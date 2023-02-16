@@ -11,7 +11,9 @@
 # **************************************************************************** #
 
 NAME = cub3D
+BONUS_NAME = cub3d_bonus
 CC = cc
+RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror -g
 GLFW3 = MLX42/build/_deps/glfw-build/src/libglfw3.a
 LIBMLX42 = MLX42/build/libmlx42.a
@@ -23,9 +25,11 @@ MANDATORY_SRC = source/mandatory/input_check.c \
 # source/mandatory/map_check.c \
 # source/mandatory/get_map.c \
 
+MANDATORY_OBJS = $(MANDATORY_SRC:.c=.o)
+
 BONUS_SRC =
 
-MANDATORY_OBJS = $(MANDATORY_SRC:.c=.o)
+BONUS_OBJS = $(BONUS_SRC:.c=.o)
 
 all: $(NAME)
 
@@ -46,13 +50,36 @@ $(LIBFT):
 	@make -C libft
 
 $(NAME): $(LIBFT) $(LIBMLX42) $(MANDATORY_OBJS)
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	@$(CC) $(LIBFT) $(MANDATORY_OBJS) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
-	@echo "$(NAME) created."
+	@echo "$(NAME) has been compiled."
+	echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	echo "           ░   ░            ░     ░"
+
+$(BONUS_NAME): $(LIBFT) $(LIBMLX42) $(BONUS_OBJS)
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(BONUS_NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
+
+	@echo "$(BONUS_NAME) has been compiled."
+	echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	echo "           ░   ░            ░     ░"
 
 clean:
-	@echo "Cleaning."
-	@rm -rf source/mandatory/*.o
-	@rm -rf source/bonus/*.o
+	@echo "Cleaning object files."
+	@$(RM) $(MANDATORY_OBJS) $(BONUS_OBJS)
 	@make clean -C libft
 ifneq (,$(wildcard ./MLX42/build))
 	@make clean -C ./MLX42/build/_deps/glfw-build
@@ -60,15 +87,40 @@ ifneq (,$(wildcard ./MLX42/build))
 else
 	
 endif
+	@echo "Objects have been removed."
 
 fclean: clean
-	@echo "Removing executable."
-	@rm -rf source/mandatory/*.o
-	@rm -rf source/bonus/*.o
+	@echo "Removing executables."
+	@$(RM) $(NAME) $(BONUS_NAME)
 	@make fclean -C libft
-	@rm -rf ./MLX42/build $(GLFW3) $(LIBMLX42) $(NAME)
+	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	@echo "Executables and objects have been romved."
 
-re: fclean all
+#RUN WITH DIFFERENT MAPS
+t1:
+
+t2:
+
+t3:
+
+t4:
+
+t5:
+
+re:
+	@echo "Rebuilding the project."
+	fclean all
+	@echo "The project has been rebuilt."
+
+DEF_COLOR = \033[0;39m
+RED = \033[1;4;91m
+GREEN = \033[4;92m
+CYAN = \033[1;96m
+CYAN3 = \033[1;4;96m
+YELLOW = \033[1;33m
+PURPLE = \033[1;35m
+BWhite = \033[1;37m
+CYAN2 = \x1B[1;36m
 
 .PHONY: all clean fclean re run
 

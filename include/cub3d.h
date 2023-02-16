@@ -21,6 +21,7 @@
 
 typedef struct s_map
 {
+	char	*input;
     char	**full_map;
     char	*north;
     char	*west;
