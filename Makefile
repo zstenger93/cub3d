@@ -6,11 +6,10 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 12:52:42 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/04 16:51:41 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
 DN = > /dev/null
 CC = cc
 RM = rm -rf
@@ -72,10 +71,10 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 clean:
 	@echo "Cleaning object files."
 	@$(RM) objects
-# @make clean -C libft
+# 	@make clean -C libft
 # ifneq (,$(wildcard ./MLX42/build))
-# @make clean -C ./MLX42/build/_deps/glfw-build
-# @make clean -C ./MLX42/build
+# 	# @make clean -C ./MLX42/build/_deps/glfw-build
+# 	@make clean -C ./MLX42/build
 # else
 	
 # endif

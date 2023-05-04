@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 12:18:31 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:53:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 bool	is_wall(int y, int x, char **matrix)
 {
-	// write(1, "IN IS_WALL\n", 12);
-	
-	// char * new_y = ft_itoa(y);
-	// write(1, new_y, ft_strlen(new_y));
-
-	// write(1, " : ", 5);
-	
-	// char * new_x = ft_itoa(x);
-	// write(1, new_x, ft_strlen(new_x));
-
-
-	// write(1, "\n", 2);
-	if (matrix[y][x] == '0')
-		return (false);
-	return (true);
+	if (matrix[y][x] == '1')
+		return (true);
+	return (false);
 }
 
-void	move(void	*param)
+void	move(double y, double x, t_minimap *minimap)
+{
+	if (is_wall(y, x, minimap->matrix))
+		return ;
+	minimap->player.y = y;
+	minimap->player.x = x;
+	printf("UP: %f : %f\n", minimap->player.y, minimap->player.x);
+}
+
+void	move_keys(void	*param)
 {
 	t_data		*data;
 	t_player	*player;
@@ -39,28 +36,28 @@ void	move(void	*param)
 	data = (t_data*) param;
 	player = &data->minimap->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-	{
-		if (is_wall(player->y - 0.03, player->x, data->minimap->matrix) == false)
-		{
-			player->y -= 0.03;
-			printf("UP: %f : %f\n", player->y, player->x);
-		}
-	}
+		move(player->y - 0.05, player->x, data->minimap);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-	{
-		if (is_wall(player->y + 0.03, player->x, data->minimap->matrix) == false)
-		{
-			printf("DOWN: %f : %f\n", player->y, player->x);
-			player->y += 0.03;
-		}
-	}
+		move(player->y + 0.05, player->x, data->minimap);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+		move(player->y, player->x - 0.05, data->minimap);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		move(player->y, player->x + 0.05, data->minimap);
+	
+
+
+
+
+
+	
 	draw_minimap(data->minimap);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		exit(1);
 }
 
 void	add_hooks(t_data *data)
 {
-	mlx_loop_hook(data->mlx, &move, data);
+	mlx_loop_hook(data->mlx, &move_keys, data);
 
-	
 }
 
