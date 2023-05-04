@@ -6,12 +6,12 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/03 16:51:12 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/04 10:01:42 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-BONUS_NAME = cub3d_bonus
+DN = > /dev/null
 CC = cc
 RM = rm -rf
 CFLAGS =  -Wall -Wextra -Werror -g
@@ -19,12 +19,18 @@ GLFW3 = MLX42/build/_deps/glfw-build/src/libglfw3.a
 LIBMLX42 = MLX42/build/libmlx42.a
 LIBFT = libft/libft.a
 FRAMEWORK = -framework Cocoa -framework OpenGL -framework IOKit
+SRC_DIR = source/mandatory/
+OBJ_DIR = objects/
 
-MANDATORY_SRC = source/mandatory/cub3d.c \
-				source/mandatory/utils.c \
-				source/mandatory/input_check.c \
+SOURCE = cub3d \
+		 utils \
+		 init_minimap \
+		 draw_minimap \
+		 hooks \
+# source/mandatory/input_check.c \
 
-MANDATORY_OBJS = $(MANDATORY_SRC:.c=.o)
+SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
+OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 
 all: $(NAME)
 	make run
@@ -45,9 +51,9 @@ $(LIBFT):
 	@git submodule update --init --recursive --remote
 	@make -C libft
 
-$(NAME): $(LIBFT) $(LIBMLX42) $(MANDATORY_OBJS)
+$(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
-	@$(CC) $(LIBFT) $(MANDATORY_OBJS) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
+	@$(CC) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
 # @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
 # @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
@@ -59,42 +65,33 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(MANDATORY_OBJS)
 # @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
 # @echo "           ░   ░            ░     ░"
 
-$(BONUS_NAME): $(LIBFT) $(LIBMLX42) $(BONUS_OBJS)
-	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(BONUS_NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
-	@$(CC) $(LIBFT) $(MANDATORY_OBJS) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(BONUS_NAME)
-	@echo "$(BONUS_NAME) has been compiled."
-	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
-	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-	@echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
-	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-	@echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
-	@echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
-	@echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
-	@echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
-	@echo "           ░   ░            ░     ░"
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
 clean:
 	@echo "Cleaning object files."
-	@$(RM) $(MANDATORY_OBJS) $(BONUS_OBJS)
+	@$(RM) objects
 # @make clean -C libft
-ifneq (,$(wildcard ./MLX42/build))
+# ifneq (,$(wildcard ./MLX42/build))
 # @make clean -C ./MLX42/build/_deps/glfw-build
 # @make clean -C ./MLX42/build
-else
+# else
 	
-endif
+# endif
 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
-	@$(RM) $(NAME) $(BONUS_NAME)
+	@$(RM) $(NAME)
 # @make fclean -C libft
 # @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
 
 re:
 	@echo "Rebuilding the project."
-	fclean all
+	@make fclean
+	@make
 	@echo "The project has been rebuilt."
 
 #RUN WITH DIFFERENT MAPS

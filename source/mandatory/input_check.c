@@ -41,14 +41,18 @@ int	validate_content(char *map_file, t_mlx_data *data)
 	while (line != NULL)
 	{
 		if (contains_valid_objects(line, data) == true) // check the textures and colors
+		{
+			free(line);
 			break ;
+		}
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (line == NULL)
 		return (false);
-	close(fd);
-	if (map_validator(map_file, data) == false) // check errors on the map
+	if (map_validator(map_file, data, fd) == false) // check errors on the map
 		return(false);
+	close(fd);
 	return (true);
 }
 
@@ -156,6 +160,7 @@ int	validate_color(char *line, t_mlx_data *data)
 	{
 		trimmed_line = ft_strtrim(line, "F "); // trim off the start
 		rgb = ft_split(trimmed_line, ","); // get array of numbers
+		free(trimmed_line);
 		if (valid_rgb(rgb) == true) // check the rgb range
 			save_color_to_data(rgb, data, 'F'); // save it to struct
 		else
@@ -165,6 +170,7 @@ int	validate_color(char *line, t_mlx_data *data)
 	{
 		trimmed_line = ft_strtrim(line, "C ");
 		rgb = ft_split(trimmed_line, ",");
+		free(trimmed_line);
 		if (valid_rgb(rgb) == true)
 			save_color_to_data(rgb, data, 'C');
 		else
@@ -240,20 +246,79 @@ void	save_color_to_data(char **rgb, t_mlx_data *data, char option) // save the r
 	}
 }
 
-int	map_validathor(char *map_file, t_mlx_data *data) // map always starts from 9th line ??
+int	map_validathor(char *map_file, t_mlx_data *data, int fd) // map always starts from 9th line ??
 {
-	int	i;
-	int fd;
+	int		i;
 	char	*line;
 
-	i = 0;
-	fd = open(map_file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line != NULL && i < 9)
+	while (line != NULL && line_cotains_only_spaces(line) == true) // skip lines with only space on them
 	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	i = 0;
+	while (line != NULL)
+	{
+		if (line_has_invalid_chars(line) == true) // check invalid char on the lines
+			return (false);
+		data->raw_map[i] = ft_strdup(line);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	close(fd);
+	// if () // map checks
+	return (true);
 }
 
+int	line_cotains_only_spaces(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\n')
+	{
+		if (line[i] == ' ' || line[i] == '\t' || line[i] == '\v'
+			|| line[i] == '\r' || line[i] == '\f')
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}
+
+int	line_has_invalid_chars(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\n')
+	{
+		if (line[i] == ' ' || line[i] == '0' || line[i] == '1'
+			|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+			|| line[i] == 'E')
+			i++;
+		else
+		{
+			printf("Error! Map has at least one invalid char: %c.", line[i]);
+			return (true);
+		}
+	}
+	return (false);
+}
+
+void	free_char_array(char **array)
+{
+	int	i;
+
+	if (array == NULL)
+		return ;
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}

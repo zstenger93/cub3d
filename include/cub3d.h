@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/03 17:30:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:14:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 # include "../MLX42/include/MLX42/MLX42.h" 
 
 
-#define TOGGLE_MINIMAP "M"
+# define TOGGLE_MINIMAP "M"
 
+# define SPACES " \t\n\v\r\f"
 
-
-#define WIDTH 5120
-#define HEIGHT 2880
-#define MINIMAP_REC 20
-#define MINIMAP_SIZE 160
+# define WIDTH 5120
+# define HEIGHT 2880
+# define MINIMAP_REC 20
+# define MINIMAP_SIZE 160
 
 typedef struct s_player
 {
-	int	y;
-	int	x;
+	double	y; // [8][8], y = 6, x =3
+	double	x;
 }	t_player;
 
 typedef struct s_minimap
@@ -45,6 +45,12 @@ typedef struct s_minimap
 	
 }	t_minimap;
 
+typedef struct s_data
+{
+	mlx_t		*mlx;
+	t_minimap	*minimap;
+}	t_data;
+
 typedef struct s_mlx_data
 {
 	char	*no;
@@ -53,7 +59,7 @@ typedef struct s_mlx_data
 	char	*ea;
 	int		floor_color[3];
 	int		ceiling_color[3];
-
+	char	**raw_map;
 	
 }	t_mlx_data;
 
@@ -98,14 +104,26 @@ typedef struct s_mlx_data
 
 
 // INPUT CHECKS
-int	input_check(int argc, char *argv, t_mlx_data *data);
-int	validate_content(char *map_file, t_mlx_data *data);
+int			input_check(int argc, char *argv, t_mlx_data *data);
+int			validate_content(char *map_file, t_mlx_data *data);
 
 
-int		get_width_of_map(int fd);
-int		get_height_of_map(int fd);
-char	**get_matrix(t_minimap *minimap, int fd);
-uint32_t get_rgba(int r, int g, int b, int a);
+int			get_width_of_map(int fd);
+int			get_height_of_map(int fd);
+char		**get_matrix(t_minimap *minimap, int fd);
+uint32_t	 get_rgba(int r, int g, int b, int a);
+
+
+// INIT_MINIMAP
+t_minimap*	init_minimap(mlx_t *mlx, char *map);
+void		set_player_position(t_minimap *minimap, char **map);
+
+// DRAW_MINIMAP
+void		draw_minimap(t_minimap *minimap);
+void		draw_player(t_minimap *minimap);
+
+// HOOKS
+void		add_hooks(t_data *data);
 
 
 #endif
