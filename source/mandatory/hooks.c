@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 11:57:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:18:31 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	move(void	*param)
 			printf("DOWN: %f : %f\n", player->y, player->x);
 			player->y += 0.03;
 		}
-		else
-			player->y = (int)player->y + 1;
 	}
 	draw_minimap(data->minimap);
 }

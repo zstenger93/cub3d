@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 10:14:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:28:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <fcntl.h>
+# include <stdio.h>
 
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
@@ -60,6 +61,8 @@ typedef struct s_mlx_data
 	int		floor_color[3];
 	int		ceiling_color[3];
 	char	**raw_map;
+	int		reading_pos;
+	int		map_length;
 	
 }	t_mlx_data;
 
@@ -106,6 +109,24 @@ typedef struct s_mlx_data
 // INPUT CHECKS
 int			input_check(int argc, char *argv, t_mlx_data *data);
 int			validate_content(char *map_file, t_mlx_data *data);
+int	contains_valid_objects(char *line, t_mlx_data *data);
+int	is_duplicate(char *line, t_mlx_data *data);
+int	validate_texture(char *line, t_mlx_data *data);
+int	it_can_be_opened(char *file);
+void	save_texture_to_data(char *file, t_mlx_data *data, char option);
+int	validate_color(char *line, t_mlx_data *data);
+int	commacounter(char *line);
+int	valid_rgb(char **rgb);
+int	rgb_contains_letters(char *line);
+void	save_color_to_data(char **rgb, t_mlx_data *data, char option);
+int	map_validathor(char *map_file, t_mlx_data *data, int fd);
+int	line_cotains_only_spaces(char *line);
+int	line_has_invalid_chars(char *line);
+void	get_map_length(int fd, char *map_file, t_mlx_data *data);
+
+
+
+
 
 
 int			get_width_of_map(int fd);
@@ -125,5 +146,10 @@ void		draw_player(t_minimap *minimap);
 // HOOKS
 void		add_hooks(t_data *data);
 
-
+// UTILS
+void	print_map_objects(t_mlx_data *data);
+void	free_char_array(char **array);
+char	*copy_map_line(char *content);
+void	ft_print_2d_char_array(char **array_2d);
+char	put_chars(char c);
 #endif

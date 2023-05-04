@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 10:01:42 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/04 12:52:42 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCE = cub3d \
 		 init_minimap \
 		 draw_minimap \
 		 hooks \
-# source/mandatory/input_check.c \
+		 input_check \
 
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
