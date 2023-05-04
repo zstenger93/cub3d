@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 12:50:52 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/04 14:52:03 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,17 +35,17 @@ OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 all: $(NAME)
 	make run
 
-# $(LIBMLX42):
-# 	@if [ -d ./MLX42/glfw_lib ]; \
-#     then echo "glfw3 already Exists"; \
-#     else \
-# 	echo "Creating Makefiles." && \
-# 	sleep 1 && \
-# 	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
-# 	echo "Building glfw3 and MLX42." && \
-# 	sleep 1; \
-# 	make -C MLX42/build; \
-# 	fi
+$(LIBMLX42):
+	@if [ -d ./MLX42/glfw_lib ]; \
+    then echo "glfw3 already Exists"; \
+    else \
+	echo "Creating Makefiles." && \
+	sleep 1 && \
+	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
+	echo "Building glfw3 and MLX42." && \
+	sleep 1; \
+	make -C MLX42/build; \
+	fi
 
 $(LIBFT):
 	@git submodule update --init --recursive --remote
@@ -72,20 +72,20 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 clean:
 	@echo "Cleaning object files."
 	@$(RM) objects
-# 	@make clean -C libft
-# ifneq (,$(wildcard ./MLX42/build))
-# 	# @make clean -C ./MLX42/build/_deps/glfw-build
-# 	@make clean -C ./MLX42/build
-# else
+	@make clean -C libft
+ifneq (,$(wildcard ./MLX42/build))
+	# @make clean -C ./MLX42/build/_deps/glfw-build
+	@make clean -C ./MLX42/build
+else
 	
-# endif
+endif
 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME)
-# @make fclean -C libft
-# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	@make fclean -C libft
+	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
 
 re:
