@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 14:52:03 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/04 16:31:47 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 all: $(NAME)
 	make run
 
-$(LIBMLX42):
+##
+$(LIBMLX42): 
 	@if [ -d ./MLX42/glfw_lib ]; \
     then echo "glfw3 already Exists"; \
     else \

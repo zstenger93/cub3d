@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 10:38:33 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:09:17 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	set_player_position(t_minimap *minimap, char **map)
 	int	y;
 	int	x;
 
-	y = 0;
-	while (y < minimap->height)
+	y = -1;
+	while (++y < minimap->height)
 	{
-		x = 0;
-		while (x < minimap->width)
+		x = -1;
+		while (++x < minimap->width)
 		{
 			if (map[y][x] == 'P')
 			{
@@ -30,10 +30,11 @@ void	set_player_position(t_minimap *minimap, char **map)
 				printf("\n%d:%d\n", y, x);
 				return ;
 			}
-			x++;
 		}
-		y++;
 	}
+	minimap->player.angle = M_PI / 2;
+	minimap->player.delta_x = cos(minimap->player.angle) * 5;
+	minimap->player.delta_x = sin(minimap->player.angle) * 5;
 }
 
 t_minimap*	init_minimap(mlx_t *mlx, char *map)

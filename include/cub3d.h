@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 10:14:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:07:54 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <fcntl.h>
+# include <math.h>
 
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
@@ -32,6 +33,9 @@ typedef struct s_player
 {
 	double	y; // [8][8], y = 6, x =3
 	double	x;
+	double	angle;
+	double	delta_y;
+	double	delta_x;
 }	t_player;
 
 typedef struct s_minimap

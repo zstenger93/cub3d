@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 14:34:18 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:29:00 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ void	move_keys(void	*param)
 		move(player->y - 0.05, player->x, data->minimap);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		move(player->y + 0.05, player->x, data->minimap);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		move(player->y, player->x - 0.05, data->minimap);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		move(player->y, player->x + 0.05, data->minimap);
-	
-
+	// else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 
 
 
