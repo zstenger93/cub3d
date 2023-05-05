@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 16:28:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 07:08:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_mlx_data
 	char	**raw_map;
 	int		reading_pos;
 	int		map_length;
+	t_player	*player;
+	char	**map_copy;
 	
 }	t_mlx_data;
 
@@ -125,6 +127,8 @@ int	line_has_invalid_chars(char *line);
 void	get_map_length(int fd, char *map_file, t_mlx_data *data);
 
 
+int	dfs(char **map, int y, int x, int rows, t_mlx_data *data);
+int	map_checks(t_mlx_data *data);
 
 
 
@@ -147,9 +151,13 @@ void		draw_player(t_minimap *minimap);
 void		add_hooks(t_data *data);
 
 // UTILS
-void	print_map_objects(t_mlx_data *data);
 void	free_char_array(char **array);
 char	*copy_map_line(char *content);
+char	**copy_2d_char_array(char **array);
+
+
+// FOR TESTING
+void	print_map_objects(t_mlx_data *data);
 void	ft_print_2d_char_array(char **array_2d);
 char	put_chars(char c);
 #endif

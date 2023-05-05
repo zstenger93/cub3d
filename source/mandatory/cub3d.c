@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 16:52:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 01:51:42 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,23 @@ int main(int argc, char **argv)
 		exit(0);
 	else
 	{
-		mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
-
-		minimap = init_minimap(mlx, argv[1]);
-
-		data.mlx = mlx;
-		data.minimap = minimap;
-		draw_minimap(minimap);
-
-		mlx_image_to_window(mlx, minimap->map, 0, 0);
-		add_hooks(&data);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
-		
+		printf("good map\n");
+		exit(0);
 	}
+
+	mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
+
+	minimap = init_minimap(mlx, argv[1]);
+
+	data.mlx = mlx;
+	data.minimap = minimap;
+	draw_minimap(minimap);
+
+	mlx_image_to_window(mlx, minimap->map, 0, 0);
+	add_hooks(&data);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+
 	exit(0);
 }
 

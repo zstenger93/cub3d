@@ -50,8 +50,10 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		return (false);
 	get_map_length(fd, map_file, data);
 	if (map_validathor(map_file, data, fd) == false) // check errors on the map
+	{
+		printf("invalid map\n");
 		return(false);
-	ft_print_2d_char_array(data->raw_map);
+	}
 	exit(0);
 	return (close(fd), true);
 }
@@ -271,21 +273,53 @@ int	map_validathor(char *map_file, t_mlx_data *data, int fd) // map always start
 	}
 	data->raw_map = malloc(sizeof(char *) * (data->map_length + 1));
 	i = 0;
-	write(1, line, ft_strlen(line));
 	while (line != NULL)
 	{
 		if (line_has_invalid_chars(line) == true) // check invalid char on the lines
 			return (false);
 		data->raw_map[i] = copy_map_line(line);
-		i++;
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	data->raw_map[i] = NULL;
-	close(fd);
-	// if () // map checks
+	return (close(fd), true);
+}
+
+int	map_checks(t_mlx_data *data)
+{
+	if (dfs(data->raw_map, 2, 2, data->map_length, data) == false)
+		return (false);
+	ft_print_2d_char_array(data->map_copy);
+	
+
+}
+
+int	dfs(char **map, int y, int x, int rows, t_mlx_data *data)
+{
+	data->map_copy = copy_2d_char_array(map);
+
+	if (y < 0 || x < 0)
+		return (false);
+	if (map[y][x] == ' ')
+		return (false);
+	if (map[y][x] != '0' && map[y][x] != 'N'
+	&& map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != 'W')
+		return (false);
+	data->map_copy[y][x] = 'X';
+	dfs(data->map_copy, x - 1, y, rows, data);
+	dfs(data->map_copy, x + 1, y, rows, data);
+	dfs(data->map_copy, x, y - 1, rows, data);
+	dfs(data->map_copy, x, y + 1, rows, data);
+	dfs(data->map_copy, x - 1, y + 1, rows, data);
+	dfs(data->map_copy, x + 1, y - 1, rows, data);
+	dfs(data->map_copy, x + 1, y + 1, rows, data);
+	dfs(data->map_copy, x - 1, y - 1, rows, data);
+
 	return (true);
 }
+
+
 
 void	get_map_length(int fd, char *map_file, t_mlx_data *data)
 {
@@ -380,6 +414,35 @@ char	*copy_map_line(char *content)
 	return (line);
 }
 
+
+
+
+
+
+
+
+
+
+char	**copy_2d_char_array(char **array)
+{
+	int		i;
+	char	**result;
+
+	i = 0;
+	if (array == NULL)
+		return (NULL);
+	while (array[i] != NULL)
+		i++;
+	result = malloc(sizeof(char *) * (i + 1));
+	if (result == NULL)
+		return (NULL);
+	i = -1;
+	while (array[++i] != NULL)
+		result[i] = copy_map_line(array[i]);
+	result[i] = NULL;
+	return (result);
+}
+
 void	ft_print_2d_char_array(char **array_2d)
 {
 	int	i;
@@ -409,7 +472,7 @@ char	put_chars(char c)
 	char	colored_s[] = "\e[1;32mS\e[0m";
 	char	colored_w[] = "\e[1;35mW\e[0m";
 	char	colored_n[] = "\e[1;34mN\e[0m";
-	
+	char	colored_x[] = "\e[1;34mX\e[0m";
 
 	if (c == '0')
 		write(1, &colored_0, 13);
@@ -427,5 +490,7 @@ char	put_chars(char c)
 		write(1, "\n", 2);
 	if (c == ' ')
 		write(1, " ", 1);
+	if (c == 'X')
+		write(1, &colored_x, 13);
 	return (0);
 }

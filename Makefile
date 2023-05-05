@@ -6,10 +6,11 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 16:51:41 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/05 01:47:10 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = cub3d
 DN = > /dev/null
 CC = cc
 RM = rm -rf
