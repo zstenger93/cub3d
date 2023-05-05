@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 14:25:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:16:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 // check invalid char on the lines
 int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 {
-	int		i;
-	int		k;
-	char	*line;
+	int			i;
+	static int	k = 0;
+	char		*line;
 
-	k = 0;
 	line = get_next_line(fd);
-	while(k++ != data->reading_pos)
+	while (k++ != data->reading_pos)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -41,7 +40,7 @@ int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 		i++;
 	}
 	data->raw_map[i] = NULL;
-	return (close(fd),map_checks(data), true);
+	return (close(fd), map_checks(data), true);
 }
 
 // skip lines with only space on them
@@ -100,7 +99,7 @@ int	line_has_invalid_chars(char *line)
 		else if (line[i] == '\0')
 			return (false);
 		else
-			return (printf("Error! Map has at least one invalid char: %c.", line[i]), true);
+			return (printf("%s%c.", INVALID_CHAR, line[i]), true);
 	}
 	return (false);
 }

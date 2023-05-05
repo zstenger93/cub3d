@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 10:40:30 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:16:00 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,13 @@ int	commacounter(char *line)
 	return (true);
 }
 
+	//check for chars in string. DONE IN PREVIOUS
 int	valid_rgb(char **rgb)
 {
-	//check for chars in string. DONE IN PREVIOUS
 	if ((ft_atoi(rgb[0]) > 255 || ft_atoi(rgb[0]) < 0)
 		&& (ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[1]) < 0)
 		&& (ft_atoi(rgb[2]) > 255 || ft_atoi(rgb[2]) < 0))
-	{
-		printf("The RGB color is out of range, all numbers must be between 0 and 255.\n");
-		return (false);
-	}
+		return (printf("%s%s", RGB_IS, OUT_OF_RANGE), false);
 	else
 		return (true);
 }

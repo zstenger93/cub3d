@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
+/*   Updated: 2023/05/05 15:17:55 by zstenger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 int	get_height_of_map(int fd)
@@ -11,7 +23,7 @@ int	get_height_of_map(int fd)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return(count);
+			return (count);
 		count++;
 		free(line);
 		line = NULL;
@@ -50,8 +62,7 @@ char	**get_matrix(t_minimap *minimap, int fd)
 	return (matrix);
 }
 
-
-uint32_t get_rgba(int r, int g, int b, int a)
+uint32_t	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }

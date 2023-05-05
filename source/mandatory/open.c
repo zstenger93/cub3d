@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:17:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 09:18:06 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:18:28 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 mlx_t *open_mapsize_window(char *map, int count)
 {	
-	mlx_t *mlx;
-	int x;
-	int y;
-	int fd;
-	char *buffer;
+	mlx_t	*mlx;
+	int		x;
+	int		y;
+	int		fd;
+	char	*buffer;
 
 	fd = open(map, O_RDWR);
 	buffer = get_next_line(fd);

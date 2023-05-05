@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 13:48:31 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:15:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
+
+# define RGB_IS "The RGB color is out of range, "
+# define OUT_OF_RANGE "all numbers must be between 0 and 255.\n"
+# define DUPLICATE "Error! Duplicates found on the map for the attributes.\n"
+# define TMA "Wrong number of arguments.\n"
+# define HOW_TO_LAUNCH "Please launch it as ./cub3d path/to/map.\n"
+# define INVALID_CHAR "Error! Map has at least one invalid char: "
+# define WRONG_EXTENSION "Map file has wrong format. It needs .ber format.\n"
 
 # define TOGGLE_MINIMAP "M"
 
@@ -122,7 +130,7 @@ int			line_cotains_only_spaces(char *line);
 int			line_has_invalid_chars(char *line);
 void		map_checks(t_mlx_data *data);
 void		set_map_error(t_mlx_data *data);
-void		dfs(char **map, int y, int x, int rows, t_mlx_data *data);
+void		dfs(char **map, int y, int x, t_mlx_data *data);
 	// INPUT UTILS
 int			it_can_be_opened(char *file);
 
@@ -141,7 +149,6 @@ void		add_hooks(t_data *data);
 void		free_char_array(char **array);
 char		*copy_map_line(char *content);
 char		**copy_2d_char_array(char **array);
-
 
 // FOR TESTING
 void		print_map_objects(t_mlx_data *data);

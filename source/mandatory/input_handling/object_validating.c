@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_validating.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
+/*   Updated: 2023/05/05 15:06:15 by zstenger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/cub3d.h"
 
 //check duplicates. DONE
@@ -5,16 +17,20 @@ int	contains_valid_objects(char *line, t_mlx_data *data)
 {
 	if (is_duplicate(line, data) == true)
 		return (false);
-	if (ft_strncmp(line, "NO .", 4) == 0 || ft_strncmp(line, "SO .", 4) == 0
-		|| ft_strncmp(line, "WE .", 4) == 0 || ft_strncmp(line, "EA .", 4) == 0)
+	if (ft_strncmp(line, "NO .", 4) == 0
+		|| ft_strncmp(line, "SO .", 4) == 0
+		|| ft_strncmp(line, "WE .", 4) == 0
+		|| ft_strncmp(line, "EA .", 4) == 0)
 		if (validate_texture(line, data) == false)
 			return (false);
 	if ((ft_strncmp(line, "F ", 2) == 0 && ft_isdigit(line[3]) == true)
 		|| (ft_strncmp(line, "C ", 2) == 0 && ft_isdigit(line[3]) == true))
 		if (validate_color(line, data) == false)
 			return (false);
-	if (ft_strcmp(data->no, "X") == false && ft_strcmp(data->so, "X") == false
-		&& ft_strcmp(data->we, "X") == false && ft_strcmp(data->ea, "X") == false
+	if (ft_strcmp(data->no, "X") == false
+		&& ft_strcmp(data->so, "X") == false
+		&& ft_strcmp(data->we, "X") == false
+		&& ft_strcmp(data->ea, "X") == false
 		&& data->floor_color[0] != -1 && data->ceiling_color[0] != -1)
 		return (true);
 	else
@@ -24,21 +40,22 @@ int	contains_valid_objects(char *line, t_mlx_data *data)
 int	is_duplicate(char *line, t_mlx_data *data)
 {
 	if ((ft_strncmp(line, "NO .", 4) == 0 && ft_strcmp(data->no, "X") == false)
-		|| (ft_strncmp(line, "SO ", 4) == 0 && ft_strcmp(data->so, "X") == false)
-		|| (ft_strncmp(line, "WE .", 4) == 0 && ft_strcmp(data->we, "X") == false)
-		|| (ft_strncmp(line, "EA .", 4) == 0 && ft_strcmp(data->ea, "X") == false)
+		|| (ft_strncmp(line, "SO ", 4) == 0
+			&& ft_strcmp(data->so, "X") == false)
+		|| (ft_strncmp(line, "WE .", 4) == 0
+			&& ft_strcmp(data->we, "X") == false)
+		|| (ft_strncmp(line, "EA .", 4) == 0
+			&& ft_strcmp(data->ea, "X") == false)
 		|| (ft_strncmp(line, "F ", 2) == 0) && data->floor_color[0] != -1
 		|| (ft_strncmp(line, "C ", 2) == 0) && data->ceiling_color[0] != -1)
-	{
-		printf("Error! Duplicates found in the map file for one of the attribute.\n");
-		return (true);
-	}
+		return (printf(DUPLICATE), true);
 	return (false);
 }
 
 int	validate_texture(char *line, t_mlx_data *data)
 {
-	if (validate_no_so(line, data) == false || validate_we_ea(line, data) == false)
+	if (validate_no_so(line, data) == false
+		|| validate_we_ea(line, data) == false)
 		return (false);
 	return (true);
 }

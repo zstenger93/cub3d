@@ -6,26 +6,22 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 14:27:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:11:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-		// printf("working\n");
+// printf("working\n");
 // checking .cub format
 //check the file content		
 int	input_check(int argc, char *argv, t_mlx_data *data)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(argv);
 	if (argc != 2)
-	{
-		ft_printf("Wrong number of arguments.\n");
-		ft_printf("Please launch it as ./cub3d path/to/map.\n");
-		return (false);
-	}
+		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
 	else if (argv && i > 3 && argv[i - 1] == 'b' && argv[i - 2] == 'u'
 		&& argv[i - 3] == 'c' && argv[i - 4] == '.')
 	{
@@ -33,10 +29,7 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 			return (false);
 	}
 	else
-	{
-		printf("Map is file is in a wrong format. It should have .ber format.\n");
-		return (false);
-	}
+		return (printf(WRONG_EXTENSION), false);
 	return (true);
 }
 
@@ -44,8 +37,8 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 // check errors on the map
 int	validate_content(char *map_file, t_mlx_data *data)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
@@ -66,7 +59,7 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		return (false);
 	get_map_length(fd, map_file, data);
 	if (map_validathor(map_file, data, fd) == false || data->error == true)
-		return(printf("invalid map\n"),false);
+		return (printf("Error! Invalid map\n"),false);
 	return (close(fd), true);
 }
 	// print_map_objects(data);
@@ -76,7 +69,7 @@ void	map_checks(t_mlx_data *data)
 {
 	data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
 	data->map_copy = copy_2d_char_array(data->raw_map);
-	dfs(data->map_copy, 3, 3, data->map_length, data);
+	dfs(data->map_copy, 3, 3, data);
 	ft_print_2d_char_array(data->map_copy);
 	printf("\n");
 	free_char_array(data->map_copy);
