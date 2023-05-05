@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 07:08:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:57:42 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
-
 
 # define TOGGLE_MINIMAP "M"
 
@@ -42,8 +41,6 @@ typedef struct s_minimap
 	int			height;
 	char		**matrix;
 	t_player	player;
-	
-	
 }	t_minimap;
 
 typedef struct s_data
@@ -67,13 +64,6 @@ typedef struct s_mlx_data
 	char	**map_copy;
 	
 }	t_mlx_data;
-
-
-
-
-
-
-
 
 // typedef struct s_map
 // {
@@ -106,38 +96,32 @@ typedef struct s_mlx_data
 // 		*enemy;
 // }	t_texture;
 
-
-
 // INPUT CHECKS
 int			input_check(int argc, char *argv, t_mlx_data *data);
 int			validate_content(char *map_file, t_mlx_data *data);
-int	contains_valid_objects(char *line, t_mlx_data *data);
-int	is_duplicate(char *line, t_mlx_data *data);
-int	validate_texture(char *line, t_mlx_data *data);
-int	it_can_be_opened(char *file);
-void	save_texture_to_data(char *file, t_mlx_data *data, char option);
-int	validate_color(char *line, t_mlx_data *data);
-int	commacounter(char *line);
-int	valid_rgb(char **rgb);
-int	rgb_contains_letters(char *line);
-void	save_color_to_data(char **rgb, t_mlx_data *data, char option);
-int	map_validathor(char *map_file, t_mlx_data *data, int fd);
-int	line_cotains_only_spaces(char *line);
-int	line_has_invalid_chars(char *line);
-void	get_map_length(int fd, char *map_file, t_mlx_data *data);
-
-
-int	dfs(char **map, int y, int x, int rows, t_mlx_data *data);
-int	map_checks(t_mlx_data *data);
-
-
-
-
-int			get_width_of_map(int fd);
-int			get_height_of_map(int fd);
-char		**get_matrix(t_minimap *minimap, int fd);
-uint32_t	 get_rgba(int r, int g, int b, int a);
-
+	// OBJECT VALIDATING
+int			contains_valid_objects(char *line, t_mlx_data *data);
+int			is_duplicate(char *line, t_mlx_data *data);
+int			validate_texture(char *line, t_mlx_data *data);
+int			validate_no_so(char *line, t_mlx_data *data);
+int			validate_we_ea(char *line, t_mlx_data *data);
+	// COLOR VALIDATING
+int			valid_rgb(char **rgb);
+int			commacounter(char *line);
+int			rgb_contains_letters(char *line);
+int			validate_color(char *line, t_mlx_data *data);
+	// SAVE DATA
+void		save_texture_to_data(char *file, t_mlx_data *data, char option);
+void		save_color_to_data(char **rgb, t_mlx_data *data, char option);
+	
+	// MAP VALIDATING
+int			map_validathor(char *map_file, t_mlx_data *data, int fd);
+void		get_map_length(int fd, char *map_file, t_mlx_data *data);
+int			line_cotains_only_spaces(char *line);
+int			line_has_invalid_chars(char *line);
+void		dfs(char **map, int y, int x, int rows, t_mlx_data *data);
+	// INPUT UTILS
+int			it_can_be_opened(char *file);
 
 // INIT_MINIMAP
 t_minimap*	init_minimap(mlx_t *mlx, char *map);
@@ -151,13 +135,22 @@ void		draw_player(t_minimap *minimap);
 void		add_hooks(t_data *data);
 
 // UTILS
-void	free_char_array(char **array);
-char	*copy_map_line(char *content);
-char	**copy_2d_char_array(char **array);
+void		free_char_array(char **array);
+char		*copy_map_line(char *content);
+char		**copy_2d_char_array(char **array);
 
 
 // FOR TESTING
-void	print_map_objects(t_mlx_data *data);
-void	ft_print_2d_char_array(char **array_2d);
-char	put_chars(char c);
+void		print_map_objects(t_mlx_data *data);
+void		ft_print_2d_char_array(char **array_2d);
+char		put_chars(char c);
+
+int	map_checks(t_mlx_data *data);
+int	wall_check(t_mlx_data *data);
+
+int			get_width_of_map(int fd);
+int			get_height_of_map(int fd);
+char		**get_matrix(t_minimap *minimap, int fd);
+uint32_t	 get_rgba(int r, int g, int b, int a);
+
 #endif

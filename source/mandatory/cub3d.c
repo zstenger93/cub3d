@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 01:51:42 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:05:02 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,30 @@ int main(int argc, char **argv)
 
 	init_data(&mlx_data);
 	if (input_check(argc, argv[1], &mlx_data) == false)
+	{
+		ft_print_2d_char_array(mlx_data.raw_map);
 		exit(0);
+	}
 	else
 	{
+		print_map_objects(&mlx_data);
+		ft_print_2d_char_array(mlx_data.raw_map);
 		printf("good map\n");
 		exit(0);
 	}
 
-	mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
+	// mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
 
-	minimap = init_minimap(mlx, argv[1]);
+	// minimap = init_minimap(mlx, argv[1]);
 
-	data.mlx = mlx;
-	data.minimap = minimap;
-	draw_minimap(minimap);
+	// data.mlx = mlx;
+	// data.minimap = minimap;
+	// draw_minimap(minimap);
 
-	mlx_image_to_window(mlx, minimap->map, 0, 0);
-	add_hooks(&data);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	// mlx_image_to_window(mlx, minimap->map, 0, 0);
+	// add_hooks(&data);
+	// mlx_loop(mlx);
+	// mlx_terminate(mlx);
 
 	exit(0);
 }
@@ -64,7 +69,6 @@ void	print_map_objects(t_mlx_data *data)
 	printf("SO: %s\n", data->so);
 	printf("WE: %s\n", data->we);
 	printf("EA: %s\n", data->ea);
-	
 	printf("F: %d,%d,%d\n", data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]);
 	printf("C: %d,%d,%d\n", data->floor_color[0], data->ceiling_color[1], data->ceiling_color[2]);
 }

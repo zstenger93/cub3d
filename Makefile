@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/05 01:47:10 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/05 10:07:48 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,15 @@ SOURCE = cub3d \
 		 init_minimap \
 		 draw_minimap \
 		 hooks \
-		 input_check \
+		 input_handling/input_check \
+		 input_handling/object_validating \
+		 input_handling/color_validating \
+		 input_handling/map_validating \
+		 input_handling/validating_utils \
+		 input_handling/save_data \
+		 input_handling/dfs \
+
+
 
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
