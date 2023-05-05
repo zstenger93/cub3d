@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 11:05:02 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:07:12 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_mlx_data *mlx_data)
 	mlx_data->ceiling_color[0] = -1;
 	mlx_data->reading_pos = 0;
 	mlx_data->map_length = 0;
+	mlx_data->error = false;
 }
 
 int main(int argc, char **argv)
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
 	{
 		print_map_objects(&mlx_data);
 		ft_print_2d_char_array(mlx_data.raw_map);
-		printf("good map\n");
+		printf("\ngood map\n");
 		exit(0);
 	}
 

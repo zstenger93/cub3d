@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/05 10:07:48 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/05 13:52:54 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ re:
 
 #RUN WITH DIFFERENT MAPS
 run:
-	./cub3d maps/valid/firstmap.cub
+	./cub3d maps/valid/input.cub
 vf:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./cub3d
 t1:

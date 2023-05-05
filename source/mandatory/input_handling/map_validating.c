@@ -6,12 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 10:42:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:25:55 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
+// do check player duplicates / no player
 // check invalid char on the lines
 int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 {
@@ -40,8 +41,7 @@ int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 		i++;
 	}
 	data->raw_map[i] = NULL;
-
-	return (close(fd), true);
+	return (close(fd),map_checks(data), true);
 }
 
 // skip lines with only space on them
@@ -100,10 +100,7 @@ int	line_has_invalid_chars(char *line)
 		else if (line[i] == '\0')
 			return (false);
 		else
-		{
-			printf("Error! Map has at least one invalid char: %c.", line[i]);
-			return (true);
-		}
+			return (printf("Error! Map has at least one invalid char: %c.", line[i]), true);
 	}
 	return (false);
 }

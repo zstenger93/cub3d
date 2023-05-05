@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 10:57:42 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:48:31 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_mlx_data
 	int		map_length;
 	t_player	*player;
 	char	**map_copy;
+	int		error;
 	
 }	t_mlx_data;
 
@@ -119,6 +120,8 @@ int			map_validathor(char *map_file, t_mlx_data *data, int fd);
 void		get_map_length(int fd, char *map_file, t_mlx_data *data);
 int			line_cotains_only_spaces(char *line);
 int			line_has_invalid_chars(char *line);
+void		map_checks(t_mlx_data *data);
+void		set_map_error(t_mlx_data *data);
 void		dfs(char **map, int y, int x, int rows, t_mlx_data *data);
 	// INPUT UTILS
 int			it_can_be_opened(char *file);
@@ -144,9 +147,6 @@ char		**copy_2d_char_array(char **array);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
 char		put_chars(char c);
-
-int	map_checks(t_mlx_data *data);
-int	wall_check(t_mlx_data *data);
 
 int			get_width_of_map(int fd);
 int			get_height_of_map(int fd);

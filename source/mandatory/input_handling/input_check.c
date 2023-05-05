@@ -6,13 +6,15 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 11:18:47 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:27:07 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
 		// printf("working\n");
+// checking .cub format
+//check the file content		
 int	input_check(int argc, char *argv, t_mlx_data *data)
 {
 	int i;
@@ -25,9 +27,9 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 		return (false);
 	}
 	else if (argv && i > 3 && argv[i - 1] == 'b' && argv[i - 2] == 'u'
-		&& argv[i - 3] == 'c' && argv[i - 4] == '.')  // checking .cub format
+		&& argv[i - 3] == 'c' && argv[i - 4] == '.')
 	{
-		if (validate_content(argv, data) == false) //check the file content
+		if (validate_content(argv, data) == false)
 			return (false);
 	}
 	else
@@ -63,46 +65,21 @@ int	validate_content(char *map_file, t_mlx_data *data)
 	if (line == NULL)
 		return (false);
 	get_map_length(fd, map_file, data);
-	if (map_validathor(map_file, data, fd) == false || map_checks(data) == false)
-	{
-		printf("invalid map\n");
-		return(false);
-	}
+	if (map_validathor(map_file, data, fd) == false || data->error == true)
+		return(printf("invalid map\n"),false);
 	return (close(fd), true);
 }
 	// print_map_objects(data);
 	// exit(0);
 
-int	map_checks(t_mlx_data *data)
+void	map_checks(t_mlx_data *data)
 {
-	// if (wall_check(data) == false)
-	// 	return (false);
 	data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
 	data->map_copy = copy_2d_char_array(data->raw_map);
 	dfs(data->map_copy, 3, 3, data->map_length, data);
 	ft_print_2d_char_array(data->map_copy);
-	return (true);
-}
-
-int	wall_check(t_mlx_data *data)
-{
-	int	i;
-	int	k;
-
-	while (data->raw_map[i] != NULL)
-	{
-		k = 0;
-		while (data->raw_map[i][k] == ' ' || data->raw_map[i][k] == '\t' || data->raw_map[i][k] == '\0')
-			k++;
-		if (data->raw_map[i][k] != '1')
-		{
-			printf("%c\n", data->raw_map[i][k]);
-			return (false);
-		}
-		else
-			i++;
-	}
-	return (true);
+	printf("\n");
+	free_char_array(data->map_copy);
 }
 
 char	put_chars(char c)
