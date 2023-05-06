@@ -36,7 +36,7 @@
 # define WIDTH 5120
 # define HEIGHT 2880
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 160
+# define MINIMAP_SIZE 1020
 
 
 

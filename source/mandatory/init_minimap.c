@@ -79,9 +79,9 @@ char	*init_line(char *old_line, int len)
 		i++;
 	line = ft_strdup2(old_line, 0, i);
 	old_line = ft_strdup(line);
-	result = dup3(4, '1');
+	result = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, '1');
 	result = ft_strjoin(result, old_line);
-	result = ft_strjoin(result, dup3(len - 4 - ft_strlen(line), '1')); // "    line    "
+	result = ft_strjoin(result, dup3(len - (MINIMAP_SIZE / MINIMAP_REC) / 2 - ft_strlen(line), '1')); // "    line    "
 	i = -1;
 	while (result[++i] != '\0')
 		if (result[i] == ' ')
@@ -95,23 +95,19 @@ char	**init_matrix(char **map, int height)
 	int		len;
 	int		i;
 
-	matrix = malloc(sizeof(char *) * (height + 8 + 1));
-	matrix[height + 8] = NULL;
-	len = get_longest_line(map) + 8 - 1;
-	i = 0;
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
-	while (map[i - 4] != NULL)
+	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / MINIMAP_REC + 1));
+	matrix[height + MINIMAP_SIZE / MINIMAP_REC] = NULL;
+	len = get_longest_line(map) + (MINIMAP_SIZE / MINIMAP_REC) - 1;
+	i = -1;
+	while (++i < (MINIMAP_SIZE / MINIMAP_REC) / 2)
+		matrix[i] = dup3(len, '1');
+	while (map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2] != NULL)
 	{
-		matrix[i] = init_line(map[i - 4], len);
+		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
-	matrix[i++] = dup3(len, '1');
+	while (matrix[i] != NULL)
+		matrix[i++] = dup3(len, '1');
 	return (matrix);
 }
 
@@ -122,7 +118,7 @@ t_minimap*	init_minimap(t_mlx_data *mlx_data, mlx_t *mlx)
 	minimap = malloc(sizeof(t_minimap));
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
 	ft_print_2d_char_array(minimap->matrix);
-	// set_player_position(minimap); // + init player dir & plane
-	// minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
+	set_player_position(minimap); // + init player dir & plane
+	minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	return (minimap);
 }
