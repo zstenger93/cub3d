@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 15:06:15 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:22:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	is_duplicate(char *line, t_mlx_data *data)
 			&& ft_strcmp(data->ea, "X") == false)
 		|| (ft_strncmp(line, "F ", 2) == 0) && data->floor_color[0] != -1
 		|| (ft_strncmp(line, "C ", 2) == 0) && data->ceiling_color[0] != -1)
-		return (printf(DUPLICATE), true);
+		return (true);
 	return (false);
 }
 

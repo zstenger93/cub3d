@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 14:10:25 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:22:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		if (contains_valid_objects(line, data) == true)
 		{
 			free(line);
-			break ;
+			return (ft_printf(DUPLICATE), false);
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -62,17 +62,21 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		return (printf("Error! Invalid map\n"),false);
 	return (close(fd), true);
 }
-	// print_map_objects(data);
 	// exit(0);
 
-void	map_checks(t_mlx_data *data)
+int	map_checks(t_mlx_data *data, int i)
 {
+	data->raw_map[i] = NULL;
+	if (map_has_multiple_players_or_none(' ', 'Y') == true)
+		return (false);
 	data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
 	data->map_copy = copy_2d_char_array(data->raw_map);
 	dfs(data->map_copy, 3, 3, data);
-	// ft_print_2d_char_array(data->map_copy);
+	print_map_objects(data);
+	ft_print_2d_char_array(data->map_copy);
 	printf("\n");
 	free_char_array(data->map_copy);
+	return (true);
 }
 
 char	put_chars(char c)
@@ -85,7 +89,7 @@ char	put_chars(char c)
 	char	colored_n[] = "\e[1;34mN\e[0m";
 	char	colored_x[] = "\e[1;34mX\e[0m";
 	char	colored_plus[] = "\e[1;34m+\e[0m";
-	
+	char	colored_v[] = "\e[1;33mV\e[0m";
 
 	if (c == '0')
 		write(1, &colored_0, 13);
@@ -101,9 +105,11 @@ char	put_chars(char c)
 		write(1, &colored_e, 13);
 	else if (c == '+')
 		write(1, &colored_plus, 13);
-	else if (c == ' ')
-		write(1, " ", 1);
+	else if (c == 'V')
+		write(1, &colored_v, 13);
 	else if (c == 'X')
 		write(1, &colored_x, 13);
+	else if (c == ' ')
+		write(1, " ", 1);
 	return (0);
 }

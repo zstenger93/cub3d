@@ -1,4 +1,6 @@
 NO ./resource/brick.png
+NO ./resource/brick.png
+
 SO ./resource/eagle.png
 WE ./resource/greystone.png
 EA ./resource/minecraft-bee.png

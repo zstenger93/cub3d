@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:30:36 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:14:45 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 	{
 		if (line_has_invalid_chars(line) == true)
 			return (false);
-		data->raw_map[i] = copy_map_line(line);
+		data->raw_map[i++] = copy_map_line(line);
 		free(line);
 		line = get_next_line(fd);
-		i++;
 	}
-	data->raw_map[i] = NULL;
-	return (close(fd), map_checks(data), true);
+	if (map_checks(data, i) == false)
+		return (false);
+	return (close(fd), true);
 }
 
 // skip lines with only space on them
@@ -96,8 +96,8 @@ int	line_has_invalid_chars(char *line)
 			|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
 			|| line[i] == 'E')
 		{
-			if (map_has_multiple_players_or_none(line[i]) == true)
-				return (false);
+			if (map_has_multiple_players_or_none(line[i], 'N') == true)
+				return (true);
 			i++;
 		}
 		else if (line[i] == '\0')
@@ -108,17 +108,14 @@ int	line_has_invalid_chars(char *line)
 	return (false);
 }
 
-int	map_has_multiple_players_or_none(char c)
+int	map_has_multiple_players_or_none(char c, char option)
 {
-	int	n;
-	int	s;
-	int	w;
-	int	e;
+	static int	n = 0;
+	static int	s = 0;
+	static int	w = 0;
+	static int	e = 0;
+	
 
-	n = 0;
-	s = 0;
-	w = 0;
-	s = 0;
 	if (c == 'N')
 		n++;
 	else if (c == 'S')
@@ -127,9 +124,14 @@ int	map_has_multiple_players_or_none(char c)
 		w++;
 	else if (c == 'E')
 		e++;
-	// else if ((n + s + w + e) > 1)
-	// 	return (printf("Error! Player duplicates on the map."), true);
-	// else if ((n + s + w + e) == 0)
-	// 	return (printf("Error! No player found on the map"), true);
-	return (true);
+	if (n > 1 || s > 1 || w > 1 || e > 1)
+		return (ft_printf("Error! Player duplicates on the map."), true);
+	if (option == 'Y')
+	{
+		if ((n + s + w + e) == 0)
+			return (printf("Error! No player found on the map.\n"), true);
+		else if ((n + s + w + e) > 1)
+			return (printf("Error! Too many players.\n"), true);
+	}
+	return (false);
 }

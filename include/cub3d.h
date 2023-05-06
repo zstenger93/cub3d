@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 15:25:17 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:23:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define TMA "Wrong number of arguments.\n"
 # define HOW_TO_LAUNCH "Please launch it as ./cub3d path/to/map.\n"
 # define INVALID_CHAR "Error! Map has at least one invalid char: "
-# define WRONG_EXTENSION "Map file has wrong format. It needs .ber format.\n"
+# define WRONG_EXTENSION "Map file has wrong format. It needs .cub format.\n"
 
 # define TOGGLE_MINIMAP "M"
 
@@ -62,19 +62,20 @@ typedef struct s_minimap
 
 typedef struct s_mlx_data
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor_color[3];
-	int		ceiling_color[3];
-	char	**raw_map;// map copied from the file
-	int		reading_pos;// actual map reading starts from here
-	int		map_length;// heigth of the map
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			floor_color[3];
+	int			ceiling_color[3];
+	char		**raw_map;// map copied from the file
+	int			reading_pos;// actual map reading starts from here
+	int			map_length;// heigth of the map
 	t_player	*player;
-	char	**map_copy;// raw map copy for dfs
-	int		error;// flag for input check from dfs in case the map is wrong
+	char		**map_copy;// raw map copy for dfs
+	int			error;// flag for input check from dfs in case the map is wrong
 }	t_mlx_data;
+
 
 typedef struct s_data
 {
@@ -83,7 +84,6 @@ typedef struct s_data
 	t_mlx_data	*mlx_data;
 	
 }	t_data;
-
 
 
 
@@ -145,10 +145,10 @@ int			map_validathor(char *map_file, t_mlx_data *data, int fd);
 void		get_map_length(int fd, char *map_file, t_mlx_data *data);
 int			line_cotains_only_spaces(char *line);
 int			line_has_invalid_chars(char *line);
-void		map_checks(t_mlx_data *data);
+int			map_checks(t_mlx_data *data, int i);
 void		set_map_error(t_mlx_data *data);
 void		dfs(char **map, int y, int x, t_mlx_data *data);
-int			map_has_multiple_players_or_none(char c);
+int			map_has_multiple_players_or_none(char c, char option);
 	// INPUT UTILS
 int			it_can_be_opened(char *file);
 
