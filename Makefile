@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 16:31:47 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/06 10:57:59 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,15 @@ SOURCE = cub3d \
 		 init_minimap \
 		 draw_minimap \
 		 hooks \
-# source/mandatory/input_check.c \
+		 input_handling/input_check \
+		 input_handling/object_validating \
+		 input_handling/color_validating \
+		 input_handling/map_validating \
+		 input_handling/validating_utils \
+		 input_handling/save_data \
+		 input_handling/dfs \
+
+
 
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
@@ -97,7 +105,7 @@ re:
 
 #RUN WITH DIFFERENT MAPS
 run:
-	./cub3d maps/valid/firstmap.cub
+	./cub3d maps/valid/input.cub
 vf:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./cub3d
 t1:
