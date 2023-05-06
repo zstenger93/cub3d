@@ -6,14 +6,17 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 14:07:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 11:16:41 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	init_data(t_mlx_data *mlx_data)
+t_mlx_data*	init_data()
 {
+	t_mlx_data	*mlx_data;
+
+	mlx_data = malloc(sizeof(t_mlx_data));
 	mlx_data->no = ft_strdup("X");
 	mlx_data->so = ft_strdup("X");
 	mlx_data->we = ft_strdup("X");
@@ -22,44 +25,37 @@ void	init_data(t_mlx_data *mlx_data)
 	mlx_data->ceiling_color[0] = -1;
 	mlx_data->reading_pos = 0;
 	mlx_data->map_length = 0;
-	mlx_data->error = false;
+	return (mlx_data);
+}
+
+int	init(int argc, char **argv, t_data *data)
+{
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
+	data->mlx_data = init_data();
+	if (input_check(argc, argv[1], data->mlx_data) == false)
+		exit(0);
+	data->minimap = init_minimap(data->mlx_data, data->mlx);
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-  	mlx_t *mlx;
-	t_mlx_data	mlx_data;
-	t_minimap	*minimap;
 	t_data		data;
 
-	init_data(&mlx_data);
-	if (input_check(argc, argv[1], &mlx_data) == false)
-	{
-		ft_print_2d_char_array(mlx_data.raw_map);
-		exit(0);
-	}
-	else
-	{
-		print_map_objects(&mlx_data);
-		ft_print_2d_char_array(mlx_data.raw_map);
-		printf("\ngood map\n");
-		exit(0);
-	}
+	init(argc, argv, &data);
 
-	// mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
-
-	// minimap = init_minimap(mlx, argv[1]);
-
-	// data.mlx = mlx;
-	// data.minimap = minimap;
-	// draw_minimap(minimap);
-
-	// mlx_image_to_window(mlx, minimap->map, 0, 0);
+	// draw_minimap(data.minimap, data.mlx_data);
+	// mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	// add_hooks(&data);
-	// mlx_loop(mlx);
-	// mlx_terminate(mlx);
+	// mlx_loop(data.mlx);
+	// mlx_terminate(data.mlx);
+	exit(0);
+}
+
+
+
+
+
 
 	exit(0);
 }
