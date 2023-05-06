@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 15:11:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 11:35:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,26 @@ char	put_chars(char c)
 	char	colored_w[] = "\e[1;35mW\e[0m";
 	char	colored_n[] = "\e[1;34mN\e[0m";
 	char	colored_x[] = "\e[1;34mX\e[0m";
+	char	colored_plus[] = "\e[1;34m+\e[0m";
+	
 
 	if (c == '0')
 		write(1, &colored_0, 13);
-	if (c == '1')
+	else if (c == '1')
 		write(1, &colored_1, 13);
-	if (c == 'N')
+	else if (c == 'N')
 		write(1, &colored_n, 13);
-	if (c == 'S')
+	else if (c == 'S')
 		write(1, &colored_s, 13);
-	if (c == 'W')
+	else if (c == 'W')
 		write(1, &colored_w, 13);
-	if (c == 'E')
+	else if (c == 'E')
 		write(1, &colored_e, 13);
-	if (c == '\n')
-		write(1, "\n", 2);
-	if (c == ' ')
+	else if (c == '+')
+		write(1, &colored_plus, 13);
+	else if (c == ' ')
 		write(1, " ", 1);
-	if (c == 'X')
+	else if (c == 'X')
 		write(1, &colored_x, 13);
 	return (0);
 }

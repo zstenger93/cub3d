@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/05 13:52:54 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/06 11:53:39 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ SOURCE = cub3d \
 		 input_handling/validating_utils \
 		 input_handling/save_data \
 		 input_handling/dfs \
-
-
 
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
