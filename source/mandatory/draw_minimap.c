@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:16:21 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/04 14:26:35 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 10:39:55 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,44 @@ void	draw_player(t_minimap *minimap)
 	int	x;
 	int	i;
 	int	k;
-	
-	y = (minimap->player.y * 20);
-	x = (minimap->player.x * 20);
+
+	y = 80;
+	x = 80;
 	i = -3;
 	while (++i < 3)
 	{
 		k = -3;
 		while (++k < 3)
-			mlx_put_pixel(minimap->map, x + k, y + i, get_rgba(0, 255, 0, 255));
+			mlx_put_pixel(minimap->img_map, x + k, y + i, get_rgba(0, 255, 0, 255));
 	}
 }
 
-void	draw_minimap(t_minimap *minimap)
+void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 {
 	int	i;
 	int	k;
+	int	pix_y;
+	int	pix_x;
 
-	i = -1;
-	while (++i < MINIMAP_SIZE)
+	// i = get_printing_position_y(minimap->matrix, minimap->player.pos.y, mlx_data->map_length);
+
+	pix_y = -1;
+	while (++pix_y < MINIMAP_SIZE)
 	{
-		k = -1;
-		while (++k < MINIMAP_SIZE)
+		// k = get_printing_position_x(minimap->matrix, minimap->player.pos.y, minimap->player.pos.x);
+		pix_x = -1;
+		while (++pix_x < MINIMAP_SIZE)
 		{
-			if (((k % 20 == 0 || i % 20 == 0) && minimap->matrix[i / MINIMAP_REC][k / MINIMAP_REC] == '1') || // DRAW WALL
-			((k % 20 == 0 || i % 20 == 0) && minimap->matrix[(i - 1 )/ MINIMAP_REC][(k - 1) / MINIMAP_REC] == '1'))
-				mlx_put_pixel(minimap->map, k, i, get_rgba(50, 50, 50, 255));
+			if (pix_x % 20 == 0)
+				k++;
+			if (((pix_y % 20 == 0 || pix_x % 20 == 0) && minimap->matrix[i][k] == '1') || // DRAW WALL
+			((pix_y % 20 == 0 || pix_x % 20 == 0) && minimap->matrix[i - 1][k - 1] == '1'))
+				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(50, 50, 50, 255));
 			else
-				mlx_put_pixel(minimap->map, k, i, get_rgba(250, 50, 50, 255)); // DRAW REST
+				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(50, 150, 150, 255)); // DRAW REST
 		}
+		if (pix_y % 20 == 0)
+			++i;
 	}
 	draw_player(minimap);
 }

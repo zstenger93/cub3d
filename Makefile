@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/04 16:31:47 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/06 10:45:44 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCE = cub3d \
 		 init_minimap \
 		 draw_minimap \
 		 hooks \
-# source/mandatory/input_check.c \
+		 input_check \
 
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
@@ -35,8 +35,7 @@ OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 all: $(NAME)
 	make run
 
-##
-$(LIBMLX42): 
+$(LIBMLX42):
 	@if [ -d ./MLX42/glfw_lib ]; \
     then echo "glfw3 already Exists"; \
     else \
@@ -85,9 +84,9 @@ endif
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME)
-	@make fclean -C libft
-	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
-	@echo "Executables and objects have been romved."
+	# @make fclean -C libft
+	# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	# @echo "Executables and objects have been romved."
 
 re:
 	@echo "Rebuilding the project."
@@ -97,7 +96,7 @@ re:
 
 #RUN WITH DIFFERENT MAPS
 run:
-	./cub3d maps/valid/firstmap.cub
+	./cub3d maps/valid/input.cub
 vf:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./cub3d
 t1:
