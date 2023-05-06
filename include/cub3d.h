@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:13:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 11:23:07 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,6 @@ typedef struct s_mlx_data
 	t_player	*player;
 	char	**map_copy;// raw map copy for dfs
 	int		error;// flag for input check from dfs in case the map is wrong
-	char	**raw_map;
-	int		reading_pos;
-	int		map_length; // height
-	t_player	*player;
-	char	**map_copy;
-	
 }	t_mlx_data;
 
 typedef struct s_data

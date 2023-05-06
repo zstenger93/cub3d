@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:02:29 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 12:26:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 11:36:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_print_2d_char_array(char **array_2d)
 			put_chars(array_2d[i][k]);
 			k++;
 		}
+		write(1, "\n", 2);
 		i++;
 	}
 }
