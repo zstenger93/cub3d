@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 12:18:59 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:25:17 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define WIDTH 5120
 # define HEIGHT 2880
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 160
+# define MINIMAP_SIZE 1020
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:35:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 14:10:25 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	map_checks(t_mlx_data *data)
 	data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
 	data->map_copy = copy_2d_char_array(data->raw_map);
 	dfs(data->map_copy, 3, 3, data);
-	ft_print_2d_char_array(data->map_copy);
+	// ft_print_2d_char_array(data->map_copy);
 	printf("\n");
 	free_char_array(data->map_copy);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:17:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:14:58 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_wall(int y, int x, char **matrix)
 {
-	if (matrix[y][x] == '1')
+	if (matrix[y + 1][x + 1] == '1')
 		return (true);
 	return (false);
 }
@@ -36,16 +36,15 @@ void	move_keys(void	*param)
 	data = (t_data*) param;
 	player = &data->minimap->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move(player->pos.y - 0.5, player->pos.x, data->minimap);
+		move(player->pos.y - 0.1, player->pos.x, data->minimap);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move(player->pos.y + 0.5, player->pos.x, data->minimap);
+		move(player->pos.y + 0.1, player->pos.x, data->minimap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move(player->pos.y, player->pos.x - 0.5, data->minimap);
+		move(player->pos.y, player->pos.x - 0.1, data->minimap);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move(player->pos.y, player->pos.x + 0.5, data->minimap);
-	
-
+		move(player->pos.y, player->pos.x + 0.1, data->minimap);
 	draw_minimap(data->minimap, data->mlx_data);
+	
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		exit(1);
 }
