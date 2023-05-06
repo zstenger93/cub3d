@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 12:39:06 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 13:24:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*init_line(char *old_line, int len)
 	i = -1;
 	while (result[++i] != '\0')
 		if (result[i] == ' ')
-			result[i] = '1';
+			result[i] = 'V';
 	return(result);
 }
 

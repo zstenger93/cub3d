@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:36:25 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:58:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ t_mlx_data*	init_data()
 
 int	init(int argc, char **argv, t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Survive The NORM", 1);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
 	data->mlx_data = init_data();
+	if (argc == 1)
+		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 		exit(0);
 	data->minimap = init_minimap(data->mlx_data, data->mlx);
