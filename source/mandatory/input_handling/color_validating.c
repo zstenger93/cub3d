@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 15:16:00 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 10:45:32 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ int	validate_color(char *line, t_mlx_data *data)
 	char	*trimmed_line;
 	char	**rgb;
 
-	if (commacounter(line) == false || rgb_contains_letters(line) == true)
+	if (commacounter(line) == false || rgb_contains_letters(line) == true
+		|| has_duplicate_rgb(line) == true)
 		return (false);
 	if (line[0] == 'F')
 	{
-		trimmed_line = ft_strtrim(line, "F \n");
-		rgb = ft_split(trimmed_line, ',');
-		free(trimmed_line);
+		rgb = split_rgb(line, "F \n");
 		if (valid_rgb(rgb) == true)
 			save_color_to_data(rgb, data, 'F');
 		else
@@ -36,15 +35,40 @@ int	validate_color(char *line, t_mlx_data *data)
 	}
 	if (line[0] == 'C')
 	{
-		trimmed_line = ft_strtrim(line, "C \n");
-		rgb = ft_split(trimmed_line, ',');
-		free(trimmed_line);
+		rgb = split_rgb(line, "C \n");
 		if (valid_rgb(rgb) == true)
 			save_color_to_data(rgb, data, 'C');
 		else
 			return (false);
 	}
 	return (true);
+}
+
+char	**split_rgb(char *line, char *trim_with)
+{
+	char	*trimmed_line;
+	char	**rgb;
+
+	trimmed_line = ft_strtrim(line, trim_with);
+	rgb = ft_split(trimmed_line, ',');
+	free(trimmed_line);
+	return (rgb);
+}
+
+int	has_duplicate_rgb(char *line)
+{
+	int	f;
+	int	c;
+
+	f = 0;
+	c = 0;
+	if (line[0] == 'F')
+		f++;
+	else if (line[0] == 'C')
+		c++;
+	else if (f != 1 || c != 1)
+		return (printf("Error! Duplicate rgb attributes.\n"), true);
+	return (false);
 }
 
 // checking the amount of commas in the rgb list
@@ -62,10 +86,7 @@ int	commacounter(char *line)
 		i++;
 	}
 	if (commacount != 2)
-	{
-		printf("Error! The amount of comma in the RGB list is wrong.\n");
-		return (false);
-	}
+		return (printf("%s", COMMA), false);
 	return (true);
 }
 

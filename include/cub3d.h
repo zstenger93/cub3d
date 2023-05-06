@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 15:15:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 10:43:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
 
+# define COMMA "Error! The amount of comma in the RGB list is wrong.\n"
 # define RGB_IS "The RGB color is out of range, "
 # define OUT_OF_RANGE "all numbers must be between 0 and 255.\n"
 # define DUPLICATE "Error! Duplicates found on the map for the attributes.\n"
@@ -65,12 +66,12 @@ typedef struct s_mlx_data
 	char	*ea;
 	int		floor_color[3];
 	int		ceiling_color[3];
-	char	**raw_map;
-	int		reading_pos;
-	int		map_length;
+	char	**raw_map;// map copied from the file
+	int		reading_pos;// actual map reading starts from here
+	int		map_length;// heigth of the map
 	t_player	*player;
-	char	**map_copy;
-	int		error;
+	char	**map_copy;// raw map copy for dfs
+	int		error;// flag for input check from dfs in case the map is wrong
 	
 }	t_mlx_data;
 
@@ -117,12 +118,13 @@ int			validate_we_ea(char *line, t_mlx_data *data);
 	// COLOR VALIDATING
 int			valid_rgb(char **rgb);
 int			commacounter(char *line);
+int			has_duplicate_rgb(char *line);
 int			rgb_contains_letters(char *line);
+char		**split_rgb(char *line, char *trim_with);
 int			validate_color(char *line, t_mlx_data *data);
 	// SAVE DATA
 void		save_texture_to_data(char *file, t_mlx_data *data, char option);
 void		save_color_to_data(char **rgb, t_mlx_data *data, char option);
-	
 	// MAP VALIDATING
 int			map_validathor(char *map_file, t_mlx_data *data, int fd);
 void		get_map_length(int fd, char *map_file, t_mlx_data *data);
@@ -131,6 +133,7 @@ int			line_has_invalid_chars(char *line);
 void		map_checks(t_mlx_data *data);
 void		set_map_error(t_mlx_data *data);
 void		dfs(char **map, int y, int x, t_mlx_data *data);
+int			map_has_multiple_players_or_none(char c);
 	// INPUT UTILS
 int			it_can_be_opened(char *file);
 

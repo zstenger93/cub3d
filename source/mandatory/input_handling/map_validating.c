@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/05 15:16:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 09:59:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,40 @@ int	line_has_invalid_chars(char *line)
 		if (line[i] == ' ' || line[i] == '0' || line[i] == '1'
 			|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
 			|| line[i] == 'E')
+		{
+			if (map_has_multiple_players_or_none(line[i]) == true)
+				return (false);
 			i++;
+		}
 		else if (line[i] == '\0')
 			return (false);
 		else
 			return (printf("%s%c.", INVALID_CHAR, line[i]), true);
 	}
 	return (false);
+}
+
+int	map_has_multiple_players_or_none(char c)
+{
+	int	n;
+	int	s;
+	int	w;
+	int	e;
+
+	n = 0;
+	s = 0;
+	w = 0;
+	s = 0;
+	if (c == 'N')
+		n++;
+	if (c == 'S')
+		s++;
+	if (c == 'W')
+		w++;
+	if (c == 'E')
+		e++;
+	if ((n + s + w + e) > 1)
+		return (printf("Error! Player duplicates on the map."), true);
+	if ((n + s + w + e) == 0)
+		return (printf("Error! No player found on the map"), true);
 }
