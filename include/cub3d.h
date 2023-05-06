@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 11:23:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:18:59 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ void		add_hooks(t_data *data);
 void		free_char_array(char **array);
 char		*copy_map_line(char *content);
 char		**copy_2d_char_array(char **array);
+char		*ft_strdup2(char *str, int start, int end);
+
 
 // FOR TESTING
 void		print_map_objects(t_mlx_data *data);
@@ -177,10 +179,6 @@ int			get_width_of_map(int fd);
 int			get_height_of_map(int fd);
 char		**get_matrix(t_minimap *minimap, int fd);
 uint32_t	 get_rgba(int r, int g, int b, int a);
-// UTILS
-void		free_char_array(char **array);
-char		*copy_map_line(char *content);
-char		**copy_2d_char_array(char **array);
 
 // FOR TESTING
 void		print_map_objects(t_mlx_data *data);

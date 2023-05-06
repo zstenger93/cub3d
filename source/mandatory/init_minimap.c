@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 10:33:25 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:39:06 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,24 @@ char	*dup3(int size, char ch)
 	return (str);
 }
 
-char	*init_line(char *line, int len)
+char	*init_line(char *old_line, int len)
 {
 	char	*result;
+	char	*line;
+	int		i;
 
-	result = ft_strjoin(dup3(4, '+'), ft_strdup(line)); // "    line"
-	result = ft_strjoin(result, dup3(len - 4 - ft_strlen(line), '+')); // "    line    "
+	i = 0;
+	while (old_line[i] != '\0' && old_line[i] != '\n')
+		i++;
+	line = ft_strdup2(old_line, 0, i);
+	old_line = ft_strdup(line);
+	result = dup3(4, '1');
+	result = ft_strjoin(result, old_line);
+	result = ft_strjoin(result, dup3(len - 4 - ft_strlen(line), '1')); // "    line    "
+	i = -1;
+	while (result[++i] != '\0')
+		if (result[i] == ' ')
+			result[i] = '1';
 	return(result);
 }
 
@@ -85,21 +97,21 @@ char	**init_matrix(char **map, int height)
 
 	matrix = malloc(sizeof(char *) * (height + 8 + 1));
 	matrix[height + 8] = NULL;
-	len = get_longest_line(map) + 8;
+	len = get_longest_line(map) + 8 - 1;
 	i = 0;
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
 	while (map[i - 4] != NULL)
 	{
 		matrix[i] = init_line(map[i - 4], len);
 		i++;
 	}
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
-	matrix[i++] = dup3(len, '+');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
+	matrix[i++] = dup3(len, '1');
 	return (matrix);
 }
 
