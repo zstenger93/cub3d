@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 15:58:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:51:55 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-t_mlx_data*	init_data()
+t_mlx_data	*init_data(void)
 {
 	t_mlx_data	*mlx_data;
 
@@ -40,13 +40,12 @@ int	init(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data		data;
 
 	init(argc, argv, &data);
-
-	draw_minimap(data.minimap, data.mlx_data);
+	// draw_minimap(data.minimap, data.mlx_data);
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	add_hooks(&data);
 	mlx_loop(data.mlx);
@@ -60,6 +59,6 @@ void	print_map_objects(t_mlx_data *data)
 	printf("SO: %s\n", data->so);
 	printf("WE: %s\n", data->we);
 	printf("EA: %s\n", data->ea);
-	printf("F: %d,%d,%d\n", data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]);
-	printf("C: %d,%d,%d\n", data->floor_color[0], data->ceiling_color[1], data->ceiling_color[2]);
+	printf("F: %d,%d,%d\n", data->floor_color[0], data->floor_color[1], data->floor_color[2]);
+	printf("C: %d,%d,%d\n", data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]);
 }

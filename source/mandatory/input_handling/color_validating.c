@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 10:45:32 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:53:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	**split_rgb(char *line, char *trim_with)
 
 int	has_duplicate_rgb(char *line)
 {
-	int	f;
-	int	c;
+	static int	f;
+	static int	c;
 
 	f = 0;
 	c = 0;
@@ -71,31 +71,12 @@ int	has_duplicate_rgb(char *line)
 	return (false);
 }
 
-// checking the amount of commas in the rgb list
-int	commacounter(char *line)
-{
-	int	i;
-	int	commacount;
-
-	i = 0;
-	commacount = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] == ',')
-			commacount++;
-		i++;
-	}
-	if (commacount != 2)
-		return (printf("%s", COMMA), false);
-	return (true);
-}
-
 	//check for chars in string. DONE IN PREVIOUS
 int	valid_rgb(char **rgb)
 {
 	if ((ft_atoi(rgb[0]) > 255 || ft_atoi(rgb[0]) < 0)
-		&& (ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[1]) < 0)
-		&& (ft_atoi(rgb[2]) > 255 || ft_atoi(rgb[2]) < 0))
+		|| (ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[1]) < 0)
+		|| (ft_atoi(rgb[2]) > 255 || ft_atoi(rgb[2]) < 0))
 		return (printf("%s%s", RGB_IS, OUT_OF_RANGE), false);
 	else
 		return (true);
@@ -107,7 +88,7 @@ int	rgb_contains_letters(char *line)
 	int	i;
 
 	i = 2;
-	while (i < 13)
+	while (i < ft_strlen(line) - 1)
 	{
 		if (line[i] == ',' || ft_isdigit(line[i]) == true)
 			i++;

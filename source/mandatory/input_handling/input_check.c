@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 16:22:38 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:52:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		if (contains_valid_objects(line, data) == true)
 		{
 			free(line);
-			return (ft_printf(DUPLICATE), false);
+			break ;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	if (line == NULL)
-		return (false);
+		return (ft_printf("Error! Missing attributes.\n"), false);
 	get_map_length(fd, map_file, data);
 	if (map_validathor(map_file, data, fd) == false || data->error == true)
-		return (printf("Error! Invalid map\n"),false);
+		return (printf("Error! Invalid map\n"), false);
 	return (close(fd), true);
 }
 	// exit(0);

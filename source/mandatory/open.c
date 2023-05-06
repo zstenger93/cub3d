@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:17:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 09:04:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:50:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ mlx_t	*open_mapsize_window(char *map, int count)
 	fd = open(map, O_RDWR);
 	buffer = get_next_line(fd);
 	y = 0;
-	while (buffer != 0) {
+	while (buffer != 0)
+	{
 		x = 0;
-		while (buffer[count] != '\n' && buffer[count] != '\0') count++;
+		while (buffer[count] != '\n' && buffer[count] != '\0')
+		count++;
 		x = count;
 		count = 0;
 		y++;

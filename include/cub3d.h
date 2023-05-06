@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 16:23:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:19:06 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define WIDTH 5120
 # define HEIGHT 2880
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 1020
+# define MINIMAP_SIZE 260
 
 
 
@@ -125,6 +125,7 @@ typedef struct s_data
 int			input_check(int argc, char *argv, t_mlx_data *data);
 int			validate_content(char *map_file, t_mlx_data *data);
 	// OBJECT VALIDATING
+int			invalid_attribute(char *line);
 int			contains_valid_objects(char *line, t_mlx_data *data);
 int			is_duplicate(char *line, t_mlx_data *data);
 int			validate_texture(char *line, t_mlx_data *data);

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 16:14:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:49:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int	map_has_multiple_players_or_none(char c, char option)
 	static int	s = 0;
 	static int	w = 0;
 	static int	e = 0;
-	
 
 	if (c == 'N')
 		n++;
