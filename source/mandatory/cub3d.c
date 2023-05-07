@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/07 13:47:08 by zstenger         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/07 10:41:26 by jergashe         ###   ########.fr       */
+>>>>>>> fe944c7d2b2fa89b72186068edf1a6d1262105b3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +60,7 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	init(argc, argv, &data);
-	// draw_minimap(data.minimap, data.mlx_data);
+	mlx_image_to_window(data.mlx, data.minimap->img_tmp, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	add_hooks(&data);
 	mlx_loop(data.mlx);

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/07 13:40:03 by zstenger         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/07 11:08:17 by jergashe         ###   ########.fr       */
+>>>>>>> fe944c7d2b2fa89b72186068edf1a6d1262105b3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +21,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdio.h>
+# include <math.h>
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h" 
 
@@ -38,7 +43,7 @@
 # define WIDTH 5120
 # define HEIGHT 2880
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 260
+# define MINIMAP_SIZE 400
 
 
 
@@ -65,11 +70,22 @@ typedef struct s_player
 	t_vector	plane;
 }	t_player;
 
+typedef struct s_ray
+{
+	t_vector	camera;
+	t_vector	dir;
+	t_vector	side_dist;
+	t_vector	delta_dist;
+	double		wall_dist;
+}	t_ray;
+
 typedef struct s_minimap
 {
 	mlx_image_t *img_map;
+	mlx_image_t *img_tmp;
 	char		**matrix;
 	t_player	player;
+	t_ray		ray;
 }	t_minimap;
 
 typedef struct s_mlx_data
@@ -150,5 +166,10 @@ char		*ft_strdup2(char *str, int start, int end);
 char		put_chars(char c);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
+
+
+
+void	write2(int n);
+
 
 #endif
