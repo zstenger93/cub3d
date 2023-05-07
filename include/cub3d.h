@@ -6,11 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/07 13:40:03 by zstenger         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/07 11:08:17 by jergashe         ###   ########.fr       */
->>>>>>> fe944c7d2b2fa89b72186068edf1a6d1262105b3
+/*   Updated: 2023/05/07 16:17:15 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +39,7 @@
 # define WIDTH 5120
 # define HEIGHT 2880
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 400
+# define MINIMAP_SIZE 420
 
 
 
@@ -68,6 +64,7 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	double		angle;
 }	t_player;
 
 typedef struct s_ray
@@ -170,6 +167,6 @@ void		ft_print_2d_char_array(char **array_2d);
 
 
 void	write2(int n);
-
+char *double_to_string(double num);
 
 #endif

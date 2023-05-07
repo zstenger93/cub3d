@@ -6,11 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/07 13:39:57 by zstenger         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/07 10:11:51 by jergashe         ###   ########.fr       */
->>>>>>> fe944c7d2b2fa89b72186068edf1a6d1262105b3
+/*   Updated: 2023/05/07 15:26:20 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +37,9 @@ void	set_player_position(t_minimap *minimap)
 		}
 		y++;
 	}
+	// minimap->player.angle = 0.1;
+	// minimap->player.dir.x = cos(minimap->player.angle);
+	// minimap->player.dir.y = sin(minimap->player.angle);
 }
 
 int	get_longest_line(char **map)
@@ -113,13 +112,8 @@ char	**init_matrix(char **map, int height)
 		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
-<<<<<<< HEAD
 	while (matrix[i] != NULL)
 		matrix[i++] = dup3(len, 'V');
-=======
-	while (i < height + MINIMAP_SIZE / MINIMAP_REC)
-		matrix[i++] = dup3(len, '1');
->>>>>>> fe944c7d2b2fa89b72186068edf1a6d1262105b3
 	return (matrix);
 }
 
