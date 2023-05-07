@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 13:24:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/07 10:11:51 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	set_player_position(t_minimap *minimap)
 	int	x;
 
 	y = 0;
+	minimap->player.dir.x = -1;
+	minimap->player.dir.y = 0;
+	minimap->player.plane.y = 0.66;
+	minimap->player.plane.y = 0;
 	while (minimap->matrix[y] != NULL)
 	{
 		x = 0;
@@ -27,7 +31,6 @@ void	set_player_position(t_minimap *minimap)
 			{
 				minimap->player.pos.y = y;
 				minimap->player.pos.x = x;
-				printf("\n%f:%f\n\n", minimap->player.pos.y, minimap->player.pos.x);
 				return ;
 			}
 			x++;
@@ -106,7 +109,7 @@ char	**init_matrix(char **map, int height)
 		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
-	while (matrix[i] != NULL)
+	while (i < height + MINIMAP_SIZE / MINIMAP_REC)
 		matrix[i++] = dup3(len, '1');
 	return (matrix);
 }
@@ -120,5 +123,6 @@ t_minimap*	init_minimap(t_mlx_data *mlx_data, mlx_t *mlx)
 	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap); // + init player dir & plane
 	minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
+	minimap->img_tmp = mlx_new_image(mlx, WIDTH, HEIGHT);
 	return (minimap);
 }

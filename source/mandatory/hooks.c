@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 06:22:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/07 07:29:19 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	move(double y, double x, t_minimap *minimap)
 		return ;
 	minimap->player.pos.y = y;
 	minimap->player.pos.x = x;
-	printf("POS: %f : %f\n", minimap->player.pos.y, minimap->player.pos.x);
 }
 
 void	move_keys(void	*param)

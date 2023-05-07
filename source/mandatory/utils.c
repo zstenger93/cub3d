@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 18:54:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/07 10:45:25 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	write2(int n)
+{
+	char *str = ft_itoa(n);
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
+}
 
 uint32_t	get_rgba(int r, int g, int b, int a)
 {
