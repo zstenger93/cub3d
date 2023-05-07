@@ -3,40 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/06 12:16:35 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/07 06:43:56 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
-DN = > /dev/null
-CC = cc
-RM = rm -rf
-CFLAGS =  -Wall -Wextra -Werror -g
-GLFW3 = MLX42/build/_deps/glfw-build/src/libglfw3.a
-LIBMLX42 = MLX42/build/libmlx42.a
-LIBFT = libft/libft.a
-FRAMEWORK = -framework Cocoa -framework OpenGL -framework IOKit
-SRC_DIR = source/mandatory/
-OBJ_DIR = objects/
+CC			= cc
+NAME		= cub3d
+RM			= rm -rf
+OBJ_DIR		= objects/
+DN			= > /dev/null
+LIBFT		= libft/libft.a
+SRC_DIR		= source/mandatory/
+LIBMLX42	= MLX42/build/libmlx42.a
+CFLAGS		= -Wall -Wextra -Werror -g
+GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
+FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
-SOURCE = cub3d \
-		 utils \
-		 init_minimap \
-		 draw_minimap \
-		 hooks \
-		 input_handling/input_check \
-		 input_handling/object_validating \
-		 input_handling/color_validating \
-		 input_handling/map_validating \
-		 input_handling/validating_utils \
-		 input_handling/save_data \
-		 input_handling/dfs \
+SOURCE		= cub3d \
+			  utils \
+			  hooks \
+			  init_minimap \
+			  draw_minimap \
+			  input_handling/dfs \
+			  input_handling/save_data \
+			  input_handling/input_check \
+			  input_handling/map_validating \
+			  input_handling/validating_utils \
+			  input_handling/color_validating \
+			  input_handling/object_validating \
 
-SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
-OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
+SRC			= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
+OBJ			= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 
 all: $(NAME)
 	make run
@@ -117,14 +117,14 @@ t5:
 
 .PHONY: all clean fclean re run
 
-DEF_COLOR = \033[0;39m
-RED = \033[1;4;91m
-GREEN = \033[4;92m
-CYAN = \033[1;96m
-CYAN3 = \033[1;4;96m
-YELLOW = \033[1;33m
-PURPLE = \033[1;35m
-BWhite = \033[1;37m
-CYAN2 = \x1B[1;36m
+DEF_COLOR	= \033[0;39m
+RED			= \033[1;4;91m
+GREEN		= \033[4;92m
+CYAN		= \033[1;96m
+CYAN3		= \033[1;4;96m
+YELLOW		= \033[1;33m
+PURPLE		= \033[1;35m
+BWhite		= \033[1;37m
+CYAN2		= \x1B[1;36m
 
 # MLX42/TOOLS/CMAKELISTS.TXT line 129 CHANGE AND TO OR
