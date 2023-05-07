@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 10:45:25 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/07 14:08:40 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@ void	write2(int n)
 	char *str = ft_itoa(n);
 	write(1, str, ft_strlen(str));
 	write(1, "\n", 1);
+}
+
+char *double_to_string(double num) {
+    char *str;
+    int len;
+
+    // Determine the length of the string representation
+    // using snprintf() with a NULL format string
+    len = snprintf(NULL, 0, "%f", num);
+
+    // Allocate memory for the string
+    str = malloc(len + 1);
+
+    // Convert the double to a string using snprintf()
+    snprintf(str, len + 1, "%f", num);
+
+    return str;
 }
 
 uint32_t	get_rgba(int r, int g, int b, int a)

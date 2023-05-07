@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 07:29:19 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/07 15:25:34 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	is_wall(int y, int x, char **matrix)
 
 void	move(double y, double x, t_minimap *minimap)
 {
+	// y += minimap->player.dir.y;
+	// x += minimap->player.dir.x;
 	if (is_wall(y, x, minimap->matrix))
 		return ;
 	minimap->player.pos.y = y;
@@ -36,13 +38,51 @@ void	move_keys(void	*param)
 	player = &data->minimap->player;
 	draw_minimap(data->minimap, data->mlx_data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move(player->pos.y - 0.1, player->pos.x, data->minimap);
+	{
+		move(player->pos.y - 0.1, player->pos.x, data->minimap);	
+	}
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	{
 		move(player->pos.y + 0.1, player->pos.x, data->minimap);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	{
 		move(player->pos.y, player->pos.x - 0.1, data->minimap);
+	}
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	{
 		move(player->pos.y, player->pos.x + 0.1, data->minimap);
+	}
+
+
+		
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+	{
+		data->minimap->player.angle -= 0.1;
+			
+			printf("%f\n", data->minimap->player.angle);
+			write(1, "\nleft\n", 6);
+		if (data->minimap->player.angle <= 0)
+		{
+			data->minimap->player.angle = 2 * M_PI;
+		}
+			data->minimap->player.dir.x = cos(data->minimap->player.angle);
+			data->minimap->player.dir.y = sin(data->minimap->player.angle);
+	}
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+	{
+		data->minimap->player.angle += 0.1;
+			printf("%f\n", data->minimap->player.angle);
+			write(1, "\nright\n", 7);
+		if (data->minimap->player.angle >= 2 * M_PI)
+		{
+			data->minimap->player.angle = 0;
+		}
+			data->minimap->player.dir.x = cos(data->minimap->player.angle);
+			data->minimap->player.dir.y = sin(data->minimap->player.angle);
+	}
+	
+	
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		exit(1);
 }

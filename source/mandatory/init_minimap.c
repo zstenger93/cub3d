@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 10:11:51 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/07 15:26:20 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	set_player_position(t_minimap *minimap)
 		}
 		y++;
 	}
+	// minimap->player.angle = 0.1;
+	// minimap->player.dir.x = cos(minimap->player.angle);
+	// minimap->player.dir.y = sin(minimap->player.angle);
 }
 
 int	get_longest_line(char **map)
