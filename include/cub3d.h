@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 06:44:28 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/07 13:40:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@
 # define HEIGHT 2880
 # define MINIMAP_REC 20
 # define MINIMAP_SIZE 260
+
+
+
+typedef struct s_img
+{
+	mlx_image_t	*minimap_wall;
+}	t_img;
+
+typedef struct s_txt
+{
+	mlx_image_t	minimap_wall;
+}	t_txt;
 
 typedef struct s_vector
 {
@@ -78,6 +90,7 @@ typedef struct s_mlx_data
 
 typedef struct s_data
 {
+	t_img		*images;
 	mlx_t		*mlx;
 	t_minimap	*minimap;
 	t_mlx_data	*mlx_data;
