@@ -41,6 +41,18 @@
 # define MINIMAP_REC 20
 # define MINIMAP_SIZE 420
 
+
+
+typedef struct s_img
+{
+	mlx_image_t	*minimap_wall;
+}	t_img;
+
+typedef struct s_txt
+{
+	mlx_image_t	minimap_wall;
+}	t_txt;
+
 typedef struct s_vector
 {
 	double	y; // [8][8], y = 6, x =3
@@ -91,6 +103,7 @@ typedef struct s_mlx_data
 
 typedef struct s_data
 {
+	t_img		*images;
 	mlx_t		*mlx;
 	t_minimap	*minimap;
 	t_mlx_data	*mlx_data;
