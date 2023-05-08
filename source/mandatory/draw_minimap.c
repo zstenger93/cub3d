@@ -6,13 +6,13 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/07 16:28:40 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/08 08:38:03 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_player(t_minimap *minimap)
+void	draw_player(t_minimap *minimap) // change
 {
 	int	y;
 	int	x;
@@ -46,29 +46,25 @@ void	draw_rays(t_minimap *minimap)
 	double	y;
 	double	x;
 
-		y = minimap->player.dir.y;
-		x = minimap->player.dir.x;
+	double tmp_y = minimap->player.dir.y / 5;
+	double tmp_x = minimap->player.dir.x / 5;
+	y = minimap->player.dir.y;
+	x = minimap->player.dir.x;
 			
 	i = 0;
 	while (i < 15)
 	{
-	if (y < 0)
-		y--;
-	else
-		y++;
-	if (x < 0)
-		x--;
-	else
-		x++;
 		mlx_put_pixel(minimap->img_map, 
 		MINIMAP_SIZE / 2 + x,
 		MINIMAP_SIZE / 2 + y, 
 		get_rgba(0, 0, 255, 255));
-		
+		y += tmp_y;
+		x += tmp_x;
 		i++;
 	}
 	
 }
+
 
 void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 {
@@ -79,35 +75,31 @@ void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 	int	pix_x;
 
 	p = &minimap->player.pos;
-	
 	i = ((MINIMAP_SIZE / MINIMAP_REC) / 2) * (-1);
-
 	pix_y = -1;
 	while (++pix_y < MINIMAP_SIZE)
 	{
-		// write2(i);
 		k = ((MINIMAP_SIZE / MINIMAP_REC) / 2) * (-1);
 		pix_x = -1;
 		while (++pix_x < MINIMAP_SIZE)
 		{
-			// write2(k);
-			if (minimap->matrix[(int)p->y + i][(int)p->x + k] == '1' &&
-				((pix_x % MINIMAP_REC == (int)((minimap->player.pos.x - (int)minimap->player.pos.x) * 10 ||
-				(int)((minimap->player.pos.y - (int)minimap->player.pos.y) * 10))) ||
-				(pix_x - 1 % MINIMAP_REC == (int)((minimap->player.pos.x - (int)minimap->player.pos.x) * 10 ||
-				(int)((minimap->player.pos.y - (int)minimap->player.pos.y) * 10)))))
+			if (minimap->matrix[(int)p->y + i][(int)p->x + k] == '1')
+				// && (pix_x % MINIMAP_REC == (int)((p->x - (int)p->x) * 10)
+				// || pix_y % MINIMAP_REC == (int)((p->y - (int)p->y) * 10))
+				// || (pix_x - 1) % MINIMAP_REC == (int)((p->x - (int)p->x) * 10)
+				// || (pix_y - 1) % MINIMAP_REC == (int)((p->y - (int)p->y) * 10))
 				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(250, 50, 50, 255));
 			else
 				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(160, 190, 150, 255)); // DRAW REST
-			if ((pix_x) % (MINIMAP_REC) == 0)
+			if ((pix_x) % 20 == 0)
 				k++;
 		}
-		if ((pix_y) % (MINIMAP_REC) == 0)
+		if ((pix_y) % 20 == 0)
 			i++;
 
 	}
 	draw_player(minimap);
-	// draw_rays(minimap);
+	draw_rays(minimap);
 }
 // void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 // {
