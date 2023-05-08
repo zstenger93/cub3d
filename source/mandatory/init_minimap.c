@@ -85,9 +85,9 @@ char	*init_line(char *old_line, int len)
 		i++;
 	line = ft_strdup2(old_line, 0, i);
 	old_line = ft_strdup(line);
-	result = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, '1');
+	result = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, 'V');
 	result = ft_strjoin(result, old_line);
-	result = ft_strjoin(result, dup3(len - (MINIMAP_SIZE / MINIMAP_REC) / 2 - ft_strlen(line), '1')); // "    line    "
+	result = ft_strjoin(result, dup3(len - (MINIMAP_SIZE / MINIMAP_REC) / 2 - ft_strlen(line), 'V')); // "    line    "
 	i = -1;
 	while (result[++i] != '\0')
 		if (result[i] == ' ')
@@ -106,14 +106,14 @@ char	**init_matrix(char **map, int height)
 	len = get_longest_line(map) + (MINIMAP_SIZE / MINIMAP_REC) - 1;
 	i = -1;
 	while (++i < (MINIMAP_SIZE / MINIMAP_REC) / 2)
-		matrix[i] = dup3(len, '1');
+		matrix[i] = dup3(len, 'V');
 	while (map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2] != NULL)
 	{
 		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
-	while (i < height + MINIMAP_SIZE / MINIMAP_REC)
-		matrix[i++] = dup3(len, '1');
+	while (matrix[i] != NULL)
+		matrix[i++] = dup3(len, 'V');
 	return (matrix);
 }
 

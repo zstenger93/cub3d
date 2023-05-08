@@ -28,6 +28,15 @@ t_mlx_data	*init_data(void)
 	return (mlx_data);
 }
 
+void	init_images(t_img *images, mlx_t *mlx)
+{
+	mlx_texture_t	*tex;
+
+	images->minimap_wall = malloc(sizeof(t_img));
+	tex = mlx_load_png("resource/wall.png");
+	images->minimap_wall = mlx_texture_to_image(mlx, tex);
+}
+
 int	init(int argc, char **argv, t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
@@ -36,7 +45,9 @@ int	init(int argc, char **argv, t_data *data)
 		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 		exit(0);
+	// init_images(data->images, data->mlx);
 	data->minimap = init_minimap(data->mlx_data, data->mlx);
+	data->images = malloc(sizeof(t_img));
 	return (0);
 }
 
