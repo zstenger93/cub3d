@@ -3,43 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:14:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 15:26:20 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:50:33 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	set_player_position(t_minimap *minimap)
+void    set_player_position(t_minimap *minimap)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	minimap->player.dir.x = -1;
-	minimap->player.dir.y = 0;
-	minimap->player.plane.y = 0.66;
-	minimap->player.plane.y = 0;
-	while (minimap->matrix[y] != NULL)
-	{
-		x = 0;
-		while (minimap->matrix[y][x] != '\n' && minimap->matrix[y][x] != '\0')
-		{
-			if (minimap->matrix[y][x] == 'N')
-			{
-				minimap->player.pos.y = y;
-				minimap->player.pos.x = x;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-	// minimap->player.angle = 0.1;
-	// minimap->player.dir.x = cos(minimap->player.angle);
-	// minimap->player.dir.y = sin(minimap->player.angle);
+    int y;
+    int x;
+    y = 0;
+    minimap->player.dir.x = -1;
+    minimap->player.dir.y = 0;
+    minimap->player.plane.x = 0;
+    minimap->player.plane.y = 0.66;
+        // write2( minimap->player.dir.y );
+    while (minimap->matrix[y] != NULL)
+    {
+        x = 0;
+        while (minimap->matrix[y][x] != '\n' && minimap->matrix[y][x] != '\0')
+        {
+            if (minimap->matrix[y][x] == 'N')
+            {
+                minimap->player.pos.y = y;
+                minimap->player.pos.x = x;
+                return ;
+            }
+            x++;
+        }
+        y++;
+    }
 }
 
 int	get_longest_line(char **map)

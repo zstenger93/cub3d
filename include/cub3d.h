@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 16:17:15 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:04:33 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define SPACES " \t\n\v\r\f"
 
 // SIZES FOR MAP CALC
-# define WIDTH 5120
-# define HEIGHT 2880
+# define WIDTH 1920
+# define HEIGHT 1080
 # define MINIMAP_REC 20
 # define MINIMAP_SIZE 420
 
@@ -163,6 +163,11 @@ char		*ft_strdup2(char *str, int start, int end);
 char		put_chars(char c);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
+
+
+
+void	draw_rays(t_minimap *minimap);
+void    draw_map(t_minimap *minimap);
 
 
 
