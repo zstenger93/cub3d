@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/09 07:35:08 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:28:47 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,44 @@ void	move_keys(void	*param)
 
 void	turn_left(t_data *data, t_player *player)
 {
-	data->minimap->player.angle -= 0.03;
-	if (data->minimap->player.angle <= 0)
-	{
-		data->minimap->player.angle =  M_PI * 2;
-	}
-		data->minimap->player.dir.x = cos(data->minimap->player.angle);
-		data->minimap->player.dir.y = sin(data->minimap->player.angle);
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos(-0.1) - player->dir.y * sin(-0.1);
+	player->dir.y = old_dir_x * sin(-0.1) + player->dir.y * cos(-0.1);
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x * cos(-0.1) - player->plane.y * sin(-0.1);
+	player->plane.y = old_plane_x * sin(-0.1) + player->plane.y * cos(-0.1);
+	
+	// data->minimap->player.angle -= 0.03;
+	// if (data->minimap->player.angle <= 0)
+	// {
+	// 	data->minimap->player.angle =  M_PI * 2;
+	// }
+		// data->minimap->player.dir.x = cos(data->minimap->player.angle);
+		// data->minimap->player.dir.y = sin(data->minimap->player.angle);
 }
 
 void	turn_right(t_data *data, t_player *player)
 {
-	data->minimap->player.angle += 0.03;
-	if (data->minimap->player.angle >= M_PI * 2)
-	{
-		data->minimap->player.angle = 0;
-	}
-		data->minimap->player.dir.x = cos(data->minimap->player.angle);
-		data->minimap->player.dir.y = sin(data->minimap->player.angle);
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos(0.1) - player->dir.y * sin(0.1);
+	player->dir.y = old_dir_x * sin(0.1) + player->dir.y * cos(0.1);
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x * cos(0.1) - player->plane.y * sin(0.1);
+	player->plane.y = old_plane_x * sin(0.1) + player->plane.y * cos(0.1);
+
+	// data->minimap->player.angle += 0.03;
+	// if (data->minimap->player.angle >= M_PI * 2)
+	// {
+	// 	data->minimap->player.angle = 0;
+	// }
+		// data->minimap->player.dir.x = cos(data->minimap->player.angle);
+		// data->minimap->player.dir.y = sin(data->minimap->player.angle);
 }
 
 void	add_hooks(t_data *data)

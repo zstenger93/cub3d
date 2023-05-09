@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/09 08:18:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:20:30 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	draw_map(t_map *map)
 		map->ray.camera.x = 2 * i / (double) WIDTH - 1;
 		map->ray.dir.y = map->player.dir.y + map->player.plane.y * map->ray.camera.x;
 		map->ray.dir.x = map->player.dir.x + map->player.plane.x * map->ray.camera.x;
+		// map->ray.dir.y = sin(map->player.angle);
+		// map->ray.dir.x = cos(map->player.angle);
 		map->map_x = (int)map->player.pos.x;
 		map->map_y = (int)map->player.pos.y;
 		map->ray.delta_dist.y = fabs(1 / map->ray.dir.y);
