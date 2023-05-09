@@ -6,11 +6,11 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/08 19:02:50 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/09 08:19:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 t_mlx_data	*init_data(void)
 {
@@ -28,14 +28,14 @@ t_mlx_data	*init_data(void)
 	return (mlx_data);
 }
 
-void	init_images(t_img *images, mlx_t *mlx)
-{
-	mlx_texture_t	*tex;
+// void	init_images(t_img *images, mlx_t *mlx)
+// {
+// 	mlx_texture_t	*tex;
 
-	images->minimap_wall = malloc(sizeof(t_img));
-	tex = mlx_load_png("resource/wall.png");
-	images->minimap_wall = mlx_texture_to_image(mlx, tex);
-}
+// 	images->minimap_wall = malloc(sizeof(t_img));
+// 	tex = mlx_load_png("resource/wall.png");
+// 	images->minimap_wall = mlx_texture_to_image(mlx, tex);
+// }
 
 int	init(int argc, char **argv, t_data *data)
 {

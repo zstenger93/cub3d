@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 void    set_player_position(t_map *minimap)
 {
@@ -111,7 +111,7 @@ char	**init_matrix(char **map, int height)
 		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
-	while (matrix[i] != NULL)
+	while (i != height + MINIMAP_SIZE / MINIMAP_REC )
 		matrix[i++] = dup3(len, 'V');
 	return (matrix);
 }

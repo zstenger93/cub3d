@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/08 14:13:13 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/09 08:23:54 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ CFLAGS		= -Wall -Wextra -Werror -g
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
-SOURCE		= cub3d \
+SOURCE		= main/cub3d \
 			  utils \
 			  hooks \
-			  init_map \
-			  draw_minimap \
 			  input_handling/dfs \
+			  init_data/init_map \
+			  minimap/draw_minimap \
+			  raycasting/raycasting \
 			  input_handling/save_data \
 			  input_handling/input_check \
 			  input_handling/map_validating \

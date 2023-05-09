@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/08 18:06:06 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/09 08:31:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	t_vector	camera;
 	t_vector	dir;
+	t_vector	camera;
 	t_vector	side_dist;
 	t_vector	delta_dist;
 	double		wall_dist;
@@ -78,15 +78,15 @@ typedef struct s_ray
 
 typedef struct s_map
 {
+	t_ray		ray;
 	int			side;
+	t_vector	step;
 	int			map_x;
 	int			map_y;
-	t_vector	step;
+	t_player	player;
 	mlx_image_t *img_map;
 	mlx_image_t *img_tmp;
 	char		**matrix;
-	t_player	player;
-	t_ray		ray;
 }	t_map;
 
 typedef struct s_mlx_data
@@ -107,9 +107,9 @@ typedef struct s_mlx_data
 
 typedef struct s_data
 {
-	t_img		*images;
 	mlx_t		*mlx;
-	t_map	*minimap;
+	t_img		*images;
+	t_map		*minimap;
 	t_mlx_data	*mlx_data;
 }	t_data;
 
@@ -146,16 +146,31 @@ void		get_map_length(int fd, char *map_file, t_mlx_data *data);
 int			it_can_be_opened(char *file);
 char		*copy_map_line(char *content);
 
-// INIt_map
+// INIT MAP
 void		set_player_position(t_map *minimap);
-t_map*	init_map(t_mlx_data *mlx_data, mlx_t *mlx);
+t_map*		init_map(t_mlx_data *mlx_data, mlx_t *mlx);
+
+// RAYCASTING
+void		draw_map(t_map *minimap);
+void		empty_map(mlx_image_t *img);
+void		calculate_the_direction_of_the_ray(t_map *map, int i);
+void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);
+void		print_vertical_lines(t_map *minimap, int i);
 
 // DRAW_MINIMAP
+void		draw_rays(t_map *minimap);
 void		draw_player(t_map *minimap);
 void		draw_minimap(t_map *minimap, t_mlx_data *mlx_data);
 
 // HOOKS
 void		add_hooks(t_data *data);
+
+// MOVEMENT and TURN L/R
+void		move_keys(void	*param);
+bool		is_wall(int y, int x, char **matrix);
+void		move(double y, double x, t_map *minimap);
+void		turn_left(t_data *data, t_player *player);
+void		turn_right(t_data *data, t_player *player);
 
 // UTILS
 void		free_char_array(char **array);
@@ -167,32 +182,18 @@ char		*ft_strdup2(char *str, int start, int end);
 char		put_chars(char c);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
+void		write2(int n);
+char		*double_to_string(double num);
 
 
 
-void	draw_rays(t_map *minimap);
-void    draw_map(t_map *minimap);
-
-void	calculate_the_direction_of_the_ray(t_map *map, int i);
-void	cast_the_ray_until_hits_the_wall(t_map *map, int hit);
-void	print_vertical_lines(t_map *minimap, int i);
-
-
-
-void	turn_left(t_data *data, t_player *player);
-void	turn_right(t_data *data, t_player *player);
-
-
-
-void	move_up(double y, double x, t_map *map, t_player *player);
-void	move_down(double y, double x, t_map *map, t_player *player);
-void	move_right(double y, double x, t_map *map, t_player *player);
-void	move_left(double y, double x, t_map *map, t_player *player);
+void		move_up(double y, double x, t_map *map, t_player *player);
+void		move_down(double y, double x, t_map *map, t_player *player);
+void		move_right(double y, double x, t_map *map, t_player *player);
+void		move_left(double y, double x, t_map *map, t_player *player);
 
 
 
 
-void	write2(int n);
-char *double_to_string(double num);
 
 #endif
