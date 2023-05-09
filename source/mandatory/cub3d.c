@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 14:15:11 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:02:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init(int argc, char **argv, t_data *data)
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 		exit(0);
 	// init_images(data->images, data->mlx);
-	data->minimap = init_minimap(data->mlx_data, data->mlx);
+	data->minimap = init_map(data->mlx_data, data->mlx);
 	data->images = malloc(sizeof(t_img));
 	return (0);
 }

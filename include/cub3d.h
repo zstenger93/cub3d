@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/08 12:04:33 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:06:06 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define SPACES " \t\n\v\r\f"
 
 // SIZES FOR MAP CALC
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 2560
+# define HEIGHT 1440
 # define MINIMAP_REC 20
-# define MINIMAP_SIZE 420
+# define MINIMAP_SIZE 320
 
 
 
@@ -76,14 +76,18 @@ typedef struct s_ray
 	double		wall_dist;
 }	t_ray;
 
-typedef struct s_minimap
+typedef struct s_map
 {
+	int			side;
+	int			map_x;
+	int			map_y;
+	t_vector	step;
 	mlx_image_t *img_map;
 	mlx_image_t *img_tmp;
 	char		**matrix;
 	t_player	player;
 	t_ray		ray;
-}	t_minimap;
+}	t_map;
 
 typedef struct s_mlx_data
 {
@@ -105,7 +109,7 @@ typedef struct s_data
 {
 	t_img		*images;
 	mlx_t		*mlx;
-	t_minimap	*minimap;
+	t_map	*minimap;
 	t_mlx_data	*mlx_data;
 }	t_data;
 
@@ -142,13 +146,13 @@ void		get_map_length(int fd, char *map_file, t_mlx_data *data);
 int			it_can_be_opened(char *file);
 char		*copy_map_line(char *content);
 
-// INIT_MINIMAP
-void		set_player_position(t_minimap *minimap);
-t_minimap*	init_minimap(t_mlx_data *mlx_data, mlx_t *mlx);
+// INIt_map
+void		set_player_position(t_map *minimap);
+t_map*	init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 
 // DRAW_MINIMAP
-void		draw_player(t_minimap *minimap);
-void		draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data);
+void		draw_player(t_map *minimap);
+void		draw_minimap(t_map *minimap, t_mlx_data *mlx_data);
 
 // HOOKS
 void		add_hooks(t_data *data);
@@ -166,8 +170,25 @@ void		ft_print_2d_char_array(char **array_2d);
 
 
 
-void	draw_rays(t_minimap *minimap);
-void    draw_map(t_minimap *minimap);
+void	draw_rays(t_map *minimap);
+void    draw_map(t_map *minimap);
+
+void	calculate_the_direction_of_the_ray(t_map *map, int i);
+void	cast_the_ray_until_hits_the_wall(t_map *map, int hit);
+void	print_vertical_lines(t_map *minimap, int i);
+
+
+
+void	turn_left(t_data *data, t_player *player);
+void	turn_right(t_data *data, t_player *player);
+
+
+
+void	move_up(double y, double x, t_map *map, t_player *player);
+void	move_down(double y, double x, t_map *map, t_player *player);
+void	move_right(double y, double x, t_map *map, t_player *player);
+void	move_left(double y, double x, t_map *map, t_player *player);
+
 
 
 

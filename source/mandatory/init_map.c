@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minimap.c                                     :+:      :+:    :+:   */
+/*   init_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-void    set_player_position(t_minimap *minimap)
+void    set_player_position(t_map *minimap)
 {
     int y;
     int x;
@@ -20,8 +20,7 @@ void    set_player_position(t_minimap *minimap)
     minimap->player.dir.x = -1;
     minimap->player.dir.y = 0;
     minimap->player.plane.x = 0;
-    minimap->player.plane.y = 0.66;
-        // write2( minimap->player.dir.y );
+    minimap->player.plane.y = 1;
     while (minimap->matrix[y] != NULL)
     {
         x = 0;
@@ -31,6 +30,9 @@ void    set_player_position(t_minimap *minimap)
             {
                 minimap->player.pos.y = y;
                 minimap->player.pos.x = x;
+				minimap->player.angle = M_PI * 2;
+				minimap->player.dir.x = cos(minimap->player.angle);
+				minimap->player.dir.y = sin(minimap->player.angle);
                 return ;
             }
             x++;
@@ -114,11 +116,11 @@ char	**init_matrix(char **map, int height)
 	return (matrix);
 }
 
-t_minimap*	init_minimap(t_mlx_data *mlx_data, mlx_t *mlx)
+t_map*	init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 {
-	t_minimap	*minimap;
+	t_map	*minimap;
 
-	minimap = malloc(sizeof(t_minimap));
+	minimap = malloc(sizeof(t_map));
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
 	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap); // + init player dir & plane

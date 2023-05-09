@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/08 11:54:49 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/08 14:13:13 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 SOURCE		= cub3d \
 			  utils \
 			  hooks \
-			  init_minimap \
+			  init_map \
 			  draw_minimap \
 			  input_handling/dfs \
 			  input_handling/save_data \

@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/08 12:03:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:53:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_player(t_minimap *minimap)
+void	draw_player(t_map *minimap)
 {
 	int	y;
 	int	x;
@@ -40,88 +40,125 @@ void	draw_player(t_minimap *minimap)
 	// }
 }
 
-void    draw_map(t_minimap *minimap)
+void	empty_map(mlx_image_t *img)
+{
+	int	i;
+	int	k;
+
+	i = -1;
+	while (++i < HEIGHT)
+	{
+		k = -1;
+		while (++k < WIDTH)
+		{
+			mlx_put_pixel(img, k, i, get_rgba(85, 85, 85, 255));
+		}
+	}
+}
+
+void    draw_map(t_map *map)
 {
     int i;
-    int k;
-    int map_x;
-    int map_y;
     int hit;
-    int side;
-    double  step_x;
-    double  step_y;
+	int k = -1;
+
+	empty_map(map->img_tmp);
     i = -1;
     while (++i < WIDTH)
     {
-    minimap->ray.camera.x = 2 * i / (double) WIDTH - 1;
-    minimap->ray.dir.y = minimap->player.dir.y + minimap->player.plane.y * minimap->ray.camera.x;
-    minimap->ray.dir.x = minimap->player.dir.x + minimap->player.plane.x * minimap->ray.camera.x;
-    hit = 0;
-    map_x = (int)minimap->player.pos.x;
-    map_y = (int)minimap->player.pos.y;
-    minimap->ray.delta_dist.y = fabs(1 / minimap->ray.dir.y);
-    minimap->ray.delta_dist.x = fabs(1 / minimap->ray.dir.x);
-    if (minimap->ray.dir.y == 0)
-        minimap->ray.delta_dist.y = 1e30;
-    if (minimap->ray.dir.x == 0)
-        minimap->ray.delta_dist.x = 1e30;
-    if (minimap->ray.dir.x < 0)
-    {
-        step_x = -1;
-        minimap->ray.side_dist.x = (minimap->player.pos.x - map_x) * minimap->ray.delta_dist.x;
-    }
-    else
-    {
-        step_x = 1;
-        minimap->ray.side_dist.x = (map_x + 1.0 - minimap->player.pos.x) * minimap->ray.delta_dist.x;
-    }
-    if (minimap->ray.dir.y < 0)
-    {
-        step_y = -1;
-        minimap->ray.side_dist.y = (minimap->player.pos.y - map_y) * minimap->ray.delta_dist.y;
-    }
-    else
-    {
-        step_y = 1;
-        minimap->ray.side_dist.y = (map_y + 1.0 - minimap->player.pos.y) * minimap->ray.delta_dist.y;
-    }
-    while (hit == 0)
-    {
-        if (minimap->ray.side_dist.x < minimap->ray.side_dist.y)
-        {
-            minimap->ray.side_dist.x += minimap->ray.delta_dist.x;
-            map_x += step_x;
-            side = 0;
-        }
-        else
-        {
-            minimap->ray.side_dist.y += minimap->ray.delta_dist.y;
-            map_y += step_y;
-            side = 1;
-        }
-        if (minimap->matrix[(int)map_x][(int)map_y] > '0')
-            hit = 1;
-    }
-    if (side == 0)
-        minimap->ray.wall_dist = minimap->ray.side_dist.x - minimap->ray.delta_dist.x;
-    else
-        minimap->ray.wall_dist = minimap->ray.side_dist.y - minimap->ray.delta_dist.y;
-    int lineHeight = (int)(HEIGHT / minimap->ray.wall_dist);
-    int drawStart = - lineHeight / 2 + HEIGHT / 2;
-    if(drawStart < 0)
-        drawStart = 0;
-    int drawEnd = lineHeight / 2 + HEIGHT / 2;
-    if(drawEnd >= HEIGHT)
-        drawEnd = HEIGHT - 1;
-    while (drawStart < drawEnd)
-    {
-        mlx_put_pixel(minimap->img_tmp, i, drawStart, get_rgba(0, 0, 255, 255));
-        drawStart++;
-    }
+		hit = 0;
+		map->ray.camera.x = 2 * i / (double) WIDTH - 1;
+		map->ray.dir.y = map->player.dir.y + map->player.plane.y * map->ray.camera.x;
+		map->ray.dir.x = map->player.dir.x + map->player.plane.x * map->ray.camera.x;
+		map->map_x = (int)map->player.pos.x;
+		map->map_y = (int)map->player.pos.y;
+		map->ray.delta_dist.y = fabs(1 / map->ray.dir.y);
+		map->ray.delta_dist.x = fabs(1 / map->ray.dir.x);
+		calculate_the_direction_of_the_ray(map, i);
+		cast_the_ray_until_hits_the_wall(map, hit);
+		print_vertical_lines(map, i);
+		// while (++k < HEIGHT)
+		// 	mlx_put_pixel(map->img_tmp, i, k, get_rgba(0, 85, 0, 255));
     }
 }
 
-void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
+void	calculate_the_direction_of_the_ray(t_map *map, int i)
+{
+	if (map->ray.dir.y == 0)
+		map->ray.delta_dist.y = 1e30;
+	if (map->ray.dir.x == 0)
+		map->ray.delta_dist.x = 1e30;
+	if (map->ray.dir.y < 0)
+	{
+		map->step.x = -1;
+		map->ray.side_dist.x = (map->player.pos.x - map->map_x) * map->ray.delta_dist.x;
+	}
+	else
+	{
+		map->step.x = 1;
+		map->ray.side_dist.x = (map->map_x + 1.0 - map->player.pos.x) * map->ray.delta_dist.x;
+	}
+	if (map->ray.dir.x < 0)
+	{
+		map->step.y = -1;
+		map->ray.side_dist.y = (map->player.pos.y - map->map_y) * map->ray.delta_dist.y;
+	}
+	else
+	{
+		map->step.y = 1;
+		map->ray.side_dist.y = (map->map_y + 1.0 - map->player.pos.y) * map->ray.delta_dist.y;
+	}
+}
+
+void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
+{
+	while (hit == 0)
+	{
+		if (map->ray.side_dist.x < map->ray.side_dist.y)
+		{
+			map->ray.side_dist.x += map->ray.delta_dist.x;
+			map->map_x += map->step.x;
+			map->side = 0;
+		}
+		else
+		{
+			map->ray.side_dist.y += map->ray.delta_dist.y;
+			map->map_y += map->step.y;
+			map->side = 1;
+		}
+		if (map->matrix[(int)map->map_x][(int)map->map_y] > '0')
+			hit = 1;
+	}
+	if (map->side == 0)
+		map->ray.wall_dist = map->ray.side_dist.x - map->ray.delta_dist.x;
+	else
+		map->ray.wall_dist = map->ray.side_dist.y - map->ray.delta_dist.y;
+}
+
+void	print_vertical_lines(t_map *map, int i)
+{
+	int line_height;
+	int draw_start;
+	int	draw_end;
+
+	line_height = (int)(HEIGHT / map->ray.wall_dist);
+	draw_start = - line_height / 2 + HEIGHT / 2;
+	draw_end = line_height / 2 + HEIGHT / 2;
+	if(draw_start < 0)
+		draw_start = 0;
+	if(draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+	while (draw_start < draw_end)
+	{
+		if (map->side == 0)
+			mlx_put_pixel(map->img_tmp, i, draw_start, get_rgba(0, 0, 255, 255));
+		else
+			mlx_put_pixel(map->img_tmp, i, draw_start, get_rgba(0, 255, 0, 255));
+		draw_start++;
+	}
+}
+
+void	draw_minimap(t_map *minimap, t_mlx_data *mlx_data)
 {
 	t_vector	*p;
 	int	i;
@@ -136,18 +173,16 @@ void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 	pix_y = -1;
 	while (++pix_y < MINIMAP_SIZE)
 	{
-		// write2(i);
 		k = ((MINIMAP_SIZE / MINIMAP_REC) / 2) * (-1);
 		pix_x = -1;
 		while (++pix_x < MINIMAP_SIZE)
 		{
-			// write2(k);
 			if (minimap->matrix[(int)p->y + i][(int)p->x + k] == '1'
 				|| (pix_x % MINIMAP_REC == (int)minimap->player.pos.x - (int)minimap->player.pos.x * 10))
 				// || ((int)((minimap->player.pos.y - (int)minimap->player.pos.y) * 10)))) ||
 				// (pix_y % MINIMAP_REC == (int)((minimap->player.pos.y - (int)minimap->player.pos.y) * 10) && minimap->matrix[(int)p->y + i][(int)p->x + k] == '1')))
 				// (minimap->matrix[(int)p->y + i][(int)p->x + k] == '1' && (pix_x % MINIMAP_REC == (int)((minimap->player.pos.x - (int)minimap->player.pos.x) * 10 || (int)((minimap->player.pos.y - (int)minimap->player.pos.y) * 10))))))
-				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(250, 50, 50, 255));
+				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(255, 0, 0, 255));
 			else
 				mlx_put_pixel(minimap->img_map, pix_x, pix_y, get_rgba(160, 190, 150, 255)); // DRAW REST
 			if ((pix_x) % (MINIMAP_REC) == 0)
@@ -155,14 +190,14 @@ void	draw_minimap(t_minimap *minimap, t_mlx_data *mlx_data)
 		}
 		if ((pix_y) % (MINIMAP_REC) == 0)
 			i++;
-
 	}
 	draw_map(minimap);
-	draw_rays(minimap);
 	draw_player(minimap);
+	draw_rays(minimap);
+
 }
 
-void	draw_rays(t_minimap *minimap)
+void	draw_rays(t_map *minimap)
 {
 	int	i;
 	double	y;
@@ -174,7 +209,7 @@ void	draw_rays(t_minimap *minimap)
 	x = minimap->player.dir.x;
 			
 	i = 0;
-	while (i < 15)
+	while (i < 40)
 	{
 		mlx_put_pixel(minimap->img_map, 
 		MINIMAP_SIZE / 2 + x,
@@ -184,5 +219,4 @@ void	draw_rays(t_minimap *minimap)
 		x += tmp_x;
 		i++;
 	}
-	
 }
