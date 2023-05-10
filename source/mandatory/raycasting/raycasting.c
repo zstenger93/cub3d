@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/09 12:06:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:09:12 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,20 @@ void	empty_map(mlx_image_t *img)
 	int	k;
 
 	i = -1;
-	while (++i < HEIGHT)
+	while (++i < HEIGHT / 2)
 	{
 		k = -1;
 		while (++k < WIDTH)
 		{
 			mlx_put_pixel(img, k, i, get_rgba(85, 85, 85, 255));
+		}
+	}
+	while (++i < HEIGHT)
+	{
+		k = -1;
+		while (++k < WIDTH)
+		{
+			mlx_put_pixel(img, k, i, get_rgba(150, 150, 150, 255));
 		}
 	}
 }
@@ -62,7 +70,7 @@ void	set_ray_distance(t_map *map)
 void	calculate_the_direction_of_the_ray(t_map *map, int i)
 {
 	set_ray_distance(map);
-	if (map->ray.dir.y < 0)
+	if (map->ray.dir.x < 0)
 	{
 		map->step.x = -1;
 		map->ray.side_dist.x = (map->player.pos.x - map->map_x)
@@ -74,7 +82,7 @@ void	calculate_the_direction_of_the_ray(t_map *map, int i)
 		map->ray.side_dist.x = (map->map_x + 1.0 - map->player.pos.x)
 			* map->ray.delta_dist.x;
 	}
-	if (map->ray.dir.x < 0)
+	if (map->ray.dir.y < 0)
 	{
 		map->step.y = -1;
 		map->ray.side_dist.y = (map->player.pos.y - map->map_y)
@@ -104,13 +112,16 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 			map->map_y += map->step.y;
 			map->side = 1;
 		}
-		if (map->matrix[(int)map->map_x][(int)map->map_y] > '0')
+		if (map->matrix[(int)map->map_y][(int)map->map_x] > '0')
 			hit = 1;
 	}
 	if (map->side == 0)
 		map->ray.wall_dist = map->ray.side_dist.x - map->ray.delta_dist.x;
 	else
 		map->ray.wall_dist = map->ray.side_dist.y - map->ray.delta_dist.y;
+	if (map->ray.wall_dist < 1e-4)
+		map->ray.wall_dist = 0.4;
+	// printf("DIST: %f\n\n", map->ray.wall_dist);
 }
 
 void	print_vertical_lines(t_map *m, int i)

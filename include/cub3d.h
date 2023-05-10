@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/09 12:14:31 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:31:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_player
 	t_vector	dir;
 	t_vector	plane;
 	double		angle;
+	double		speed;
 }	t_player;
 
 typedef struct s_ray
@@ -192,9 +193,5 @@ void		ft_print_2d_char_array(char **array_2d);
 
 
 
-void		move_up(double y, double x, t_map *map, t_player *player);
-void		move_down(double y, double x, t_map *map, t_player *player);
-void		move_left(double y, double x, t_map *map, t_player *player);
-void		move_right(double y, double x, t_map *map, t_player *player);
 
 #endif

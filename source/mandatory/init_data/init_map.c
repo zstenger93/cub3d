@@ -12,33 +12,68 @@
 
 #include "../../../include/cub3d.h"
 
+double	get_angle(char c)
+{
+	if (c == 'S')
+		return (M_PI_2);
+	if (c == 'W')
+		return (0);
+	if (c == 'N')
+		return (M_PI + M_PI_2);
+	return (M_PI * 2);
+	
+}
+
+void	set_plan(t_vector *plane, char c)
+{
+	if (c == 'N')
+	{
+		plane->y = 0;
+		plane->x = 1;
+	}
+	if (c == 'S')
+	{
+		plane->y = 0;
+		plane->x = -1;
+	}
+	if (c == 'W')
+	{
+		plane->y = -1;
+		plane->x = 0;
+	}
+	if (c == 'E')
+	{
+		plane->y = 1;
+		plane->x = 0;
+	}
+}
+
 void    set_player_position(t_map *minimap)
 {
-    int y;
-    int x;
+    int 	y;
+    int 	x;
+	double	plane_length;
 
-    y = 0;
-    minimap->player.dir.x = -1;
-    minimap->player.dir.y = 0;
-    minimap->player.plane.x = 0;
-    minimap->player.plane.y = 0.66;
-    while (minimap->matrix[y] != NULL)
-    {
-        x = 0;
-        while (minimap->matrix[y][x] != '\n' && minimap->matrix[y][x] != '\0')
-        {
-            if (minimap->matrix[y][x] == 'N')
-            {
-                minimap->player.pos.y = y;
-                minimap->player.pos.x = x;
-				minimap->player.angle = M_PI * 2;
-				minimap->player.dir.x = cos(minimap->player.angle);
-				minimap->player.dir.y = sin(minimap->player.angle);
-                return ;
-            }
-            x++;
-        }
-        y++;
+	y = 0;
+	minimap->player.speed = 0.07;
+	while (minimap->matrix[y] != NULL)
+	{
+		x = 0;
+		while (minimap->matrix[y][x] != '\n' && minimap->matrix[y][x] != '\0')
+		{
+			if (ft_pf_strchr("NESW", minimap->matrix[y][x]) != NULL)
+			{
+				minimap->player.pos.y = y;
+				minimap->player.pos.x = x;
+				minimap->player.dir.x = cos(get_angle(minimap->matrix[y][x]));
+    			minimap->player.dir.y = sin(get_angle(minimap->matrix[y][x]));
+				set_plan(&minimap->player.plane, minimap->matrix[y][x]);
+				minimap->matrix[y][x] = '0';
+				return ;
+			}
+			x++;
+		}
+		y++;
     }
 }
 
