@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 16:14:56 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:35:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	print_vertical_lines(t_map *m, int i)
 	while (draw_start < draw_end)
 	{
 		if (m->side == 0)
-			mlx_put_pixel(m->img_tmp, i, draw_start, get_rgba(0, 0, 255, 255));
+			mlx_put_pixel(m->img_tmp, i, draw_start, rgb(0, 0, 255, 255));
 		else
-			mlx_put_pixel(m->img_tmp, i, draw_start, get_rgba(0, 255, 0, 255));
+			mlx_put_pixel(m->img_tmp, i, draw_start, rgb(0, 255, 0, 255));
 		draw_start++;
 	}
 }

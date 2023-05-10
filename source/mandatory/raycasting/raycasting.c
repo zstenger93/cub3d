@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:52:42 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:35:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	empty_map(mlx_image_t *img, t_mlx_data *mlx_d)
 	{
 		k = -1;
 		while (++k < WIDTH)
-			mlx_put_pixel(img, k, i, get_rgba(mlx_d->ceiling_color[0],
+			mlx_put_pixel(img, k, i, rgb(mlx_d->ceiling_color[0],
 					mlx_d->ceiling_color[1], mlx_d->ceiling_color[2], 255));
 	}
 	while (++i < HEIGHT)
 	{
 		k = -1;
 		while (++k < WIDTH)
-			mlx_put_pixel(img, k, i, get_rgba(mlx_d->floor_color[0],
+			mlx_put_pixel(img, k, i, rgb(mlx_d->floor_color[0],
 					mlx_d->floor_color[1], mlx_d->floor_color[2], 255));
 	}
 }

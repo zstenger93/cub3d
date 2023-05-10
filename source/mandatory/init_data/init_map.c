@@ -31,18 +31,18 @@ char	**init_matrix(char **m, int height)
 	int		len;
 	int		i;
 
-	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / MINIMAP_REC + 1));
-	matrix[height + MINIMAP_SIZE / MINIMAP_REC] = NULL;
-	len = get_longest_line(m) + (MINIMAP_SIZE / MINIMAP_REC) - 1;
+	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / R + 1));
+	matrix[height + MINIMAP_SIZE / R] = NULL;
+	len = get_longest_line(m) + (MINIMAP_SIZE / R) - 1;
 	i = -1;
-	while (++i < (MINIMAP_SIZE / MINIMAP_REC) / 2)
+	while (++i < (MINIMAP_SIZE / R) / 2)
 		matrix[i] = dup3(len, 'V');
-	while (m[i - (MINIMAP_SIZE / MINIMAP_REC) / 2] != NULL)
+	while (m[i - (MINIMAP_SIZE / R) / 2] != NULL)
 	{
-		matrix[i] = init_line(m[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
+		matrix[i] = init_line(m[i - (MINIMAP_SIZE / R) / 2], len);
 		i++;
 	}
-	while (i != height + MINIMAP_SIZE / MINIMAP_REC)
+	while (i != height + MINIMAP_SIZE / R)
 		matrix[i++] = dup3(len, 'V');
 	return (matrix);
 }
@@ -60,9 +60,9 @@ char	*init_line(char *old_line, int l)
 	line = ft_strdup2(old_line, 0, i);
 	k = ft_strlen(line);
 	old_line = ft_strdup(line);
-	res = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, 'V');
+	res = dup3((MINIMAP_SIZE / R) / 2, 'V');
 	res = ft_strjoin(res, old_line);
-	res = ft_strjoin(res, dup3(l - (MINIMAP_SIZE / MINIMAP_REC) / 2 - k, 'V'));
+	res = ft_strjoin(res, dup3(l - (MINIMAP_SIZE / R) / 2 - k, 'V'));
 	i = -1;
 	while (res[++i] != '\0')
 		if (res[i] == ' ')
