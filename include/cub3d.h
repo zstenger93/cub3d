@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 10:31:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@
 # define MINIMAP_REC 20
 # define MINIMAP_SIZE 320
 
-
-
-typedef struct s_img
-{
-	mlx_image_t	*minimap_wall;
-}	t_img;
-
-typedef struct s_txt
-{
-	mlx_image_t	minimap_wall;
-}	t_txt;
-
 typedef struct s_vector
 {
 	double	y; // [8][8], y = 6, x =3
@@ -77,6 +65,27 @@ typedef struct s_ray
 	double		wall_dist;
 }	t_ray;
 
+typedef struct s_mlx_data
+{
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	mlx_texture_t	*t_no;
+	mlx_texture_t	*t_so;
+	mlx_texture_t	*t_we;
+	mlx_texture_t	*t_ea;
+	mlx_texture_t	*texture;
+	int				error;// flag for input check from dfs in case the map is wrong
+	t_player		*player;
+	char			**raw_map;// map copied from the file
+	int				map_length;// heigth of the map
+	char			**map_copy;// raw map copy for dfs
+	int				reading_pos;// actual map reading starts from here
+	int				floor_color[3];
+	int				ceiling_color[3];
+}	t_mlx_data;
+
 typedef struct s_map
 {
 	t_ray		ray;
@@ -90,26 +99,9 @@ typedef struct s_map
 	char		**matrix;
 }	t_map;
 
-typedef struct s_mlx_data
-{
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	int			error;// flag for input check from dfs in case the map is wrong
-	t_player	*player;
-	char		**raw_map;// map copied from the file
-	int			map_length;// heigth of the map
-	char		**map_copy;// raw map copy for dfs
-	int			reading_pos;// actual map reading starts from here
-	int			floor_color[3];
-	int			ceiling_color[3];
-}	t_mlx_data;
-
 typedef struct s_data
 {
 	mlx_t		*mlx;
-	t_img		*images;
 	t_map		*minimap;
 	t_mlx_data	*mlx_data;
 }	t_data;
@@ -155,8 +147,8 @@ char		**init_matrix(char **map, int height);
 t_map*		init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 
 // RAYCASTING
-void		draw_map(t_map *minimap);
-void		empty_map(mlx_image_t *img);
+void		draw_map(t_map *minimap, t_mlx_data *mlx_data);
+void		empty_map(mlx_image_t *img, t_mlx_data *mlx_data);
 void		set_ray_distance(t_map *map);
 void		calculate_the_direction_of_the_ray(t_map *map, int i);
 void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);

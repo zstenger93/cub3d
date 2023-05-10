@@ -6,18 +6,18 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 13:09:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:39:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	draw_map(t_map *m)
+void	draw_map(t_map *m, t_mlx_data *mlx_data)
 {
 	int	i;
 	int	hit;
 
-	empty_map(m->img_tmp);
+	empty_map(m->img_tmp, mlx_data);
 	i = -1;
 	while (++i < WIDTH)
 	{
@@ -35,7 +35,7 @@ void	draw_map(t_map *m)
 	}
 }
 
-void	empty_map(mlx_image_t *img)
+void	empty_map(mlx_image_t *img, t_mlx_data *mlx_d)
 {
 	int	i;
 	int	k;
@@ -45,17 +45,15 @@ void	empty_map(mlx_image_t *img)
 	{
 		k = -1;
 		while (++k < WIDTH)
-		{
-			mlx_put_pixel(img, k, i, get_rgba(85, 85, 85, 255));
-		}
+			mlx_put_pixel(img, k, i, get_rgba(mlx_d->ceiling_color[0],
+					mlx_d->ceiling_color[1], mlx_d->ceiling_color[2], 255));
 	}
 	while (++i < HEIGHT)
 	{
 		k = -1;
 		while (++k < WIDTH)
-		{
-			mlx_put_pixel(img, k, i, get_rgba(150, 150, 150, 255));
-		}
+			mlx_put_pixel(img, k, i, get_rgba(mlx_d->floor_color[0],
+					mlx_d->floor_color[1], mlx_d->floor_color[2], 255));
 	}
 }
 
@@ -121,7 +119,6 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 		map->ray.wall_dist = map->ray.side_dist.y - map->ray.delta_dist.y;
 	if (map->ray.wall_dist < 1e-4)
 		map->ray.wall_dist = 0.4;
-	// printf("DIST: %f\n\n", map->ray.wall_dist);
 }
 
 void	print_vertical_lines(t_map *m, int i)
