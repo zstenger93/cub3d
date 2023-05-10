@@ -16,11 +16,12 @@ void    set_player_position(t_map *minimap)
 {
     int y;
     int x;
+
     y = 0;
     minimap->player.dir.x = -1;
     minimap->player.dir.y = 0;
     minimap->player.plane.x = 0;
-    minimap->player.plane.y = 1;
+    minimap->player.plane.y = 0.66;
     while (minimap->matrix[y] != NULL)
     {
         x = 0;
@@ -73,28 +74,30 @@ char	*dup3(int size, char ch)
 	return (str);
 }
 
-char	*init_line(char *old_line, int len)
+char	*init_line(char *old_line, int l)
 {
-	char	*result;
+	char	*res;
 	char	*line;
 	int		i;
+	int		k;
 
 	i = 0;
 	while (old_line[i] != '\0' && old_line[i] != '\n')
 		i++;
 	line = ft_strdup2(old_line, 0, i);
+	k = ft_strlen(line);
 	old_line = ft_strdup(line);
-	result = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, 'V');
-	result = ft_strjoin(result, old_line);
-	result = ft_strjoin(result, dup3(len - (MINIMAP_SIZE / MINIMAP_REC) / 2 - ft_strlen(line), 'V')); // "    line    "
+	res = dup3((MINIMAP_SIZE / MINIMAP_REC) / 2, 'V');
+	res = ft_strjoin(res, old_line);
+	res = ft_strjoin(res, dup3(l - (MINIMAP_SIZE / MINIMAP_REC) / 2 - k, 'V'));
 	i = -1;
-	while (result[++i] != '\0')
-		if (result[i] == ' ')
-			result[i] = 'V';
-	return(result);
+	while (res[++i] != '\0')
+		if (res[i] == ' ')
+			res[i] = 'V';
+	return(res);
 }
 
-char	**init_matrix(char **map, int height)
+char	**init_matrix(char **m, int height)
 {
 	char	**matrix;
 	int		len;
@@ -102,13 +105,13 @@ char	**init_matrix(char **map, int height)
 
 	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / MINIMAP_REC + 1));
 	matrix[height + MINIMAP_SIZE / MINIMAP_REC] = NULL;
-	len = get_longest_line(map) + (MINIMAP_SIZE / MINIMAP_REC) - 1;
+	len = get_longest_line(m) + (MINIMAP_SIZE / MINIMAP_REC) - 1;
 	i = -1;
 	while (++i < (MINIMAP_SIZE / MINIMAP_REC) / 2)
 		matrix[i] = dup3(len, 'V');
-	while (map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2] != NULL)
+	while (m[i - (MINIMAP_SIZE / MINIMAP_REC) / 2] != NULL)
 	{
-		matrix[i] = init_line(map[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
+		matrix[i] = init_line(m[i - (MINIMAP_SIZE / MINIMAP_REC) / 2], len);
 		i++;
 	}
 	while (i != height + MINIMAP_SIZE / MINIMAP_REC )

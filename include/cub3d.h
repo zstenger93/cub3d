@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/09 08:31:56 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:14:31 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,16 @@ int			it_can_be_opened(char *file);
 char		*copy_map_line(char *content);
 
 // INIT MAP
+int			get_longest_line(char **map);
+char		*init_line(char *old_line, int l);
 void		set_player_position(t_map *minimap);
+char		**init_matrix(char **map, int height);
 t_map*		init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 
 // RAYCASTING
 void		draw_map(t_map *minimap);
 void		empty_map(mlx_image_t *img);
+void		set_ray_distance(t_map *map);
 void		calculate_the_direction_of_the_ray(t_map *map, int i);
 void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);
 void		print_vertical_lines(t_map *minimap, int i);
@@ -169,31 +173,28 @@ void		add_hooks(t_data *data);
 void		move_keys(void	*param);
 bool		is_wall(int y, int x, char **matrix);
 void		move(double y, double x, t_map *minimap);
-void		turn_left(t_data *data, t_player *player);
+void		turn_left(t_data *data, t_player *playr);
 void		turn_right(t_data *data, t_player *player);
 
 // UTILS
+char		*dup3(int size, char ch);
 void		free_char_array(char **array);
 char		**copy_2d_char_array(char **array);
 uint32_t	get_rgba(int r, int g, int b, int a);
 char		*ft_strdup2(char *str, int start, int end);
 
 // FOR TESTING
+void		write2(int n);
 char		put_chars(char c);
+char		*double_to_string(double num);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
-void		write2(int n);
-char		*double_to_string(double num);
 
 
 
 void		move_up(double y, double x, t_map *map, t_player *player);
 void		move_down(double y, double x, t_map *map, t_player *player);
-void		move_right(double y, double x, t_map *map, t_player *player);
 void		move_left(double y, double x, t_map *map, t_player *player);
-
-
-
-
+void		move_right(double y, double x, t_map *map, t_player *player);
 
 #endif
