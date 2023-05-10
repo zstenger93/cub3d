@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 14:34:05 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:27:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,18 @@ int			it_can_be_opened(char *file);
 char		*copy_map_line(char *content);
 
 // INIT MAP
+double		get_angle(char c);
 int			get_longest_line(char **map);
+void		set_plan(t_vector *plane, char c);
 char		*init_line(char *old_line, int l);
 void		set_player_position(t_map *minimap);
 char		**init_matrix(char **map, int height);
-t_map*		init_map(t_mlx_data *mlx_data, mlx_t *mlx);
+t_map		*init_map(t_mlx_data *mlx_data, mlx_t *mlx);
+
+// INIT
+t_mlx_data	*init_data(void);
+void		init_textures(t_mlx_data *mlx_data);
+int			init(int argc, char **argv, t_data *data);
 
 // RAYCASTING
 void		draw_map(t_map *minimap, t_mlx_data *mlx_data);
@@ -152,6 +159,8 @@ void		empty_map(mlx_image_t *img, t_mlx_data *mlx_data);
 void		set_ray_distance(t_map *map);
 void		calculate_the_direction_of_the_ray(t_map *map, int i);
 void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);
+
+// DRAW TEXTURE
 void		print_vertical_lines(t_map *minimap, int i);
 
 // DRAW_MINIMAP
@@ -162,10 +171,15 @@ void		draw_minimap(t_map *minimap, t_mlx_data *mlx_data);
 // HOOKS
 void		add_hooks(t_data *data);
 
-// MOVEMENT and TURN L/R
+// MOVEMENT
 void		move_keys(void	*param);
 bool		is_wall(int y, int x, char **matrix);
-void		move(double y, double x, t_map *minimap);
+void		move_up(double y, double x, t_map *map);
+void		move_down(double y, double x, t_map *map);
+void		move_left(double y, double x, t_map *map);
+void		move_right(double y, double x, t_map *map);
+
+// TURN L/R
 void		turn_left(t_data *data, t_player *playr);
 void		turn_right(t_data *data, t_player *player);
 
@@ -182,8 +196,5 @@ char		put_chars(char c);
 char		*double_to_string(double num);
 void		print_map_objects(t_mlx_data *data);
 void		ft_print_2d_char_array(char **array_2d);
-
-
-
 
 #endif

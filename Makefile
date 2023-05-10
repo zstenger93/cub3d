@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/09 10:13:38 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/10 16:09:06 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,16 @@ FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 SOURCE		= main/cub3d \
 			  utils \
 			  hooks \
+			  movement/move \
+			  movement/turn \
+			  init_data/init \
 			  input_handling/dfs \
 			  init_data/init_map \
+			  movement/move_utils \
 			  minimap/draw_minimap \
+			  init_data/init_utils \
 			  raycasting/raycasting \
+			  raycasting/print_texture \
 			  input_handling/save_data \
 			  input_handling/input_check \
 			  input_handling/map_validating \

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 14:39:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:52:42 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,27 +119,4 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 		map->ray.wall_dist = map->ray.side_dist.y - map->ray.delta_dist.y;
 	if (map->ray.wall_dist < 1e-4)
 		map->ray.wall_dist = 0.4;
-}
-
-void	print_vertical_lines(t_map *m, int i)
-{
-	int line_height;
-	int draw_start;
-	int	draw_end;
-
-	line_height = (int)(HEIGHT / m->ray.wall_dist);
-	draw_start = - line_height / 2 + HEIGHT / 2;
-	draw_end = line_height / 2 + HEIGHT / 2;
-	if(draw_start < 0)
-		draw_start = 0;
-	if(draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-	while (draw_start < draw_end)
-	{
-		if (m->side == 0)
-			mlx_put_pixel(m->img_tmp, i, draw_start, get_rgba(0, 0, 255, 255));
-		else
-			mlx_put_pixel(m->img_tmp, i, draw_start, get_rgba(0, 255, 0, 255));
-		draw_start++;
-	}
 }

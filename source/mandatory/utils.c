@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/07 14:08:40 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:26:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 void	write2(int n)
 {
-	char *str = ft_itoa(n);
+	char	*str;
+
+	str = ft_itoa(n);
 	write(1, str, ft_strlen(str));
 	write(1, "\n", 1);
 }
 
-char *double_to_string(double num) {
-    char *str;
-    int len;
+char	*double_to_string(double num)
+{
+	char	*str;
+	int		len;
 
-    // Determine the length of the string representation
-    // using snprintf() with a NULL format string
-    len = snprintf(NULL, 0, "%f", num);
-
-    // Allocate memory for the string
-    str = malloc(len + 1);
-
-    // Convert the double to a string using snprintf()
-    snprintf(str, len + 1, "%f", num);
-
-    return str;
+	len = snprintf(NULL, 0, "%f", num);
+	str = malloc(len + 1);
+	snprintf(str, len + 1, "%f", num);
+	return (str);
 }
 
 uint32_t	get_rgba(int r, int g, int b, int a)
@@ -73,19 +69,4 @@ int	commacounter(char *line)
 	if (commacount != 2)
 		return (printf("%s", COMMA), false);
 	return (true);
-}
-
-int	is_duplicate(char *line, t_mlx_data *data)
-{
-	if ((ft_strncmp(line, "NO .", 4) == 0 && ft_strcmp(data->no, "X") == false)
-		|| (ft_strncmp(line, "SO ", 4) == 0
-			&& ft_strcmp(data->so, "X") == false)
-		|| (ft_strncmp(line, "WE .", 4) == 0
-			&& ft_strcmp(data->we, "X") == false)
-		|| (ft_strncmp(line, "EA .", 4) == 0
-			&& ft_strcmp(data->ea, "X") == false)
-		|| (ft_strncmp(line, "F ", 2) == 0) && data->floor_color[0] != -1
-		|| (ft_strncmp(line, "C ", 2) == 0) && data->ceiling_color[0] != -1)
-		return (ft_printf(DUPLICATE), true);
-	return (false);
 }

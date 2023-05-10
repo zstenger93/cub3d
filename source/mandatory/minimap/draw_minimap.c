@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/10 14:34:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:20:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	draw_player(t_map *minimap)
 
 	y = MINIMAP_SIZE / 2;
 	x = MINIMAP_SIZE / 2;
-	
 	mlx_put_pixel(minimap->img_map, x, y - 2, get_rgba(0, 0, 0, 255));
 	mlx_put_pixel(minimap->img_map, x, y - 1, get_rgba(0, 0, 0, 255));
 	mlx_put_pixel(minimap->img_map, x - 1, y, get_rgba(0, 0, 0, 255));
@@ -68,22 +67,23 @@ void	draw_minimap(t_map *minimap, t_mlx_data *mlx_data)
 
 void	draw_rays(t_map *minimap)
 {
-	int	i;
+	int		i;
 	double	y;
 	double	x;
+	double	tmp_y;
+	double	tmp_x;
 
-	double tmp_y = minimap->player.dir.y / 5;
-	double tmp_x = minimap->player.dir.x / 5;
+	tmp_y = minimap->player.dir.y / 5;
+	tmp_x = minimap->player.dir.x / 5;
 	y = minimap->player.dir.y;
 	x = minimap->player.dir.x;
-			
 	i = 0;
 	while (i < 40)
 	{
-		mlx_put_pixel(minimap->img_map, 
-		MINIMAP_SIZE / 2 + x,
-		MINIMAP_SIZE / 2 + y, 
-		get_rgba(0, 0, 255, 255));
+		mlx_put_pixel(minimap->img_map,
+			MINIMAP_SIZE / 2 + x,
+			MINIMAP_SIZE / 2 + y,
+			get_rgba(0, 0, 255, 255));
 		y += tmp_y;
 		x += tmp_x;
 		i++;

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 16:01:53 by zstenger         ###   ########.fr       */
+/*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
+/*   Updated: 2023/05/10 16:01:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-void	add_hooks(t_data *data)
+bool	is_wall(int y, int x, char **matrix)
 {
-	mlx_loop_hook(data->mlx, &move_keys, data);
+	if (matrix[y][x] == '1')
+		return (true);
+	return (false);
 }
