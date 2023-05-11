@@ -1,7 +1,7 @@
-NO ./resource/brick.png
-SO ./resource/eagle.png
-WE ./resource/greystone.png
-EA ./resource/minecraft-bee.png
+NO ./resource/Brick_02-256x256.png
+SO ./resource/Brick_04-256x256.png
+WE ./resource/Brick_06-256x256.png
+EA ./resource/Brick_01-256x256.png
 
 F 190,178,123
 C 135,206,235

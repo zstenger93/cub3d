@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/11 06:11:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:05:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,21 @@ typedef struct s_mlx_data
 	int				ceiling_color[3];
 }	t_mlx_data;
 
+typedef struct s_tex
+{
+	double		step;
+	double		t_pos;
+	int			line_height;
+	t_vector	tex;
+	int			height;
+	int			d_start;
+	int			d_end;
+}	t_tex;
+
 typedef struct s_map
 {
+	int			buffer[WIDTH][HEIGHT];
+	t_tex		*tex;
 	t_ray		ray;
 	int			side;
 	t_vector	step;
@@ -163,7 +176,8 @@ void		calculate_the_direction_of_the_ray(t_map *map, int i);
 void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);
 
 // DRAW TEXTURE
-void		print_vertical_lines(t_map *minimap, int i);
+void		print_textures(t_map *minimap, int i, t_mlx_data *mlx_data);
+void		print_vertical_lines(t_map *m, int i);
 
 // DRAW_MINIMAP
 void		draw_rays(t_map *minimap);
@@ -193,6 +207,22 @@ void		free_char_array(char **array);
 char		**copy_2d_char_array(char **array);
 uint32_t	rgb(int r, int g, int b, int a);
 char		*ft_strdup2(char *str, int start, int end);
+
+
+
+
+
+void	print_textures(t_map *m, int x, t_mlx_data *mlx_data);
+mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data);
+mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data);
+int	get_pixel_color(t_map *map, mlx_texture_t *tex);
+void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
+
+
+
+void	ray_hitting_point(t_map *map, int hit);
+
+void	empty_buffer(t_map *map);
 
 // FOR TESTING
 void		write2(int n);

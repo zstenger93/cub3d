@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 16:04:15 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:19:37 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init(int argc, char **argv, t_data *data)
 		exit(0);
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_textures(data->mlx_data);
+	data->minimap->tex = malloc(sizeof(t_tex));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 18:35:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:13:52 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 		m->ray.delta_dist.x = fabs(1 / m->ray.dir.x);
 		calculate_the_direction_of_the_ray(m, i);
 		cast_the_ray_until_hits_the_wall(m, hit);
+		// ray_hitting_point(m, hit);
+		// print_textures(m, i, mlx_data);
 		print_vertical_lines(m, i);
 	}
+	draw_buff(m->img_tmp, m->buffer);
 }
 
 void	empty_map(mlx_image_t *img, t_mlx_data *mlx_d)
