@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 18:57:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/11 06:11:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@
 # define SPACES " \t\n\v\r\f"
 
 // SIZES FOR MAP CALC
+	// MINIMAP_REC
+# define R 20
 # define WIDTH 2560
 # define HEIGHT 1440
-# define R 20 // MINIMAP_REC
 # define MINIMAP_SIZE 320
 
 typedef struct s_vector

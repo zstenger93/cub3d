@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 17:59:59 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:36:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	mouse_rotate(void *param)
 	data = (t_data *)param;
 	x = data->mouse_x;
 	mlx_get_mouse_pos(data->mlx, &data->mouse_x, &y);
+	// if (data->mouse_x == WIDTH)
+	// 	x = 0;
+	// if (data->mouse_x == 0)
+	// 	turn_left(data, player);
 	if (data->mouse_x > x)
 		turn_right(data, player);
 	else if (data->mouse_x < x)
