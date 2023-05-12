@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 18:25:28 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:21:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_mlx_data	*init_data(void)
 
 void	init_textures(t_mlx_data *mlx_data)
 {
-	mlx_data->door = mlx_load_png("resource/greystone.png");
+	mlx_data->door = mlx_load_png("resource/vortex1.png");
 	if (mlx_data->door == NULL)
 	{
 		printf("Error! Door file is shit\n");
