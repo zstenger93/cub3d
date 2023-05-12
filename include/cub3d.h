@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 07:03:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:06:13 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	double		x_hit_point;
 	t_vector	dir;
 	t_vector	camera;
 	t_vector	side_dist;

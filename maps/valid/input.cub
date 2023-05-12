@@ -1,7 +1,7 @@
 NO ./resource/wall64.png
-SO ./resource/Brick_04-256x256.png
-WE ./resource/Brick_06-256x256.png
-EA ./resource/Brick_01-256x256.png
+SO ./resource/greystone.png
+WE ./resource/eagle.png
+EA ./resource/brick.png
 
 F 190,178,123
 C 135,206,235

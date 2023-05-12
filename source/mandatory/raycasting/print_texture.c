@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 07:09:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:19:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	empty_buffer(t_map *map)
 // 	else
 // 		map->ray.wall_dist = map->ray.side_dist.y - map->ray.delta_dist.y;
 // 	map->ray.wall_dist = map->ray.wall_dist - (double)((int)map->ray.wall_dist);
-// 	map->tex->tex.x = (int)(map->ray.wall_dist) * (double)64;
-// 	if (map->side == 0 && map->ray.dir.x > 0 || (map->side == 1 && map->ray.dir.y < 0))
-// 		map->tex->tex.x = 64 - map->tex->tex.x - 1;
+	// map->tex->tex.x = (int)(map->ray.wall_dist) * (double)64;
+	// if (map->side == 0 && map->ray.dir.x > 0 || (map->side == 1 && map->ray.dir.y < 0))
+	// 	map->tex->tex.x = 64 - map->tex->tex.x - 1;
 // }
 
 void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
@@ -55,7 +55,6 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 
 	tex = set_variables(m, mlx_data, x);
 	// empty_buffer(m);
-	i = m->tex->d_start;
 	while (m->tex->d_start < m->tex->d_end)
 	{
 		m->tex->tex.y = (int)m->tex->t_pos & (64 - 1);
@@ -65,8 +64,8 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 		// 	m->tex->height = (m->tex->height >> 1) & 8355711;
 		m->buffer[x][m->tex->d_start] = m->tex->height;
 		m->tex->d_start++;
-		i++;
 	}
+	i = m->tex->d_start;
 	while (i < HEIGHT)
 		m->buffer[x][i++] = rgb(mlx_data->floor_color[0], mlx_data->floor_color[1], mlx_data->floor_color[2], 255);
 }
@@ -89,17 +88,29 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x)
 {
 	int				i;
 	mlx_texture_t	*tex;
+	int pitch = 100;
 
 	tex = get_texture(map, mlx_data);
 	map->tex->line_height = (int)(HEIGHT / map->ray.wall_dist);
-	map->tex->d_start = -map->tex->line_height / 2 + HEIGHT / 2;
-	map->tex->d_end = map->tex->line_height / 2 + HEIGHT / 2;
-	map->tex->step = 1.0 * tex->height / map->tex->line_height;
-	map->tex->t_pos = (map->tex->d_start - HEIGHT / 2 + map->tex->line_height / 2) * map->tex->step;
+	map->tex->d_start = -map->tex->line_height / 2 + HEIGHT / 2 + pitch;
+	map->tex->d_end = map->tex->line_height / 2 + HEIGHT / 2 + pitch;
+	map->tex->step = 1.0 * 64 / map->tex->line_height;
+	map->tex->t_pos = (map->tex->d_start - pitch - HEIGHT / 2 + map->tex->line_height / 2) * map->tex->step;
 	if (map->tex->d_start < 0)
 		map->tex->d_start = 0;
 	if (map->tex->d_end >= HEIGHT)
 		map->tex->d_end = HEIGHT - 1;
+		
+	if (map->side == 0)
+		map->ray.x_hit_point = map->player.pos.y + map->ray.wall_dist * map->ray.dir.y;
+	else
+		map->ray.x_hit_point = map->player.pos.x + map->ray.wall_dist * map->ray.dir.x;
+	map->ray.x_hit_point -= (int)map->ray.x_hit_point;
+	
+	map->tex->tex.x = (int)((map->ray.x_hit_point) * (double)64);
+	
+	if ((map->side == 0 && map->ray.dir.x > 0) || (map->side == 1 && map->ray.dir.y < 0))
+		map->tex->tex.x = 64 - map->tex->tex.x - 1;
 	i = 0;
 	while (i < map->tex->d_start)
 		map->buffer[x][i++] = rgb(mlx_data->ceiling_color[0], mlx_data->ceiling_color[1], mlx_data->ceiling_color[2], 255);
@@ -126,8 +137,8 @@ void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT])
 		while (j < WIDTH)
 		{
 			// printf("%d ", buffer[j][i]);
-			if (buffer[j][i] != 0)
-				mlx_put_pixel(img_tmp, j, i, buffer[j][i]);
+			// if (buffer[j][i] != 0)
+			mlx_put_pixel(img_tmp, j, i, buffer[j][i]);
 			j++;
 		}
 			// printf("\n");
