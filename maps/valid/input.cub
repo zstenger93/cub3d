@@ -1,4 +1,4 @@
-NO ./resource/Brick_02-256x256.png
+NO ./resource/wall64.png
 SO ./resource/Brick_04-256x256.png
 WE ./resource/Brick_06-256x256.png
 EA ./resource/Brick_01-256x256.png

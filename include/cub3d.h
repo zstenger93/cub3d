@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/11 18:05:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:03:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ char		*ft_strdup2(char *str, int start, int end);
 
 void	print_textures(t_map *m, int x, t_mlx_data *mlx_data);
 mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data);
-mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data);
+mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
 int	get_pixel_color(t_map *map, mlx_texture_t *tex);
 void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
 

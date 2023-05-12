@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/11 18:09:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:09:13 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 	mlx_texture_t	*tex;
 	int				i;
 
-	tex = set_variables(m, mlx_data);
+	tex = set_variables(m, mlx_data, x);
 	// empty_buffer(m);
 	i = m->tex->d_start;
 	while (m->tex->d_start < m->tex->d_end)
@@ -61,12 +61,14 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 		m->tex->tex.y = (int)m->tex->t_pos & (64 - 1);
 		m->tex->t_pos += m->tex->step;
 		m->tex->height = get_pixel_color(m, tex);
-		if (m->side == 1)
-			m->tex->height = (m->tex->height >> 1) & 8355711;
+		// if (m->side == 1)
+		// 	m->tex->height = (m->tex->height >> 1) & 8355711;
 		m->buffer[x][m->tex->d_start] = m->tex->height;
 		m->tex->d_start++;
 		i++;
 	}
+	while (i < HEIGHT)
+		m->buffer[x][i++] = rgb(mlx_data->floor_color[0], mlx_data->floor_color[1], mlx_data->floor_color[2], 255);
 }
 
 mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data)
@@ -83,9 +85,9 @@ mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data)
 	return (NULL);
 }
 
-mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data)
+mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x)
 {
-	int	pitch = 100;
+	int				i;
 	mlx_texture_t	*tex;
 
 	tex = get_texture(map, mlx_data);
@@ -98,6 +100,9 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data)
 		map->tex->d_start = 0;
 	if (map->tex->d_end >= HEIGHT)
 		map->tex->d_end = HEIGHT - 1;
+	i = 0;
+	while (i < map->tex->d_start)
+		map->buffer[x][i++] = rgb(mlx_data->ceiling_color[0], mlx_data->ceiling_color[1], mlx_data->ceiling_color[2], 255);
 	return (tex);
 }
 
