@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:23:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:51:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data)
 	return (NULL);
 }
 
+void	set_tex_struct(t_map *map)
+{
+	map->tex->line_height = (int)(HEIGHT / map->ray.wall_dist);
+	map->tex->d_start = -map->tex->line_height / 2 + HEIGHT / 2;
+	if (map->tex->d_start < 0)
+		map->tex->d_start = 0;
+	map->tex->d_end = map->tex->line_height / 2 + HEIGHT / 2;
+	if (map->tex->d_end >= HEIGHT)
+		map->tex->d_end = HEIGHT - 1;
+	map->tex->step = 1.0 * 64 / map->tex->line_height;
+	map->tex->t_pos = (map->tex->d_start - HEIGHT / 2
+			+ map->tex->line_height / 2) * map->tex->step;
+}
+
 mlx_texture_t	*set_variables(t_map *map, t_mlx_data *m_d, int x)
 {
 	int	i;
@@ -69,20 +83,6 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *m_d, int x)
 		map->buffer[x][i++] = rgb(m_d->c_color[0],
 				m_d->c_color[1], m_d->c_color[2], 255);
 	return (get_texture(map, m_d));
-}
-
-void	set_tex_struct(t_map *map)
-{
-	map->tex->line_height = (int)(HEIGHT / map->ray.wall_dist);
-	map->tex->d_start = -map->tex->line_height / 2 + HEIGHT / 2;
-	map->tex->d_end = map->tex->line_height / 2 + HEIGHT / 2;
-	map->tex->step = 1.0 * 64 / map->tex->line_height;
-	map->tex->t_pos = (map->tex->d_start - HEIGHT / 2
-			+ map->tex->line_height / 2) * map->tex->step;
-	if (map->tex->d_start < 0)
-		map->tex->d_start = 0;
-	if (map->tex->d_end >= HEIGHT)
-		map->tex->d_end = HEIGHT - 1;
 }
 
 void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT])
