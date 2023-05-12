@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 17:13:30 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:24:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 			map->map_y += map->step.y;
 			map->side = 1;
 		}
-		if (map->matrix[(int)map->map_y][(int)map->map_x] > '0')
+		if (map->matrix[(int)map->map_y][(int)map->map_x] > '0'
+			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd')
 			hit = 1;
 	}
 	if (map->side == 0)

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 14:55:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:20:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 	i = m->tex->d_start;
 	while (i < HEIGHT)
 		m->buffer[x][i++] = rgb(mlx_data->f_color[0],
-				mlx_data->f_color[1], mlx_data->f_color[2], 255);
+				mlx_data->f_color[1], mlx_data->f_color[2], 200);
 }
 
 mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data)
 {
-	if (map->side == 0 && map->ray.dir.x > 0)
+	if (map->matrix[(int)map->map_y][(int)map->map_x] == 'D')
+		return (mlx_data->door);
+	else if (map->side == 0 && map->ray.dir.x > 0)
 		return (mlx_data->t_ea);
-	if (map->side == 0 && map->ray.dir.x < 0)
+	else if (map->side == 0 && map->ray.dir.x < 0)
 		return (mlx_data->t_we);
-	if (map->side == 1 && map->ray.dir.y > 0)
+	else if (map->side == 1 && map->ray.dir.y > 0)
 		return (mlx_data->t_no);
-	if (map->side == 1 && map->ray.dir.y < 0)
+	else if (map->side == 1 && map->ray.dir.y < 0)
 		return (mlx_data->t_so);
 	return (NULL);
 }
@@ -84,7 +86,7 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *m_d, int x)
 	i = 0;
 	while (i < map->tex->d_start)
 		map->buffer[x][i++] = rgb(m_d->c_color[0],
-				m_d->c_color[1], m_d->c_color[2], 255);
+				m_d->c_color[1], m_d->c_color[2], 200);
 	return (get_texture(map, m_d));
 }
 

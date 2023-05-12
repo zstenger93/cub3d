@@ -6,16 +6,19 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/10 16:09:06 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/12 16:04:06 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
 NAME		= cub3d
+B_NAME		= Cub3d
 RM			= rm -rf
-OBJ_DIR		= objects/
+OBJ_DIR		= objects/mandatory/
+B_OBJ_DIR	= objects/bonus/
 DN			= > /dev/null
 LIBFT		= libft/libft.a
+B_SRC_DIR	= source/bonus/
 SRC_DIR		= source/mandatory/
 LIBMLX42	= MLX42/build/libmlx42.a
 CFLAGS		= -Wall -Wextra -Werror -g
@@ -42,11 +45,37 @@ SOURCE		= main/cub3d \
 			  input_handling/color_validating \
 			  input_handling/object_validating \
 
+B_SOURCE	= main/cub3d \
+			  utils \
+			  hooks \
+			  movement/move \
+			  movement/turn \
+			  init_data/init \
+			  input_handling/dfs \
+			  init_data/init_map \
+			  movement/move_utils \
+			  minimap/draw_minimap \
+			  init_data/init_utils \
+			  raycasting/raycasting \
+			  raycasting/print_texture \
+			  input_handling/save_data \
+			  input_handling/input_check \
+			  input_handling/map_validating \
+			  input_handling/validating_utils \
+			  input_handling/color_validating \
+			  input_handling/object_validating \
+
 SRC			= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SOURCE)))
 OBJ			= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SOURCE)))
 
+B_SRC		= $(addprefix $(B_SRC_DIR), $(addsuffix .c, $(B_SOURCE)))
+B_OBJ		= $(addprefix $(B_OBJ_DIR), $(addsuffix .o, $(B_SOURCE)))
+
 all: $(NAME)
 	make run
+
+bonus: $(B_NAME)
+	make brun
 
 # $(LIBMLX42):
 # 	@if [ -d ./MLX42/glfw_lib ]; \
@@ -78,7 +107,25 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 # @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
 # @echo "           ░   ░            ░     ░"
 
+$(B_NAME): $(LIBFT) $(LIBMLX42) $(B_OBJ)
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
+	@$(CC) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
+	@echo "$(NAME) has been compiled."
+# @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+# @echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+# @echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+# @echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+# @echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+# @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+# @echo "           ░   ░            ░     ░"
+
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
+
+$(B_OBJ_DIR)%.o : $(B_SRC_DIR)%.c
 	@mkdir -p $(@D)
 	@$(CC) $(INCL_RDL_HEADER) -c $< -o $@ $(DN)
 
@@ -96,7 +143,7 @@ clean:
 
 fclean: clean
 	@echo "Removing executables."
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(B_NAME)
 # @make fclean -C libft
 # @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
@@ -110,6 +157,10 @@ re:
 #RUN WITH DIFFERENT MAPS
 run:
 	./cub3d maps/valid/input.cub
+
+brun:
+	./Cub3d maps/valid/bonus.cub
+
 vf:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./cub3d
 t1:

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:14:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:07:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_mlx_data
 	mlx_texture_t	*t_so;
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
+	mlx_texture_t	*door;
 	mlx_texture_t	*texture;
 	int				error; // flag for input check from dfs in case the map is wrong
 	t_player		*player;
@@ -220,6 +221,16 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
 int	get_pixel_color(t_map *map, mlx_texture_t *tex);
 void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
 void	set_tex_struct(t_map *map);
+
+
+
+
+void	switch_door(t_map *map, t_mlx_data *mlx_data);
+bool	is_closed_door_here(t_map *map);
+bool	is_open_door_here(t_map *map);
+void	hodor(mlx_key_data_t keydata, void *param);
+
+
 
 
 
