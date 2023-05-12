@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 18:54:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	contains_valid_objects(char *line, t_mlx_data *data)
 		&& ft_strcmp(data->so, "X") == false
 		&& ft_strcmp(data->we, "X") == false
 		&& ft_strcmp(data->ea, "X") == false
-		&& data->floor_color[0] != -1 && data->ceiling_color[0] != -1)
+		&& data->f_color[0] != -1 && data->c_color[0] != -1)
 		return (true);
 	else
 		return (false);

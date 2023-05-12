@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 08:06:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:14:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <float.h>
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/includes/libft.h"
@@ -84,8 +85,8 @@ typedef struct s_mlx_data
 	int				map_length; // heigth of the map
 	char			**map_copy; // raw map copy for dfs
 	int				reading_pos; // actual map reading starts from here
-	int				floor_color[3];
-	int				ceiling_color[3];
+	int				f_color[3];
+	int				c_color[3];
 }	t_mlx_data;
 
 typedef struct s_tex
@@ -94,7 +95,7 @@ typedef struct s_tex
 	double		t_pos;
 	int			line_height;
 	t_vector	tex;
-	int			height;
+	int			color;
 	int			d_start;
 	int			d_end;
 }	t_tex;
@@ -218,12 +219,9 @@ mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data);
 mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
 int	get_pixel_color(t_map *map, mlx_texture_t *tex);
 void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
+void	set_tex_struct(t_map *map);
 
 
-
-void	ray_hitting_point(t_map *map, int hit);
-
-void	empty_buffer(t_map *map);
 
 // FOR TESTING
 void		write2(int n);

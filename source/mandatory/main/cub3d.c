@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 16:04:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:19:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_map_objects(t_mlx_data *data)
 	printf("SO: %s\n", data->so);
 	printf("WE: %s\n", data->we);
 	printf("EA: %s\n", data->ea);
-	printf("F: %d,%d,%d\n", data->floor_color[0], data->floor_color[1], data->floor_color[2]);
-	printf("C: %d,%d,%d\n", data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]);
+	printf("F: %d,%d,%d\n", data->f_color[0],
+		data->f_color[1], data->f_color[2]);
+	printf("C: %d,%d,%d\n", data->c_color[0],
+		data->c_color[1], data->c_color[2]);
 }

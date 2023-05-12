@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/11 15:19:37 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ t_mlx_data	*init_data(void)
 	mlx_data->so = ft_strdup("X");
 	mlx_data->we = ft_strdup("X");
 	mlx_data->ea = ft_strdup("X");
-	mlx_data->floor_color[0] = -1;
-	mlx_data->floor_color[1] = -1;
-	mlx_data->floor_color[2] = -1;
-	mlx_data->ceiling_color[0] = -1;
-	mlx_data->ceiling_color[1] = -1;
-	mlx_data->ceiling_color[2] = -1;
+	mlx_data->f_color[0] = -1;
+	mlx_data->f_color[1] = -1;
+	mlx_data->f_color[2] = -1;
+	mlx_data->c_color[0] = -1;
+	mlx_data->c_color[1] = -1;
+	mlx_data->c_color[2] = -1;
 	mlx_data->reading_pos = 0;
 	mlx_data->map_length = 0;
 	return (mlx_data);

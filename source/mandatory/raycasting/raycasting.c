@@ -6,34 +6,39 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 09:11:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:17:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
+	// empty_map(m->img_tmp, mlx_data);
+		// print_vertical_lines(m, i);
 void	draw_map(t_map *m, t_mlx_data *mlx_data)
 {
 	int	i;
 	int	hit;
 
-	// empty_map(m->img_tmp, mlx_data);
 	i = -1;
 	while (++i < WIDTH)
 	{
 		hit = 0;
-		m->ray.camera.x = 2 * i / (double) WIDTH - 1;
+		m->ray.camera.x = ((2 * i) / (double)WIDTH) - 1;
 		m->ray.dir.y = m->player.dir.y + m->player.plane.y * m->ray.camera.x;
 		m->ray.dir.x = m->player.dir.x + m->player.plane.x * m->ray.camera.x;
 		m->map_x = (int)m->player.pos.x;
 		m->map_y = (int)m->player.pos.y;
-		m->ray.delta_dist.y = fabs(1 / m->ray.dir.y);
-		m->ray.delta_dist.x = fabs(1 / m->ray.dir.x);
+		if (m->ray.delta_dist.x == 0)
+			m->ray.delta_dist.x = DBL_MAX;
+		else
+			m->ray.delta_dist.x = fabs(1 / m->ray.dir.x);
+		if (m->ray.delta_dist.y == 0)
+			m->ray.delta_dist.y = DBL_MAX;
+		else
+			m->ray.delta_dist.y = fabs(1 / m->ray.dir.y);
 		calculate_the_direction_of_the_ray(m, i);
 		cast_the_ray_until_hits_the_wall(m, hit);
-		// ray_hitting_point(m, hit);
 		print_textures(m, i, mlx_data);
-		// print_vertical_lines(m, i);
 	}
 	draw_buff(m->img_tmp, m->buffer);
 }
@@ -48,15 +53,15 @@ void	empty_map(mlx_image_t *img, t_mlx_data *mlx_d)
 	{
 		k = -1;
 		while (++k < WIDTH)
-			mlx_put_pixel(img, k, i, rgb(mlx_d->ceiling_color[0],
-					mlx_d->ceiling_color[1], mlx_d->ceiling_color[2], 255));
+			mlx_put_pixel(img, k, i, rgb(mlx_d->c_color[0],
+					mlx_d->c_color[1], mlx_d->c_color[2], 255));
 	}
 	while (++i < HEIGHT)
 	{
 		k = -1;
 		while (++k < WIDTH)
-			mlx_put_pixel(img, k, i, rgb(mlx_d->floor_color[0],
-					mlx_d->floor_color[1], mlx_d->floor_color[2], 255));
+			mlx_put_pixel(img, k, i, rgb(mlx_d->f_color[0],
+					mlx_d->f_color[1], mlx_d->f_color[2], 255));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/10 18:42:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:18:55 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	draw_minimap(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
 		{
 			if (m->matrix[(int)p->y + i][(int)p->x + k] == '1'
 				|| (x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-				mlx_put_pixel(m->img_map, x, y, rgb(255, 0, 0, 255));
+				mlx_put_pixel(m->img_map, x, y, rgb(230, 0, 0, 200));
 			else if (m->matrix[(int)p->y + i][(int)p->x + k] == '0'
 				|| (x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-				mlx_put_pixel(m->img_map, x, y, rgb(145, 145, 145, 255));
+				mlx_put_pixel(m->img_map, x, y, rgb(145, 145, 145, 200));
 			else
-				mlx_put_pixel(m->img_map, x, y, rgb(160, 190, 150, 255));
+				mlx_put_pixel(m->img_map, x, y, rgb(160, 190, 150, 100));
 			if (x % R == 0)
 				k++;
 		}
@@ -99,4 +99,16 @@ void	draw_rays(t_map *minimap)
 		x += tmp_x;
 		i++;
 	}
+}
+
+int	get_pixel_color(t_map *map, mlx_texture_t *tex)
+{
+	return (rgb(tex->pixels[64 * (int)map->tex->tex.y * 4
+				+ (int)map->tex->tex.x * 4], \
+		tex->pixels[64 * (int)map->tex->tex.y * 4
+				+ (int)map->tex->tex.x * 4 + 1], \
+		tex->pixels[64 * (int)map->tex->tex.y * 4
+				+ (int)map->tex->tex.x * 4 + 2], \
+		tex->pixels[64 * (int)map->tex->tex.y * 4
+				+ (int)map->tex->tex.x * 4 + 3]));
 }
