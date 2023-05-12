@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/12 13:18:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 01:30:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,39 @@ void	draw_player(t_map *minimap)
 	mlx_put_pixel(minimap->img_map, x + 2, y - 2, rgb(0, 0, 0, 255));
 }
 
-void	draw_minimap(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
+void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 {
-	int			k;
-	int			y;
-	int			x;
-
-	y = -1;
-	while (++y < MINIMAP_SIZE)
-	{
-		k = ((MINIMAP_SIZE / R) / 2) * (-1);
-		x = -1;
-		while (++x < MINIMAP_SIZE)
-		{
-			if (m->matrix[(int)p->y + i][(int)p->x + k] == '1'
-				|| (x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-				mlx_put_pixel(m->img_map, x, y, rgb(230, 0, 0, 200));
-			else if (m->matrix[(int)p->y + i][(int)p->x + k] == '0'
-				|| (x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-				mlx_put_pixel(m->img_map, x, y, rgb(145, 145, 145, 200));
-			else
-				mlx_put_pixel(m->img_map, x, y, rgb(160, 190, 150, 100));
-			if (x % R == 0)
-				k++;
-		}
-		if ((y) % (R) == 0)
-			i++;
-	}
+	if (m->matrix[(int)p->y + i][(int)p->x + k] == '1'
+		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(230, 0, 0, 200));
+	else if (m->matrix[(int)p->y + i][(int)p->x + k] == '0'
+		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, 200));
+	else if (m->matrix[(int)p->y + i][(int)p->x + k] == 'D'
+		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 0, 145, 200));
+	else
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, 100));
 }
 
-void	draw(t_map *map, t_mlx_data *mlx_data)
+void	draw_minimap(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
 {
-	draw_map(map, mlx_data);
-	draw_player(map);
-	draw_rays(map);
+	int	k;
+
+	m->y = -1;
+	while (++m->y < MINIMAP_SIZE)
+	{
+		k = ((MINIMAP_SIZE / R) / 2) * (-1);
+		m->x = -1;
+		while (++m->x < MINIMAP_SIZE)
+		{
+			put_pixels_on_minimap(m, i, k, p);
+			if (m->x % R == 0)
+				k++;
+		}
+		if ((m->y) % (R) == 0)
+			i++;
+	}
 }
 
 void	draw_rays(t_map *minimap)

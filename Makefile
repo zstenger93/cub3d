@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/12 16:04:06 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/13 01:31:01 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
 SOURCE		= main/cub3d \
-			  utils \
-			  hooks \
+			  main/utils \
+			  main/hooks \
+			  minimap/draw \
 			  movement/move \
 			  movement/turn \
 			  init_data/init \
@@ -45,9 +46,11 @@ SOURCE		= main/cub3d \
 			  input_handling/color_validating \
 			  input_handling/object_validating \
 
-B_SOURCE	= main/cub3d \
-			  utils \
-			  hooks \
+B_SOURCE	= door/door \
+			  main/cub3d \
+			  main/utils \
+			  main/hooks \
+			  minimap/draw \
 			  movement/move \
 			  movement/turn \
 			  init_data/init \

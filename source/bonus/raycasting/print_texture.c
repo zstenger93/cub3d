@@ -6,15 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 19:27:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:39:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
 	// empty_buffer(m);
-		// if (m->side == 1)
-		// 	m->tex->color = (m->tex->color >> 1) & 8355711;
 void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 {
 	mlx_texture_t	*tex;

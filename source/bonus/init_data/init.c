@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 19:21:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:47:04 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,22 @@ void	init_textures(t_mlx_data *mlx_data)
 	mlx_data->t_so = mlx_load_png(mlx_data->so);
 	mlx_data->t_we = mlx_load_png(mlx_data->we);
 	mlx_data->t_ea = mlx_load_png(mlx_data->ea);
+}
+
+void	free_all(t_data *data)
+{
+	mlx_delete_texture(data->mlx_data->t_no);
+	mlx_delete_texture(data->mlx_data->t_so);
+	mlx_delete_texture(data->mlx_data->t_we);
+	mlx_delete_texture(data->mlx_data->t_ea);
+	mlx_delete_texture(data->mlx_data->door);
+	mlx_delete_texture(data->mlx_data->texture);
+	free(data->mlx_data->no);
+	free(data->mlx_data->so);
+	free(data->mlx_data->we);
+	free(data->mlx_data->ea);
+	free(data->minimap->tex);
+	free(data->mlx_data);
+	free(data->minimap->img_map);
+	free(data->minimap->img_tmp);
 }

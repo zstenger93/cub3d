@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:56:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 18:41:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 01:32:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	move_keys(void	*param)
 		turn_right(data, player);
 	p = &data->minimap->player.pos;
 	i = ((MINIMAP_SIZE / R) / 2) * (-1);
-	draw_minimap(data->minimap, data->mlx_data, p, i);
-	draw(data->minimap, data->mlx_data);
+	draw(data->minimap, data->mlx_data, p, i);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		exit(1);
 }

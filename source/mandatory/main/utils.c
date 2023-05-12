@@ -6,11 +6,11 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 18:34:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:56:41 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 void	write2(int n)
 {

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 18:07:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 01:33:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double		x_hit_point;
 	t_vector	dir;
 	t_vector	camera;
 	t_vector	side_dist;
-	t_vector	delta_dist;
 	double		wall_dist;
+	t_vector	delta_dist;
+	double		x_hit_point;
 }	t_ray;
 
 typedef struct s_mlx_data
@@ -79,9 +79,9 @@ typedef struct s_mlx_data
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*door;
-	mlx_texture_t	*texture;
 	int				error; // flag for input check from dfs in case the map is wrong
 	t_player		*player;
+	mlx_texture_t	*texture;
 	char			**raw_map; // map copied from the file
 	int				map_length; // heigth of the map
 	char			**map_copy; // raw map copy for dfs
@@ -92,20 +92,21 @@ typedef struct s_mlx_data
 
 typedef struct s_tex
 {
+	t_vector	tex;
 	double		step;
 	double		t_pos;
-	int			line_height;
-	t_vector	tex;
 	int			color;
-	int			d_start;
 	int			d_end;
+	int			d_start;
+	int			line_height;
 }	t_tex;
 
 typedef struct s_map
 {
-	int			buffer[WIDTH][HEIGHT];
-	t_tex		*tex;
+	int			x;
+	int			y;
 	t_ray		ray;
+	t_tex		*tex;
 	int			side;
 	t_vector	step;
 	int			map_x;
@@ -114,131 +115,120 @@ typedef struct s_map
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_tmp;
 	char		**matrix;
+	int			buffer[WIDTH][HEIGHT];
 }	t_map;
 
 typedef struct s_data
 {
-	int			mouse_x;
 	mlx_t		*mlx;
+	int			mouse_x;
 	t_map		*minimap;
 	t_mlx_data	*mlx_data;
 }	t_data;
 
 // INPUT CHECKS
-int			validate_content(char *map_file, t_mlx_data *data);
-int			input_check(int argc, char *argv, t_mlx_data *data);
+int				validate_content(char *map_file, t_mlx_data *data);
+int				input_check(int argc, char *argv, t_mlx_data *data);
 // OBJECT VALIDATING
-int			invalid_attribute(char *line);
-int			is_duplicate(char *line, t_mlx_data *data);
-int			validate_no_so(char *line, t_mlx_data *data);
-int			validate_we_ea(char *line, t_mlx_data *data);
-int			validate_texture(char *line, t_mlx_data *data);
-int			contains_valid_objects(char *line, t_mlx_data *data);
+int				invalid_attribute(char *line);
+int				is_duplicate(char *line, t_mlx_data *data);
+int				validate_no_so(char *line, t_mlx_data *data);
+int				validate_we_ea(char *line, t_mlx_data *data);
+int				validate_texture(char *line, t_mlx_data *data);
+int				contains_valid_objects(char *line, t_mlx_data *data);
 // COLOR VALIDATING
-int			valid_rgb(char **rgb);
-int			commacounter(char *line);
-int			has_duplicate_rgb(char *line);
-int			rgb_contains_letters(char *line);
-char		**split_rgb(char *line, char *trim_with);
-int			validate_color(char *line, t_mlx_data *data);
+int				valid_rgb(char **rgb);
+int				commacounter(char *line);
+int				has_duplicate_rgb(char *line);
+int				rgb_contains_letters(char *line);
+char			**split_rgb(char *line, char *trim_with);
+int				validate_color(char *line, t_mlx_data *data);
 // SAVE DATA
-void		save_color_to_data(char **rgb, t_mlx_data *data, char option);
-void		save_texture_to_data(char *file, t_mlx_data *data, char option);
+void			save_color_to_data(char **rgb, t_mlx_data *data, char option);
+void			save_texture_to_data(char *file, t_mlx_data *data, char option);
 // MAP VALIDATING
-void		set_map_error(t_mlx_data *data);
-int			line_has_invalid_chars(char *line);
-int			map_checks(t_mlx_data *data, int i);
-int			line_cotains_only_spaces(char *line);
-void		dfs(char **map, int y, int x, t_mlx_data *data);
-int			map_has_multiple_players_or_none(char c, char option);
-int			map_validathor(char *map_file, t_mlx_data *data, int fd);
-void		get_map_length(int fd, char *map_file, t_mlx_data *data);
+void			set_map_error(t_mlx_data *data);
+int				line_has_invalid_chars(char *line);
+int				map_checks(t_mlx_data *data, int i);
+int				line_cotains_only_spaces(char *line);
+void			dfs(char **map, int y, int x, t_mlx_data *data);
+int				map_has_multiple_players_or_none(char c, char option);
+int				map_validathor(char *map_file, t_mlx_data *data, int fd);
+void			get_map_length(int fd, char *map_file, t_mlx_data *data);
 // INPUT UTILS
-int			it_can_be_opened(char *file);
-char		*copy_map_line(char *content);
+int				it_can_be_opened(char *file);
+char			*copy_map_line(char *content);
 
 // INIT MAP
-double		get_angle(char c);
-int			get_longest_line(char **map);
-void		set_plan(t_vector *plane, char c);
-char		*init_line(char *old_line, int l);
-void		set_player_position(t_map *minimap);
-char		**init_matrix(char **map, int height);
-t_map		*init_map(t_mlx_data *mlx_data, mlx_t *mlx);
+double			get_angle(char c);
+int				get_longest_line(char **map);
+void			set_plan(t_vector *plane, char c);
+char			*init_line(char *old_line, int l);
+void			set_player_position(t_map *minimap);
+char			**init_matrix(char **map, int height);
+t_map			*init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 
 // INIT
-t_mlx_data	*init_data(void);
-void		init_textures(t_mlx_data *mlx_data);
-int			init(int argc, char **argv, t_data *data);
+t_mlx_data		*init_data(void);
+void			init_textures(t_mlx_data *mlx_data);
+int				init(int argc, char **argv, t_data *data);
 
 // RAYCASTING
-void		draw_map(t_map *minimap, t_mlx_data *mlx_data);
-void		empty_map(mlx_image_t *img, t_mlx_data *mlx_data);
-void		set_ray_distance(t_map *map);
-void		calculate_the_direction_of_the_ray(t_map *map, int i);
-void		cast_the_ray_until_hits_the_wall(t_map *map, int hit);
+void			set_ray_distance(t_map *map);
+void			draw_map(t_map *minimap, t_mlx_data *mlx_data);
+void			empty_map(mlx_image_t *img, t_mlx_data *mlx_data);
+void			calculate_the_direction_of_the_ray(t_map *map, int i);
+void			cast_the_ray_until_hits_the_wall(t_map *map, int hit);
 
 // DRAW TEXTURE
-void		print_textures(t_map *minimap, int i, t_mlx_data *mlx_data);
-void		print_vertical_lines(t_map *m, int i);
+void			set_tex_struct(t_map *map);
+mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data);
+int				get_pixel_color(t_map *map, mlx_texture_t *tex);
+void			print_textures(t_map *m, int x, t_mlx_data *mlx_data);
+mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
+void			draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
 
 // DRAW_MINIMAP
-void		draw_rays(t_map *minimap);
-void		draw_player(t_map *minimap);
-void		draw(t_map *map, t_mlx_data *mlx_data);
-void		draw_minimap(t_map *minimap, t_mlx_data *mlx_d, t_vector *p, int i);
+void			draw_rays(t_map *minimap);
+void			draw_player(t_map *minimap);
+void			draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i);
+void			put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p);
+void			draw_minimap(t_map *minimap, t_mlx_data *mlx_d, t_vector *p, int i);
 
 // HOOKS
-void		add_hooks(t_data *data);
+void			add_hooks(t_data *data);
+void			mouse_rotate(void *param);
+void			hodor(mlx_key_data_t keydata, void *param);
+
+// DOOR
+bool			is_open_door_here(t_map *map);
+bool			is_closed_door_here(t_map *map);
+void			switch_door(t_map *map, t_mlx_data *mlx_data);
 
 // MOVEMENT
-void		move_keys(void *param);
-bool		is_wall(int y, int x, char **matrix);
-void		move_up(double y, double x, t_map *map);
-void		move_down(double y, double x, t_map *map);
-void		move_left(double y, double x, t_map *map);
-void		move_right(double y, double x, t_map *map);
+void			move_keys(void *param);
+bool			is_wall(int y, int x, char **matrix);
+void			move_up(double y, double x, t_map *map);
+void			move_down(double y, double x, t_map *map);
+void			move_left(double y, double x, t_map *map);
+void			move_right(double y, double x, t_map *map);
 
 // TURN L/R & MOUSE
-void		mouse_rotate(void *param);
-void		turn_left(t_data *data, t_player *playr);
-void		turn_right(t_data *data, t_player *player);
+void			turn_left(t_data *data, t_player *playr);
+void			turn_right(t_data *data, t_player *player);
 
 // UTILS
-char		*dup3(int size, char ch);
-void		free_char_array(char **array);
-char		**copy_2d_char_array(char **array);
-uint32_t	rgb(int r, int g, int b, int a);
-char		*ft_strdup2(char *str, int start, int end);
-
-
-
-
-
-void	print_textures(t_map *m, int x, t_mlx_data *mlx_data);
-mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data);
-mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
-int	get_pixel_color(t_map *map, mlx_texture_t *tex);
-void	draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
-void	set_tex_struct(t_map *map);
-
-
-
-
-void	switch_door(t_map *map, t_mlx_data *mlx_data);
-bool	is_closed_door_here(t_map *map);
-bool	is_open_door_here(t_map *map);
-void	hodor(mlx_key_data_t keydata, void *param);
-
-
-
-
+char			*dup3(int size, char ch);
+void			free_char_array(char **array);
+uint32_t		rgb(int r, int g, int b, int a);
+char			**copy_2d_char_array(char **array);
+char			*ft_strdup2(char *str, int start, int end);
 
 // FOR TESTING
-void		write2(int n);
-char		put_chars(char c);
-char		*double_to_string(double num);
-void		print_map_objects(t_mlx_data *data);
-void		ft_print_2d_char_array(char **array_2d);
+void			write2(int n);
+char			put_chars(char c);
+char			*double_to_string(double num);
+void			print_map_objects(t_mlx_data *data);
+void			ft_print_2d_char_array(char **array_2d);
 
 #endif
