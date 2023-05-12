@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 00:54:52 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/13 01:47:30 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 void	switch_door(t_map *map, t_mlx_data *mlx_data)
 {
 	if (is_closed_door_here(map) == true)
-	{
-		mlx_delete_texture(mlx_data->door);
-		mlx_data->door = mlx_load_png("resource/transparent.png");
-	}
+		return ;
 	else if (is_open_door_here(map) == true)
-	{
-		mlx_delete_texture(mlx_data->door);
 		mlx_data->door = mlx_load_png("resource/vortex1.png");
-	}
 }
 
 bool	is_closed_door_here(t_map *m)
