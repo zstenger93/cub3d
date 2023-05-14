@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/13 01:27:28 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 09:57:00 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
 		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 0, 145, 200));
 	else
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, 100));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, 0));
 }
 
 void	draw_minimap(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)

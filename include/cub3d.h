@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 01:33:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:31:34 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 // SIZES FOR MAP CALC
 	// MINIMAP_REC
 # define R 20
-# define WIDTH 2560
-# define HEIGHT 1440
+# define WIDTH 1920
+# define HEIGHT 1080
 # define MINIMAP_SIZE 320
 
 typedef struct s_vector
@@ -230,5 +230,11 @@ char			put_chars(char c);
 char			*double_to_string(double num);
 void			print_map_objects(t_mlx_data *data);
 void			ft_print_2d_char_array(char **array_2d);
+
+
+
+
+void	set_floor(t_map *map);
+
 
 #endif

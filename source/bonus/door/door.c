@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 01:47:30 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:07:14 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ bool	is_closed_door_here(t_map *m)
 		return (m->matrix[(int)m->map_y - 1][(int)m->map_x] = 'd', true);
 	else if (m->matrix[(int)m->map_y - 1][(int)m->map_x - 1] == 'D')
 		return (m->matrix[(int)m->map_y - 1][(int)m->map_x - 1] = 'd', true);
+	else if (m->matrix[(int)m->map_y - 1][(int)m->map_x + 1] == 'D')
+		return (m->matrix[(int)m->map_y - 1][(int)m->map_x + 1] = 'd', true);
+	else if (m->matrix[(int)m->map_y + 1][(int)m->map_x - 1] == 'D')
+		return (m->matrix[(int)m->map_y + 1][(int)m->map_x - 1] = 'd', true);
 	return (false);
 }
 
@@ -55,5 +59,9 @@ bool	is_open_door_here(t_map *m)
 		return (m->matrix[(int)m->map_y - 1][(int)m->map_x] = 'D', true);
 	else if (m->matrix[(int)m->map_y - 1][(int)m->map_x - 1] == 'd')
 		return (m->matrix[(int)m->map_y - 1][(int)m->map_x - 1] = 'D', true);
+	else if (m->matrix[(int)m->map_y - 1][(int)m->map_x + 1] == 'D')
+		return (m->matrix[(int)m->map_y - 1][(int)m->map_x + 1] = 'd', true);
+	else if (m->matrix[(int)m->map_y + 1][(int)m->map_x - 1] == 'D')
+		return (m->matrix[(int)m->map_y + 1][(int)m->map_x - 1] = 'd', true);
 	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 00:56:16 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:44:39 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,21 @@ void	mouse_rotate(void *param)
 {
 	t_data		*data;
 	t_player	*player;
-	int			x;
 	int			y;
-	float		last_m_x;
+	static int	last_m_x;
 
 	data = (t_data *)param;
-	x = data->mouse_x;
 	last_m_x = data->mouse_x;
-	mlx_get_mouse_pos(data->mlx, &data->mouse_x, &y);
-	if (data->mouse_x > x)
-		turn_right(data, player);
-	else if (data->mouse_x < x)
-		turn_left(data, player);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+	mlx_get_mouse_pos(data->mlx, &data->mouse_x, &y);
+	if (data->mouse_x > last_m_x)
+		turn_right(data, player);
+	else if (data->mouse_x < last_m_x)
+		turn_left(data, player);
+	if (data->mouse_x > 2555)
+		data->mouse_x = 5;
+	else if (data->mouse_x < 5)
+		data->mouse_x = 2555;
 }
 
 void	hodor(mlx_key_data_t keydata, void *param)
