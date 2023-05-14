@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/14 09:57:00 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:00:44 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, 0));
 }
 
-void	draw_minimap(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
+void	draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i)
 {
 	int	k;
 
-	m->y = -1;
-	while (++m->y < MINIMAP_SIZE)
+	map->y = -1;
+	while (++map->y < MINIMAP_SIZE)
 	{
 		k = ((MINIMAP_SIZE / R) / 2) * (-1);
-		m->x = -1;
-		while (++m->x < MINIMAP_SIZE)
+		map->x = -1;
+		while (++map->x < MINIMAP_SIZE)
 		{
-			put_pixels_on_minimap(m, i, k, p);
-			if (m->x % R == 0)
+			put_pixels_on_minimap(map, i, k, p);
+			if (map->x % R == 0)
 				k++;
 		}
-		if ((m->y) % (R) == 0)
+		if ((map->y) % (R) == 0)
 			i++;
 	}
 }

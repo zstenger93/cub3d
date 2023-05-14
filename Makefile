@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
+#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/13 01:31:01 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/14 16:57:01 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ B_SOURCE	= door/door \
 			  raycasting/raycasting \
 			  raycasting/print_texture \
 			  input_handling/save_data \
+			  draw_f_and_c/draw_f_and_c \
 			  input_handling/input_check \
 			  input_handling/map_validating \
 			  input_handling/validating_utils \

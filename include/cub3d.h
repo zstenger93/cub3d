@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 14:31:34 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:04:02 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,35 @@ typedef struct s_tex
 	int			line_height;
 }	t_tex;
 
+typedef struct s_fc_tex
+{
+	int				y;
+	int				x;
+	int				p;
+	float			pos_z;
+	float			row_distance;
+	float			f_step_x;
+	float			f_step_y;
+	float			f_x;
+	float			f_y;
+	float			ray_dir_x0;
+	float			ray_dir_y0;
+	float			ray_dir_x1;
+	float			ray_dir_y1;
+	mlx_texture_t	*tex;
+	mlx_texture_t	*tex2;
+	int				cell_x;
+	int				cell_y;
+	int				tx;
+	int				ty;
+}	t_fc_tex;
+
 typedef struct s_map
 {
 	int			x;
 	int			y;
+	t_fc_tex	fc;
+	int			hit;
 	t_ray		ray;
 	t_tex		*tex;
 	int			side;
@@ -193,7 +218,7 @@ void			draw_rays(t_map *minimap);
 void			draw_player(t_map *minimap);
 void			draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i);
 void			put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p);
-void			draw_minimap(t_map *minimap, t_mlx_data *mlx_d, t_vector *p, int i);
+void			draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i);
 
 // HOOKS
 void			add_hooks(t_data *data);
@@ -204,6 +229,11 @@ void			hodor(mlx_key_data_t keydata, void *param);
 bool			is_open_door_here(t_map *map);
 bool			is_closed_door_here(t_map *map);
 void			switch_door(t_map *map, t_mlx_data *mlx_data);
+
+// FLOOR AND CEILING
+void			draw_floor_and_ceiling(t_map *map);
+void			init_variables_for_y(t_map *map, t_fc_tex *fc, int y);
+void			init_variables_for_x(t_map *map, t_fc_tex *fc, int x, int y);
 
 // MOVEMENT
 void			move_keys(void *param);
@@ -230,11 +260,5 @@ char			put_chars(char c);
 char			*double_to_string(double num);
 void			print_map_objects(t_mlx_data *data);
 void			ft_print_2d_char_array(char **array_2d);
-
-
-
-
-void	set_floor(t_map *map);
-
 
 #endif

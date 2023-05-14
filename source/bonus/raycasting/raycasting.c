@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 14:28:09 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:04:25 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 void	draw_map(t_map *m, t_mlx_data *mlx_data)
 {
 	int	i;
-	int	hit;
 
 	i = -1;
-	set_floor(m);
+	draw_floor_and_ceiling(m);
 	while (++i < WIDTH)
 	{
-		hit = 0;
+		m->hit = 0;
 		m->ray.camera.x = ((2 * i) / (double)WIDTH) - 1;
 		m->ray.dir.y = m->player.dir.y + m->player.plane.y * m->ray.camera.x;
 		m->ray.dir.x = m->player.dir.x + m->player.plane.x * m->ray.camera.x;
@@ -38,7 +37,7 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 		else
 			m->ray.delta_dist.y = fabs(1 / m->ray.dir.y);
 		calculate_the_direction_of_the_ray(m, i);
-		cast_the_ray_until_hits_the_wall(m, hit);
+		cast_the_ray_until_hits_the_wall(m, m->hit);
 		print_textures(m, i, mlx_data);
 	}
 	draw_buff(m->img_tmp, m->buffer);
