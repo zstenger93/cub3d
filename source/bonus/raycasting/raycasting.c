@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 17:04:25 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:50:41 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 			map->side = 1;
 		}
 		if (map->matrix[(int)map->map_y][(int)map->map_x] > '0'
-			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd')
+			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd'
+			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'K')
 			hit = 1;
 	}
 	if (map->side == 0)

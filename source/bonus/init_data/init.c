@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 00:47:04 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:29:29 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,29 @@ int	init(int argc, char **argv, t_data *data)
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_textures(data->mlx_data);
 	data->minimap->tex = malloc(sizeof(t_tex));
+	init_spirite_position(data->minimap);
 	return (0);
+}
+
+void	init_spirite_position(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (map->matrix[++y] != NULL)
+	{
+		x = -1;
+		while (map->matrix[y][++x] != '\0')
+		{
+			if (map->matrix[y][x] == 'K')
+			{
+				map->sprite.pos.x = x;
+				map->sprite.pos.y = y;
+				break ;
+			}
+		}
+	}
 }
 
 t_mlx_data	*init_data(void)

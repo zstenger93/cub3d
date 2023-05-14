@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validating.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 15:58:05 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:09:37 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	line_has_invalid_chars(char *line)
 	{
 		if (line[i] == ' ' || line[i] == '0' || line[i] == '1'
 			|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
-			|| line[i] == 'E' || line[i] == 'D')
+			|| line[i] == 'E' || line[i] == 'D' || line[i] == 'K')
 		{
 			if (map_has_multiple_players_or_none(line[i], 'N') == true)
 				return (true);

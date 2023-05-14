@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 17:04:02 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:05:37 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,29 +103,48 @@ typedef struct s_tex
 
 typedef struct s_fc_tex
 {
-	int				y;
 	int				x;
+	int				y;
 	int				p;
+	mlx_texture_t	*tex;
+	mlx_texture_t	*tex2;
+	int				tex_x;
+	int				tex_y;
 	float			pos_z;
-	float			row_distance;
+	int				cell_x;
+	int				cell_y;
+	float			floor_x;
+	float			floor_y;
 	float			f_step_x;
 	float			f_step_y;
-	float			f_x;
-	float			f_y;
 	float			ray_dir_x0;
 	float			ray_dir_y0;
 	float			ray_dir_x1;
 	float			ray_dir_y1;
-	mlx_texture_t	*tex;
-	mlx_texture_t	*tex2;
-	int				cell_x;
-	int				cell_y;
-	int				tx;
-	int				ty;
+	float			row_distance;
 }	t_fc_tex;
+
+typedef struct s_sprite
+{
+	t_vector		draw_start;
+	t_vector		draw_end;
+	double			inv_det;
+	double			transform_x;
+	double			transform_y;
+	int				screen_x;
+	t_vector		size;
+	t_vector		pos;
+	int				fps;
+	int				index;
+	double			x;
+	double			y;
+	double			distance;
+	mlx_texture_t	*textures[4];
+}	t_sprite;
 
 typedef struct s_map
 {
+	double		z_buffer[WIDTH];
 	int			x;
 	int			y;
 	t_fc_tex	fc;
@@ -137,6 +156,8 @@ typedef struct s_map
 	int			map_x;
 	int			map_y;
 	t_player	player;
+	bool		has_key;
+	t_sprite	sprite;
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_tmp;
 	char		**matrix;
@@ -195,6 +216,7 @@ t_map			*init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 
 // INIT
 t_mlx_data		*init_data(void);
+void			init_spirite_position(t_map *map);
 void			init_textures(t_mlx_data *mlx_data);
 int				init(int argc, char **argv, t_data *data);
 
@@ -221,6 +243,7 @@ void			put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p);
 void			draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i);
 
 // HOOKS
+void			sprites(void *param);
 void			add_hooks(t_data *data);
 void			mouse_rotate(void *param);
 void			hodor(mlx_key_data_t keydata, void *param);
@@ -234,6 +257,9 @@ void			switch_door(t_map *map, t_mlx_data *mlx_data);
 void			draw_floor_and_ceiling(t_map *map);
 void			init_variables_for_y(t_map *map, t_fc_tex *fc, int y);
 void			init_variables_for_x(t_map *map, t_fc_tex *fc, int x, int y);
+
+// SPRITES
+
 
 // MOVEMENT
 void			move_keys(void *param);

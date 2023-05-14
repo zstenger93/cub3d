@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 14:25:29 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:14:32 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	init(argc, argv, &data);
+	// data.minimap->sprite.textures[0] = mlx_load_png("resource/key0");
+	// data.minimap->sprite.textures[1] = mlx_load_png("resource/key1");
+	// data.minimap->sprite.textures[2] = mlx_load_png("resource/key2");
+	// data.minimap->sprite.textures[3] = mlx_load_png("resource/key3");
 	mlx_image_to_window(data.mlx, data.minimap->img_tmp, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	add_hooks(&data);

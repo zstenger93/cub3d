@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 16:11:37 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:09:12 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	put_chars(char c)
 	char	colored_plus[] = "\e[1;34m+\e[0m";
 	char	colored_v[] = "\e[1;33mV\e[0m";
 	char	colored_d[] = "\e[1;34mD\e[0m";
+	char	colored_k[] = "\e[1;34mK\e[0m";
 
 	if (c == '0')
 		write(1, &colored_0, 13);
@@ -127,6 +128,8 @@ char	put_chars(char c)
 		write(1, &colored_x, 13);
 	else if (c == 'D')
 		write(1, &colored_d, 13);
+	else if (c == 'K')
+		write(1, &colored_k, 13);
 	else if (c == ' ')
 		write(1, " ", 1);
 	return (0);

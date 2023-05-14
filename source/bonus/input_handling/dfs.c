@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:54 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 15:25:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:08:23 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	dfs(char **map, int y, int x, t_mlx_data *data)
 		return ;
 	if (data->map_copy[y][x] != '0' && data->map_copy[y][x] != 'N'
 		&& data->map_copy[y][x] != 'S' && data->map_copy[y][x] != 'E'
-		&& data->map_copy[y][x] != 'W' && data->map_copy[y][x] != 'D')
+		&& data->map_copy[y][x] != 'W' && data->map_copy[y][x] != 'D'
+		&& data->map_copy[y][x] != 'K')
 		return ;
 	data->map_copy[y][x] = 'X';
 	dfs(data->map_copy, y + 1, x + 1, data);

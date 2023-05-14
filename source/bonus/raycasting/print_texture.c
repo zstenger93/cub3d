@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 16:52:49 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:50:08 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 		m->tex->d_start++;
 	}
 	i = m->tex->d_start;
+	m->z_buffer[x] = m->ray.wall_dist;
 }
 
 mlx_texture_t	*get_texture(t_map *map, t_mlx_data *mlx_data)
