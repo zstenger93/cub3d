@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 20:05:37 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:41:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@
 // MISC
 # define TOGGLE_MINIMAP "M"
 # define SPACES " \t\n\v\r\f"
+
+// idk wtf is this
+# define UDIV 1
+# define VDIV 1
+# define VMOVE 0.0
 
 // SIZES FOR MAP CALC
 	// MINIMAP_REC
@@ -95,7 +100,7 @@ typedef struct s_tex
 	t_vector	tex;
 	double		step;
 	double		t_pos;
-	int			color;
+	uint32_t	color;
 	int			d_end;
 	int			d_start;
 	int			line_height;
@@ -126,6 +131,8 @@ typedef struct s_fc_tex
 
 typedef struct s_sprite
 {
+	int				v_move_screen;
+	int				stripe;
 	t_vector		draw_start;
 	t_vector		draw_end;
 	double			inv_det;
@@ -259,7 +266,8 @@ void			init_variables_for_y(t_map *map, t_fc_tex *fc, int y);
 void			init_variables_for_x(t_map *map, t_fc_tex *fc, int x, int y);
 
 // SPRITES
-
+void	draw_sprite(t_map *map);
+void	calculate_sprite_attributes(t_map *map);
 
 // MOVEMENT
 void			move_keys(void *param);

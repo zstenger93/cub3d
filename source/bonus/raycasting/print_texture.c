@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:52:26 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 18:50:08 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:40:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	print_textures(t_map *m, int x, t_mlx_data *mlx_data)
 		m->tex->tex.y = (int)m->tex->t_pos & (64 - 1);
 		m->tex->t_pos += m->tex->step;
 		m->tex->color = get_pixel_color(m, tex);
-		m->buffer[x][m->tex->d_start] = m->tex->color;
+		if ((m->tex->color & 0x00FFFFFF) != 0)
+			m->buffer[x][m->tex->d_start] = m->tex->color;
 		m->tex->d_start++;
 	}
 	i = m->tex->d_start;

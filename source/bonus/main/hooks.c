@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 19:10:56 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:24:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	add_hooks(t_data *data)
 {
 	mlx_loop_hook(data->mlx, &move_keys, data);
 	mlx_loop_hook(data->mlx, &mouse_rotate, data);
-	// mlx_loop_hook(data->mlx, &sprites, data);
+	mlx_loop_hook(data->mlx, &sprites, data);
 	mlx_key_hook(data->mlx, &hodor, data);
 }
 
