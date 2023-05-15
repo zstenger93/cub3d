@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 16:55:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:29:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,13 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	init(argc, argv, &data);
-	data.minimap->sprite.textures[0] = mlx_load_png("resource/key17.png");
-	data.minimap->sprite.textures[1] = mlx_load_png("resource/key15.png");
-	data.minimap->sprite.textures[2] = mlx_load_png("resource/key20.png");
-	data.minimap->sprite.textures[3] = mlx_load_png("resource/key16.png");
-	data.minimap->sprite.textures[4] = mlx_load_png("resource/key13.png");
-	data.minimap->sprite.textures[5] = mlx_load_png("resource/key14.png");
-	data.minimap->sprite.textures[6] = mlx_load_png("resource/key11.png");
-	data.minimap->sprite.textures[7] = mlx_load_png("resource/key10.png");
+	system("afplay ./resource/background.mp3 &");
 	mlx_image_to_window(data.mlx, data.minimap->img_tmp, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	add_hooks(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
+	system("pkill afplay &");
 	exit(0);
 }
 

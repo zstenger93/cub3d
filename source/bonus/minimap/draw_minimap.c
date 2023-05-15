@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/15 17:12:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:33:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	draw_player(t_map *minimap)
+void	draw_player(t_map *map)
 {
 	int	y;
 	int	x;
@@ -21,41 +21,41 @@ void	draw_player(t_map *minimap)
 
 	y = MINIMAP_SIZE / 2;
 	x = MINIMAP_SIZE / 2;
-	mlx_put_pixel(minimap->img_map, x, y - 4, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y - 3, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y - 2, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x - 2, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x - 3, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x - 4, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x + 2, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x + 3, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x + 4, y, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y + 2, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y + 3, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x, y + 4, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x + 2, y + 2, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x - 2, y - 2, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x - 2, y + 2, rgb(0, 0, 0, 255));
-	mlx_put_pixel(minimap->img_map, x + 2, y - 2, rgb(0, 0, 0, 255));
+	mlx_put_pixel(map->img_map, x, y - 4, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y - 3, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y - 2, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x - 2, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x - 3, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x - 4, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x + 2, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x + 3, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x + 4, y, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y + 2, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y + 3, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x, y + 4, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x + 2, y + 2, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x - 2, y - 2, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x - 2, y + 2, rgb(0, 0, 0, map->op_max));
+	mlx_put_pixel(map->img_map, x + 2, y - 2, rgb(0, 0, 0, map->op_max));
 }
 
 void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 {
 	if (m->matrix[(int)p->y + i][(int)p->x + k] == '1'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(230, 0, 0, 200));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(230, 0, 0, m->op_mid));
 	else if (m->matrix[(int)p->y + i][(int)p->x + k] == '0'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, 200));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, m->op_mid));
 	else if (m->matrix[(int)p->y + i][(int)p->x + k] == 'D'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 0, 145, 200));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 0, 145, m->op_mid));
 	else if (m->matrix[(int)p->y + i][(int)p->x + k] == 'K'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, 200));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, m->op_mid));
 	else
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, 0));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, m->op_mid));
 }
 
 void	draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i)
@@ -96,7 +96,7 @@ void	draw_rays(t_map *minimap)
 		mlx_put_pixel(minimap->img_map,
 			MINIMAP_SIZE / 2 + x,
 			MINIMAP_SIZE / 2 + y,
-			rgb(0, 0, 255, 255));
+			rgb(0, 0, minimap->op_max, minimap->op_max));
 		y += tmp_y;
 		x += tmp_x;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 17:18:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:34:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@
 # define HEIGHT 1080
 # define MINIMAP_SIZE 320
 
+// MINIMAP OPACITY
+# define OP_ZERO 0
+# define OP_M 200
+# define OPM 255
+
+// SPEED TO MOVE
+# define NORMAL 0.07
+# define FAST 0.20
+
+// SPEED TO TURN WITH
+# define NORMAL_SPEED 0.05
+# define FAST_SPEED 0.14
+
+// CHANGE BRIGHTNESS
+# define BRIGHT 1
+# define FOG 0.05
+
 typedef struct s_vector
 {
 	double	y;// [8][8], y = 6, x =3
@@ -61,6 +78,7 @@ typedef struct s_player
 	t_vector	plane;
 	double		angle;
 	double		speed;
+	bool		speed_is_life;
 }	t_player;
 
 typedef struct s_ray
@@ -88,11 +106,11 @@ typedef struct s_mlx_data
 	t_player		*player;
 	mlx_texture_t	*texture;
 	char			**raw_map; // map copied from the file
+	int				f_color[3];
+	int				c_color[3];
 	int				map_length; // heigth of the map
 	char			**map_copy; // raw map copy for dfs
 	int				reading_pos; // actual map reading starts from here
-	int				f_color[3];
-	int				c_color[3];
 }	t_mlx_data;
 
 typedef struct s_tex
@@ -166,12 +184,16 @@ typedef struct s_map
 	t_vector	step;
 	int			map_x;
 	int			map_y;
+	int			op_min;
+	int			op_mid;
+	int			op_max;
 	t_player	player;
 	t_sprite	sprite;
 	bool		has_key;
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_tmp;
 	char		**matrix;
+	bool		draw_minimap;
 	double		z_buffer[WIDTH];
 	int			buffer[WIDTH][HEIGHT];
 }	t_map;
@@ -219,6 +241,7 @@ char			*copy_map_line(char *content);
 
 // INIT MAP
 double			get_angle(char c);
+void			init_key_images(t_map *map);
 int				get_longest_line(char **map);
 void			set_plan(t_vector *plane, char c);
 char			*init_line(char *old_line, int l);
@@ -248,14 +271,15 @@ mlx_texture_t	*set_variables(t_map *map, t_mlx_data *mlx_data, int x);
 void			draw_buff(mlx_image_t *img_tmp, int32_t buffer[WIDTH][HEIGHT]);
 
 // DRAW_MINIMAP
+void			draw_player(t_map *map);
 void			draw_rays(t_map *minimap);
-void			draw_player(t_map *minimap);
 void			draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i);
 void			put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p);
+void			visible_map(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i);
+void			invisible_map(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i);
 void			draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i);
 
 // HOOKS
-void			sprites(void *param);
 void			add_hooks(t_data *data);
 void			mouse_rotate(void *param);
 void			hodor(mlx_key_data_t keydata, void *param);
@@ -278,12 +302,13 @@ uint32_t		get_pixels(t_sprite *sprite, int texture_x, int texture_y);
 
 // MOVEMENT
 void			move_keys(void *param);
+void			set_speed(t_player *player);
 bool			is_wall(int y, int x, char **matrix);
 void			move_up(double y, double x, t_map *map);
 void			move_down(double y, double x, t_map *map);
 void			move_left(double y, double x, t_map *map);
 void			move_right(double y, double x, t_map *map);
-void			is_key_collected(t_map *map, t_player *player, t_sprite *sprite);
+void			is_key_collected(t_map *m, t_player *player, t_sprite *sprite);
 
 // TURN L/R & MOUSE
 void			turn_left(t_data *data, t_player *playr);

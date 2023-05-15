@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:15:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:33:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,19 @@ void	hodor(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS
 		&& data->minimap->has_key == true)
 		switch_door(data->minimap, data->mlx_data);
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS
+		&& data->minimap->draw_minimap == false)
+		data->minimap->draw_minimap = true;
+	else if (keydata.key == MLX_KEY_N && keydata.action == MLX_PRESS
+		&& data->minimap->draw_minimap == true)
+		data->minimap->draw_minimap = false;
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_REPEAT
+		&& data->minimap->player.speed_is_life == false)
+	{
+		data->minimap->player.speed_is_life = true;
+		system("afplay ./resource/piu.mp3 &");
+	}
+	else if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_RELEASE
+		&& data->minimap->player.speed_is_life == true)
+		data->minimap->player.speed_is_life = false;
 }

@@ -23,8 +23,23 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	minimap->img_tmp = mlx_new_image(mlx, WIDTH, HEIGHT);
 	minimap->has_key = false;
+	minimap->player.speed_is_life = false;
 	minimap->sprite.index = 0;
+	minimap->draw_minimap = false;
+	init_key_images(minimap);
 	return (minimap);
+}
+
+void	init_key_images(t_map *map)
+{
+	map->sprite.textures[0] = mlx_load_png("resource/key17.png");
+	map->sprite.textures[1] = mlx_load_png("resource/key15.png");
+	map->sprite.textures[2] = mlx_load_png("resource/key20.png");
+	map->sprite.textures[3] = mlx_load_png("resource/key16.png");
+	map->sprite.textures[4] = mlx_load_png("resource/key13.png");
+	map->sprite.textures[5] = mlx_load_png("resource/key14.png");
+	map->sprite.textures[6] = mlx_load_png("resource/key11.png");
+	map->sprite.textures[7] = mlx_load_png("resource/key10.png");
 }
 
 char	**init_matrix(char **m, int height)

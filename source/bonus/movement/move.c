@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:56:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:32:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:34:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	move_keys(void	*param)
 	i = ((MINIMAP_SIZE / R) / 2) * (-1);
 	draw(data->minimap, data->mlx_data, p, i);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+	{
+		system("pkill afplay &");
 		exit(1);
+	}
 }
 
 void	move_down(double y, double x, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:13:34 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:35:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,19 @@ bool	is_wall(int y, int x, char **matrix)
 	return (false);
 }
 
-void	is_key_collected(t_map *map, t_player *player, t_sprite *sprite)
+void	set_speed(t_player *player)
 {
-	if (map->has_key == false
+	if (player->speed_is_life == false)
+		player->speed = NORMAL;
+	else
+		player->speed = FAST;
+}
+
+void	is_key_collected(t_map *m, t_player *player, t_sprite *sprite)
+{
+	set_speed(player);
+	if (m->has_key == false
 		&& fabs(sprite->pos.x - player->pos.x) < (double)1
 		&& fabs(sprite->pos.y - player->pos.y) < (double)1.5)
-		map->has_key = true;
+		m->has_key = true;
 }

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 00:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 17:19:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:32:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 void	switch_door(t_map *map, t_mlx_data *mlx_data)
 {
 	if (is_closed_door_here(map) == true)
+	{
+		system("afplay ./resource/portal.mp3 &");
 		return ;
+	}
 	else if (is_open_door_here(map) == true)
+	{
+		system("afplay ./resource/portal.mp3 &");
 		mlx_data->door = mlx_load_png("resource/bhole.png");
+	}
 }
 
 bool	is_closed_door_here(t_map *m)

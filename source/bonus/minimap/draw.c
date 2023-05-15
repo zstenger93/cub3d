@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:14 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:16:59 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:32:04 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i)
 {
-	draw_minimap(map, mlx_data, p, i);
+	if (map->draw_minimap == true)
+		visible_map(map, mlx_data, p, i);
+	else
+		invisible_map(map, mlx_data, p, i);
 	draw_floor_and_ceiling(map);
 	draw_map(map, mlx_data);
 	if (map->has_key == false)
@@ -23,6 +26,24 @@ void	draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i)
 		draw_sprite(map, &map->sprite);
 	}
 	draw_buff(map->img_tmp, map->buffer);
-	draw_player(map);
-	draw_rays(map);
+}
+
+void	visible_map(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
+{
+	m->op_min = OP_ZERO;
+	m->op_mid = OP_M;
+	m->op_max = OPM;
+	draw_minimap(m, mlx_d, p, i);
+	draw_player(m);
+	draw_rays(m);
+}
+
+void	invisible_map(t_map *m, t_mlx_data *mlx_d, t_vector *p, int i)
+{
+	m->op_min = OP_ZERO;
+	m->op_mid = OP_ZERO;
+	m->op_max = OP_ZERO;
+	draw_minimap(m, mlx_d, p, i);
+	draw_player(m);
+	draw_rays(m);
 }
