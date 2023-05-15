@@ -22,6 +22,8 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	set_player_position(minimap);
 	minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	minimap->img_tmp = mlx_new_image(mlx, WIDTH, HEIGHT);
+	minimap->has_key = false;
+	minimap->sprite.index = 0;
 	return (minimap);
 }
 

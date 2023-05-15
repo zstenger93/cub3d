@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 19:29:29 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:19:35 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	init(int argc, char **argv, t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 0);
+	mlx_set_window_limit(data->mlx, WIDTH, HEIGHT, WIDTH, HEIGHT);
 	data->mlx_data = init_data();
 	if (argc == 1)
 		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
@@ -70,7 +71,7 @@ t_mlx_data	*init_data(void)
 
 void	init_textures(t_mlx_data *mlx_data)
 {
-	mlx_data->door = mlx_load_png("resource/vortex1.png");
+	mlx_data->door = mlx_load_png("resource/bhole.png");
 	if (mlx_data->door == NULL)
 	{
 		printf("Error! Door file is shit\n");

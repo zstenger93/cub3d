@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 10:28:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:16:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 	int	i;
 
 	i = -1;
-	draw_floor_and_ceiling(m);
 	while (++i < WIDTH)
 	{
 		m->hit = 0;
@@ -40,7 +39,6 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 		cast_the_ray_until_hits_the_wall(m, m->hit);
 		print_textures(m, i, mlx_data);
 	}
-	
 }
 
 void	empty_map(mlx_image_t *img, t_mlx_data *mlx_d)

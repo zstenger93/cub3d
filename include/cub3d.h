@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 10:41:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:18:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define TOGGLE_MINIMAP "M"
 # define SPACES " \t\n\v\r\f"
 
-// idk wtf is this
-# define UDIV 1
-# define VDIV 1
-# define VMOVE 0.0
+// MOVING THE SPRITE ON THE MAP AND SCALE IT
+# define UDIV 2
+# define VDIV 2
+# define VMOVE 222.0
 
 // SIZES FOR MAP CALC
 	// MINIMAP_REC
@@ -131,27 +131,31 @@ typedef struct s_fc_tex
 
 typedef struct s_sprite
 {
-	int				v_move_screen;
-	int				stripe;
-	t_vector		draw_start;
-	t_vector		draw_end;
-	double			inv_det;
-	double			transform_x;
-	double			transform_y;
-	int				screen_x;
-	t_vector		size;
-	t_vector		pos;
-	int				fps;
-	int				index;
 	double			x;
 	double			y;
+	int				d;
+	int				d_y;
+	t_vector		pos;
+	int				fps;
+	t_vector		size;
+	uint32_t		color;
+	int				index;
+	int				stripe;
+	double			inv_det;
+	t_vector		draw_end;
+	int				screen_x;
 	double			distance;
-	mlx_texture_t	*textures[4];
+	int				texture_x;
+	int				texture_y;
+	t_vector		draw_start;
+	double			transform_x;
+	double			transform_y;
+	mlx_texture_t	*textures[8];
+	int				v_move_screen;
 }	t_sprite;
 
 typedef struct s_map
 {
-	double		z_buffer[WIDTH];
 	int			x;
 	int			y;
 	t_fc_tex	fc;
@@ -163,11 +167,12 @@ typedef struct s_map
 	int			map_x;
 	int			map_y;
 	t_player	player;
-	bool		has_key;
 	t_sprite	sprite;
+	bool		has_key;
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_tmp;
 	char		**matrix;
+	double		z_buffer[WIDTH];
 	int			buffer[WIDTH][HEIGHT];
 }	t_map;
 
@@ -266,8 +271,10 @@ void			init_variables_for_y(t_map *map, t_fc_tex *fc, int y);
 void			init_variables_for_x(t_map *map, t_fc_tex *fc, int x, int y);
 
 // SPRITES
-void	draw_sprite(t_map *map);
-void	calculate_sprite_attributes(t_map *map);
+void			love_norm(t_map *map, t_sprite *sprite);
+void			draw_sprite(t_map *map, t_sprite *sprite);
+void			calculate_sprite_attributes(t_map *map, t_sprite *sprite);
+uint32_t		get_pixels(t_sprite *sprite, int texture_x, int texture_y);
 
 // MOVEMENT
 void			move_keys(void *param);
@@ -276,6 +283,7 @@ void			move_up(double y, double x, t_map *map);
 void			move_down(double y, double x, t_map *map);
 void			move_left(double y, double x, t_map *map);
 void			move_right(double y, double x, t_map *map);
+void			is_key_collected(t_map *map, t_player *player, t_sprite *sprite);
 
 // TURN L/R & MOUSE
 void			turn_left(t_data *data, t_player *playr);

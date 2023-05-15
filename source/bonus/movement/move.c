@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:56:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 13:35:27 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:32:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ void	move_keys(void	*param)
 
 	data = (t_data *)param;
 	player = &data->minimap->player;
+	is_key_collected(data->minimap, player, &data->minimap->sprite);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_down(player->pos.y, player->pos.x, data->minimap);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		move_up(player->pos.y, player->pos.x, data->minimap);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		move_down(player->pos.y, player->pos.x, data->minimap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_right(player->pos.y, player->pos.x, data->minimap);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		move_left(player->pos.y, player->pos.x, data->minimap);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		move_right(player->pos.y, player->pos.x, data->minimap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		turn_left(data, player);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
@@ -40,7 +41,7 @@ void	move_keys(void	*param)
 		exit(1);
 }
 
-void	move_up(double y, double x, t_map *map)
+void	move_down(double y, double x, t_map *map)
 {
 	y -= map->player.dir.y * map->player.speed;
 	x -= map->player.dir.x * map->player.speed;
@@ -48,13 +49,13 @@ void	move_up(double y, double x, t_map *map)
 		return ;
 	map->player.pos.y = y;
 	map->player.pos.x = x;
-	if (map->matrix[(int)y + 1][(int)x] == '1' && y - (int)y > 0.85)
+	if (map->matrix[(int)y - 1][(int)x] == '1' && y - (int)y > 1)
 		map->player.pos.y = (int)y + 1;
-	if (map->matrix[(int)y][(int)x + 1] == '1' && x - (int)x > 0.85)
+	if (map->matrix[(int)y][(int)x - 1] == '1' && x - (int)x > 1)
 		map->player.pos.x = (int)x + 1;
 }
 
-void	move_down(double y, double x, t_map *map)
+void	move_up(double y, double x, t_map *map)
 {
 	y += map->player.dir.y * map->player.speed;
 	x += map->player.dir.x * map->player.speed;
@@ -62,13 +63,13 @@ void	move_down(double y, double x, t_map *map)
 		return ;
 	map->player.pos.y = y;
 	map->player.pos.x = x;
-	if (map->matrix[(int)y + 1][(int)x] == '1' && y - (int)y > 0.85)
+	if (map->matrix[(int)y + 1][(int)x] == '1' && y - (int)y > 1)
 		map->player.pos.y = (int)y + 1;
-	if (map->matrix[(int)y][(int)x + 1] == '1' && x - (int)x > 0.85)
+	if (map->matrix[(int)y][(int)x + 1] == '1' && x - (int)x > 1)
 		map->player.pos.x = (int)x + 1;
 }
 
-void	move_left(double y, double x, t_map *map)
+void	move_right(double y, double x, t_map *map)
 {
 	double	y_delta;
 	double	x_delta;
@@ -82,7 +83,7 @@ void	move_left(double y, double x, t_map *map)
 	}
 }
 
-void	move_right(double y, double x, t_map *map)
+void	move_left(double y, double x, t_map *map)
 {
 	double	y_delta;
 	double	x_delta;
