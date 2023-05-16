@@ -95,10 +95,10 @@ char	*init_line(char *old_line, int l)
 	int		k;
 
 	i = 0;
-	while (old_line[i] != '\0' && old_line[i] != '\n') // 111\n
+	while (old_line[i] != '\0' && old_line[i] != '\n')
 		i++;
-	line = ft_strdup2(old_line, 0, i); // 111
-	k = ft_strlen(line); // 3
+	line = ft_strdup2(old_line, 0, i);
+	k = ft_strlen(line);
 	old_line = ft_strdup(line);
 	free(line);
 	res = dup3((MINIMAP_SIZE / R) / 2, 'V');

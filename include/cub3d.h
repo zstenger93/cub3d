@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:14:36 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:45:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ typedef struct s_mlx_data
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*door;
 	int				error;
-	t_player		*player; // possible LEAK
-	char			**raw_map; // free
+	t_player		*player;
+	char			**raw_map;
 	int				f_color[3];
 	int				c_color[3];
 	int				map_length;

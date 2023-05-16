@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:19:15 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:43:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,6 @@ int	map_checks(t_mlx_data *data, int i)
 	data->raw_map[i] = NULL;
 	if (map_has_multiple_players_or_none(' ', 'Y') == true)
 		return (false);
-	// data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
-	// if (data->map_copy == NULL)
-		// return (p_err(MALLOC_FAIL), 1);
 	data->map_copy = copy_2d_char_array(data->raw_map);
 	get_player_pos(data->map_copy, &y, &x);
 	dfs(data->map_copy, y, x, data);
