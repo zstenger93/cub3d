@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:00:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:12:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	hodor(mlx_key_data_t keydata, void *param)
 	t_data		*data;
 
 	data = (t_data *)param;
-	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS
-		&& data->minimap->has_key == true)
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
 		switch_door(data->minimap, data->mlx_data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS
 		&& data->minimap->draw_minimap == false)
