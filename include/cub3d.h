@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 13:57:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:14:36 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ typedef struct s_sprite
 
 typedef struct s_map
 {
-	int			sound;
 	int			x;
 	int			y;
 	t_fc_tex	fc;
