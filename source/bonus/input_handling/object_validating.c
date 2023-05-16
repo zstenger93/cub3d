@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 08:46:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:44:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	validate_texture(char *line, t_mlx_data *data)
 	if (validate_no_so(line, data) == false
 		|| validate_we_ea(line, data) == false)
 		return (false);
+	free(line);
 	return (true);
 }
 

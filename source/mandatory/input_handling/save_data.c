@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:03:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 12:22:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:52:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	save_texture_to_data(char *file, t_mlx_data *data, char option)
 		free(data->ea);
 		data->ea = ft_strdup(file);
 	}
+	free(file);
 }
 
 // save the rgb colors as int
@@ -52,4 +53,5 @@ void	save_color_to_data(char **rgb, t_mlx_data *data, char option)
 		data->c_color[1] = ft_atoi(rgb[1]);
 		data->c_color[2] = ft_atoi(rgb[2]);
 	}
+	free_char_array(rgb);
 }

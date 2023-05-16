@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:02:29 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:29:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:05:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 char	*get_line(int fd, char *line)
 {
-	char	*return_line;
-
 	free(line);
-	return_line = get_next_line(fd);
-	return (return_line);
+	return (get_next_line(fd));
 }
 
 char	**copy_2d_char_array(char **array)
