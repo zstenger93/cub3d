@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:45:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:31:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 # define R 20
 # define WIDTH 1920
 # define HEIGHT 1080
-# define MINIMAP_SIZE 320
+# define MINIMAP_SIZE 260
 
 // MINIMAP OPACITY
 # define OPM 255
@@ -70,11 +70,11 @@
 
 // SPEED TO MOVE
 # define FAST 0.20
-# define NORMAL 0.07
+# define NORMAL 0.09
 
 // SPEED TO TURN WITH
 # define FAST_SPEED 0.14
-# define NORMAL_SPEED 0.05
+# define NORMAL_SPEED 0.07
 
 // CHANGE BRIGHTNESS
 # define BRIGHT 1
@@ -335,6 +335,7 @@ void			turn_left(t_data *data, t_player *playr);
 void			turn_right(t_data *data, t_player *player);
 
 // UTILS
+void			free_data(t_data *data);
 char			*dup3(int size, char ch);
 void			free_char_array(char **array);
 uint32_t		rgb(int r, int g, int b, int a);
@@ -345,7 +346,5 @@ char			*ft_strdup2(char *str, int start, int end);
 // char			put_chars(char c);
 // void			print_map_objects(t_mlx_data *data);
 // void			ft_print_2d_char_array(char **array_2d);
-
-void			free_data(t_data *data);
-
+ 
 #endif

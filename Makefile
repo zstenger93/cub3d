@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/16 14:03:48 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/16 17:39:55 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC_DIR		= source/mandatory/
 OBJ_DIR		= objects/mandatory/
 CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
-# CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -167,19 +167,40 @@ run:
 	./cub3d maps/valid/input.cub
 
 brun:
-	./Cub3d maps/valid/bonus.cub
+	./cub3d maps/valid/bonus.cub
 
-vf:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./cub3d
+# WITH BONUS
 t1:
-
-t2:
+	./cub3d maps/valid/crazy.cub
 
 t3:
+	./cub3d maps/valid/randomshit.cub
 
 t4:
+	./cub3d maps/valid/bonus_big.cub
 
+# WITH MANDATORY
+t2:
+	./cub3d maps/valid/dfs.cub
+
+# MAPS WITH ERROR
 t5:
+	./cub3d maps/valid/empty.cub
+
+t6:
+	./cub3d maps/valid/bad_file.cub
+
+t7:
+	./cub3d maps/valid/hole.cub
+
+t8:
+	./cub3d maps/valid/line_inside.cub
+
+t9:
+	./cub3d maps/valid/bad_rgb.cub
+
+t10:
+	./cub3d maps/valid/bad_extension.cub
 
 .PHONY: all clean fclean re run
 
