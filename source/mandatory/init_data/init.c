@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:49:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:56:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	init(int argc, char **argv, t_data *data)
 		exit(0);
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_m_textures(data->mlx_data);
-	data->minimap->tex = malloc(sizeof(t_tex));
 	if (data->minimap->tex == NULL)
 		return (p_err(MALLOC_FAIL), 1);
 	return (0);
@@ -37,6 +36,9 @@ t_mlx_data	*init_data(void)
 	mlx_data = malloc(sizeof(t_mlx_data));
 	if (mlx_data == NULL)
 		return (p_err(MALLOC_FAIL), NULL);
+	mlx_data->map_copy = NULL;
+	mlx_data->raw_map = NULL;
+	mlx_data->player = NULL;
 	mlx_data->no = ft_strdup("X");
 	mlx_data->so = ft_strdup("X");
 	mlx_data->we = ft_strdup("X");
