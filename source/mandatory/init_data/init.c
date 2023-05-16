@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:49:26 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	init(int argc, char **argv, t_data *data)
 {
+	if (argc == 1)
+		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
 	data->mlx_data = init_data();
 	if (argc == 1)

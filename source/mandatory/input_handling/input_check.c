@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:50:07 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	map_checks(t_mlx_data *data, int i)
 	ft_print_2d_char_array(data->map_copy);
 	ft_printf("\n");
 	free_char_array(data->map_copy);
+	data->map_copy = NULL;
 	return (true);
 }
 

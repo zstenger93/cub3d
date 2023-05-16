@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:03:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 07:54:02 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,25 @@
 void	save_texture_to_data(char *file, t_mlx_data *data, char option)
 {
 	if (option == 'N')
+	{
+		free(data->no);
 		data->no = ft_strdup(file);
+	}
 	if (option == 'S')
+	{
+		free(data->no);
 		data->so = ft_strdup(file);
+	}
 	if (option == 'W')
+	{
+		free(data->no);
 		data->we = ft_strdup(file);
+	}
 	if (option == 'E')
+	{
+		free(data->no);
 		data->ea = ft_strdup(file);
+	}
 }
 
 // save the rgb colors as int
