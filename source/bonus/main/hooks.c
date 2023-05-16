@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 20:33:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:00:35 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,22 @@ void	hodor(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_RELEASE
 		&& data->minimap->player.speed_is_life == true)
 		data->minimap->player.speed_is_life = false;
+	steps(keydata, data);
+}
+
+void	steps(mlx_key_data_t keydata, t_data *data)
+{
+	static int	i;
+
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS
+		|| keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS
+		|| keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS
+		|| keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS
+		|| keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS
+		|| keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+	{
+		i++;
+		if (i % 2 == 0)
+			system("afplay ./resource/step1.mp3 &");
+	}
 }

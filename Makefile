@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/16 12:12:34 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/16 14:03:48 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@ CC			= cc
 NAME		= cub3D
 B_NAME		= Cub3D
 RM			= rm -rf
-OBJ_DIR		= objects/mandatory/
-B_OBJ_DIR	= objects/bonus/
 DN			= > /dev/null
 LIBFT		= libft/libft.a
 B_SRC_DIR	= source/bonus/
+B_OBJ_DIR	= objects/bonus/
 SRC_DIR		= source/mandatory/
+OBJ_DIR		= objects/mandatory/
+CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
-# CFLAGS		= -Wall -Wextra -Werror 
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
+# CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -151,7 +151,7 @@ clean:
 
 fclean: clean
 	@echo "Removing executables."
-	@$(RM) $(NAME) $(B_NAME)
+	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
 # @make fclean -C libft
 # @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."

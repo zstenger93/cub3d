@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 12:33:51 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:57:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ typedef struct s_sprite
 
 typedef struct s_map
 {
+	int			sound;
 	int			x;
 	int			y;
 	t_fc_tex	fc;
@@ -327,6 +328,7 @@ void			move_up(double y, double x, t_map *map);
 void			move_down(double y, double x, t_map *map);
 void			move_left(double y, double x, t_map *map);
 void			move_right(double y, double x, t_map *map);
+void			steps(mlx_key_data_t keydata, t_data *data);
 void			is_key_collected(t_map *m, t_player *player, t_sprite *sprite);
 
 // TURN L/R & MOUSE
