@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 20:34:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:35:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,31 @@
 # include <stdio.h>
 # include <float.h>
 
-# include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/includes/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 // ERROR MESSAGES
 # define TMA "Wrong number of arguments.\n"
+# define MALLOC_FAIL "Error! Malloc failed.\n"
 # define RGB_IS "The RGB color is out of range, "
+# define BAD_DOOR "Error! Png for door is bad.\n"
+# define INVALID_MAP "Error! The map is invalid.\n"
+# define BAD_FLOOR "Error! Png for floor is bad.\n"
+# define BAD_CEILING "Error! Png for ceiling is bad.\n"
+# define CANNOT_OPEN "Error! This map cannot be opened.\n"
+# define BAD_KEY_PIC "Error! Png for key animation is bad.\n"
+# define MISSING_PLAYER "Error! No players found on the map.\n"
 # define OUT_OF_RANGE "all numbers must be between 0 and 255.\n"
+# define RGB_DUPLICATE "Error! To many rgb values on the map.\n"
+# define TOO_MANY_PLAYERS "Error! Too many players on the map.\n"
 # define INVALID_CHAR "Error! Map has at least one invalid char: "
+# define PLAYER_DUPLICATE "Error! Player duplicates on the map.\n"
 # define HOW_TO_LAUNCH "Please launch it as ./cub3d path/to/map.\n"
+# define WRONG_ATTRIBUTES "Error! Wrong attributes in the map file.\n"
 # define COMMA "Error! The amount of comma in the RGB list is wrong.\n"
+# define TEX_FILE_WRONG "Error! The %s texture file cannot be opened.\n"
+# define DFS_ERROR "Error! The DFS algorithm found a problem on the map.\n"
+# define MISSING_ATTRIBUTES "Error! Attributes are missing form the map.\n"
 # define DUPLICATE "Error! Duplicates found on the map for the attributes.\n"
 # define WRONG_EXTENSION "Map file has wrong format. It needs .cub format.\n"
 
@@ -49,17 +64,17 @@
 # define MINIMAP_SIZE 320
 
 // MINIMAP OPACITY
-# define OP_ZERO 0
-# define OP_M 200
 # define OPM 255
+# define OP_M 200
+# define OP_ZERO 0
 
 // SPEED TO MOVE
-# define NORMAL 0.07
 # define FAST 0.20
+# define NORMAL 0.07
 
 // SPEED TO TURN WITH
-# define NORMAL_SPEED 0.05
 # define FAST_SPEED 0.14
+# define NORMAL_SPEED 0.05
 
 // CHANGE BRIGHTNESS
 # define BRIGHT 1
@@ -227,6 +242,7 @@ int				validate_color(char *line, t_mlx_data *data);
 void			save_color_to_data(char **rgb, t_mlx_data *data, char option);
 void			save_texture_to_data(char *file, t_mlx_data *data, char option);
 // MAP VALIDATING
+char			*get_line(int fd, char *line);
 void			set_map_error(t_mlx_data *data);
 int				line_has_invalid_chars(char *line);
 int				map_checks(t_mlx_data *data, int i);
@@ -241,7 +257,7 @@ char			*copy_map_line(char *content);
 
 // INIT MAP
 double			get_angle(char c);
-void			init_key_images(t_map *map);
+int				init_key_images(t_map *map);
 int				get_longest_line(char **map);
 void			set_plan(t_vector *plane, char c);
 char			*init_line(char *old_line, int l);
@@ -252,8 +268,9 @@ t_map			*init_map(t_mlx_data *mlx_data, mlx_t *mlx);
 // INIT
 t_mlx_data		*init_data(void);
 void			init_spirite_position(t_map *map);
-void			init_textures(t_mlx_data *mlx_data);
+void			init_m_textures(t_mlx_data *mlx_data);
 int				init(int argc, char **argv, t_data *data);
+void			init_textures(t_mlx_data *mlx_data, t_fc_tex *fc);
 
 // RAYCASTING
 void			set_ray_distance(t_map *map);

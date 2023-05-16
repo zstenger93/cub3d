@@ -17,6 +17,8 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	t_map	*minimap;
 
 	minimap = malloc(sizeof(t_map));
+	if (minimap == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
 	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap);
@@ -32,6 +34,8 @@ char	**init_matrix(char **m, int height)
 	int		i;
 
 	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / R + 1));
+	if (matrix == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	matrix[height + MINIMAP_SIZE / R] = NULL;
 	len = get_longest_line(m) + (MINIMAP_SIZE / R) - 1;
 	i = -1;

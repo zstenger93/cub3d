@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:54 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 18:08:23 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:28:30 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	dfs(char **map, int y, int x, t_mlx_data *data)
 
 void	set_map_error(t_mlx_data *data)
 {
+	p_err(DFS_ERROR);
 	data->error = true;
 }

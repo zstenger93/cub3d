@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:46:39 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	invalid_attribute(char *line)
 		&& ft_strncmp(line, "C", 1) != 0)
 		flag++;
 	if (flag != 0)
-		return (ft_printf("Error! Wrong attribute.\n"), true);
+		return (p_err(WRONG_ATTRIBUTES), true);
 	return (false);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:51:57 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/15 19:40:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 07:59:52 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	draw_floor_and_ceiling(t_map *map)
 
 	y = 0;
 	fc = map->fc;
-	fc.tex = mlx_load_png("resource/lava.png");
-	fc.tex2 = mlx_load_png("resource/greystone.png");
 	while (y < HEIGHT)
 	{
 		init_variables_for_y(map, &fc, y);

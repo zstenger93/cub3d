@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/06 18:53:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:26:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	has_duplicate_rgb(char *line)
 	else if (line[0] == 'C')
 		c++;
 	else if (f != 1 || c != 1)
-		return (printf("Error! Duplicate rgb attributes.\n"), true);
+		return (p_err(RGB_DUPLICATE), true);
 	return (false);
 }
 
@@ -77,7 +77,7 @@ int	valid_rgb(char **rgb)
 	if ((ft_atoi(rgb[0]) > 255 || ft_atoi(rgb[0]) < 0)
 		|| (ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[1]) < 0)
 		|| (ft_atoi(rgb[2]) > 255 || ft_atoi(rgb[2]) < 0))
-		return (printf("%s%s", RGB_IS, OUT_OF_RANGE), false);
+		return (p_err("%s%s", RGB_IS, OUT_OF_RANGE), false);
 	else
 		return (true);
 }

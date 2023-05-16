@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 17:43:08 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	init(int argc, char **argv, t_data *data)
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 0);
 	data->mlx_data = init_data();
 	if (argc == 1)
-		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
+		return (p_err("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 		exit(0);
 	data->minimap = init_map(data->mlx_data, data->mlx);
-	init_textures(data->mlx_data);
+	init_textures(data->mlx_data, &data->minimap->fc);
 	data->minimap->tex = malloc(sizeof(t_tex));
+	if (data->minimap->tex == NULL)
+		return (p_err(MALLOC_FAIL), 1);
 	init_spirite_position(data->minimap);
 	return (0);
 }
@@ -53,6 +55,8 @@ t_mlx_data	*init_data(void)
 	t_mlx_data	*mlx_data;
 
 	mlx_data = malloc(sizeof(t_mlx_data));
+	if (mlx_data == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	mlx_data->no = ft_strdup("X");
 	mlx_data->so = ft_strdup("X");
 	mlx_data->we = ft_strdup("X");
@@ -68,18 +72,30 @@ t_mlx_data	*init_data(void)
 	return (mlx_data);
 }
 
-void	init_textures(t_mlx_data *mlx_data)
+void	init_textures(t_mlx_data *mlx_data, t_fc_tex *fc)
 {
 	mlx_data->door = mlx_load_png("resource/bhole.png");
 	if (mlx_data->door == NULL)
 	{
-		printf("Error! Door file is shit\n");
+		p_err(BAD_DOOR);
 		exit(0);
 	}
 	mlx_data->t_no = mlx_load_png(mlx_data->no);
 	mlx_data->t_so = mlx_load_png(mlx_data->so);
 	mlx_data->t_we = mlx_load_png(mlx_data->we);
 	mlx_data->t_ea = mlx_load_png(mlx_data->ea);
+	fc->tex = mlx_load_png("resource/lava.png");
+	if (fc->tex == NULL)
+	{
+		p_err(BAD_FLOOR);
+		exit(0);
+	}
+	fc->tex2 = mlx_load_png("resource/greystone.png");
+	if (fc->tex2 == NULL)
+	{
+		p_err(BAD_CEILING);
+		exit(0);
+	}
 }
 
 void	free_all(t_data *data)

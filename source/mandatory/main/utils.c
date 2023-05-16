@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/13 00:56:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:36:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strdup2(char *str, int start, int end)
 
 	result = malloc(sizeof(char) * (end - start + 1));
 	if (result == NULL)
-		return (NULL);
+		return (p_err(MALLOC_FAIL), NULL);
 	i = -1;
 	while (start + ++i != end)
 		result[i] = str[i + start];
@@ -67,6 +67,6 @@ int	commacounter(char *line)
 		i++;
 	}
 	if (commacount != 2)
-		return (printf("%s", COMMA), false);
+		return (p_err("%s", COMMA), false);
 	return (true);
 }

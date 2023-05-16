@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:06:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/10 16:21:25 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*dup3(int size, char ch)
 
 	i = 0;
 	str = malloc(sizeof(char) * (size + 1));
+	if (str == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	str[size] = '\0';
 	while (i != size)
 	{

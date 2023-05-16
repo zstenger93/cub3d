@@ -17,6 +17,8 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	t_map	*minimap;
 
 	minimap = malloc(sizeof(t_map));
+	if (minimap == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
 	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap);
@@ -26,20 +28,38 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	minimap->player.speed_is_life = false;
 	minimap->sprite.index = 0;
 	minimap->draw_minimap = false;
-	init_key_images(minimap);
+	if (init_key_images(minimap) == 1)
+		exit(0);
 	return (minimap);
 }
 
-void	init_key_images(t_map *map)
+int	init_key_images(t_map *map)
 {
 	map->sprite.textures[0] = mlx_load_png("resource/key17.png");
+	if (map->sprite.textures[0] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[1] = mlx_load_png("resource/key15.png");
+	if (map->sprite.textures[1] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[2] = mlx_load_png("resource/key20.png");
+	if (map->sprite.textures[2] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[3] = mlx_load_png("resource/key16.png");
+	if (map->sprite.textures[3] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[4] = mlx_load_png("resource/key13.png");
+	if (map->sprite.textures[4] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[5] = mlx_load_png("resource/key14.png");
+	if (map->sprite.textures[5] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[6] = mlx_load_png("resource/key11.png");
+	if (map->sprite.textures[6] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
 	map->sprite.textures[7] = mlx_load_png("resource/key10.png");
+	if (map->sprite.textures[7] == NULL)
+		return (p_err(BAD_KEY_PIC), 1);
+	return (0);
 }
 
 char	**init_matrix(char **m, int height)
@@ -49,6 +69,8 @@ char	**init_matrix(char **m, int height)
 	int		i;
 
 	matrix = malloc(sizeof(char *) * (height + MINIMAP_SIZE / R + 1));
+	if (matrix == NULL)
+		return (p_err(MALLOC_FAIL), NULL);
 	matrix[height + MINIMAP_SIZE / R] = NULL;
 	len = get_longest_line(m) + (MINIMAP_SIZE / R) - 1;
 	i = -1;

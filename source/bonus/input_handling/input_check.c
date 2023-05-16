@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 18:09:12 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/16 08:50:37 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 
 	i = ft_strlen(argv);
 	if (argc != 2)
-		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
+		return (p_err("%s%s", TMA, HOW_TO_LAUNCH), false);
 	else if (argv && i > 3 && argv[i - 1] == 'b' && argv[i - 2] == 'u'
 		&& argv[i - 3] == 'c' && argv[i - 4] == '.')
 	{
@@ -29,7 +29,7 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 			return (false);
 	}
 	else
-		return (printf(WRONG_EXTENSION), false);
+		return (p_err(WRONG_EXTENSION), false);
 	return (true);
 }
 
@@ -42,7 +42,7 @@ int	validate_content(char *map_file, t_mlx_data *data)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		return (printf("Map cannot be opened.\n"), false);
+		return (p_err(CANNOT_OPEN), false);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -56,10 +56,10 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		line = get_next_line(fd);
 	}
 	if (line == NULL)
-		return (ft_printf("Error! Missing attributes.\n"), false);
+		return (p_err(MISSING_ATTRIBUTES), false);
 	get_map_length(fd, map_file, data);
 	if (map_validathor(map_file, data, fd) == false || data->error == true)
-		return (printf("Error! Invalid map\n"), false);
+		return (p_err(INVALID_MAP), false);
 	return (close(fd), true);
 }
 	// exit(0);
@@ -70,6 +70,8 @@ int	map_checks(t_mlx_data *data, int i)
 	if (map_has_multiple_players_or_none(' ', 'Y') == true)
 		return (false);
 	data->map_copy = malloc(sizeof(char *) * (data->map_length + 1));
+	if (data->map_copy == NULL)
+		return (p_err(MALLOC_FAIL), false);
 	data->map_copy = copy_2d_char_array(data->raw_map);
 	dfs(data->map_copy, 3, 3, data);
 	print_map_objects(data);
@@ -90,7 +92,7 @@ int	is_duplicate(char *line, t_mlx_data *data)
 			&& ft_strcmp(data->ea, "X") == false)
 		|| (ft_strncmp(line, "F ", 2) == 0) && data->f_color[0] != -1
 		|| (ft_strncmp(line, "C ", 2) == 0) && data->c_color[0] != -1)
-		return (ft_printf(DUPLICATE), true);
+		return (p_err(DUPLICATE), true);
 	return (false);
 }
 
