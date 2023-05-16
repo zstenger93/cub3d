@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:50:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:28:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,40 @@ int	validate_content(char *map_file, t_mlx_data *data)
 		return (p_err(INVALID_MAP), false);
 	return (close(fd), true);
 }
-	// exit(0);
 
+void	get_player_pos(char **map, int *py, int *px)
+{
+	int		y;
+	int		x;
+	double	plane_length;
+
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\n' && map[y][x] != '\0')
+		{
+			if (ft_pf_strchr("NESW", map[y][x]) != NULL)
+			{
+				*py = y;
+				*px = x;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+// TO PRINT MAP
+	// print_map_objects(data);
+	// ft_print_2d_char_array(data->map_copy);
+	// ft_printf("\n");
 int	map_checks(t_mlx_data *data, int i)
 {
+	int	x;
+	int	y;
+
 	data->raw_map[i] = NULL;
 	if (map_has_multiple_players_or_none(' ', 'Y') == true)
 		return (false);
@@ -73,10 +103,8 @@ int	map_checks(t_mlx_data *data, int i)
 	if (data->map_copy == NULL)
 		return (p_err(MALLOC_FAIL), 1);
 	data->map_copy = copy_2d_char_array(data->raw_map);
-	dfs(data->map_copy, 3, 3, data);
-	print_map_objects(data);
-	ft_print_2d_char_array(data->map_copy);
-	ft_printf("\n");
+	get_player_pos(data->map_copy, &y, &x);
+	dfs(data->map_copy, y, x, data);
 	free_char_array(data->map_copy);
 	data->map_copy = NULL;
 	return (true);
@@ -97,37 +125,37 @@ int	is_duplicate(char *line, t_mlx_data *data)
 	return (false);
 }
 
-char	put_chars(char c)
-{
-	char	colored_0[] = "\e[1;37m0\e[0m";
-	char	colored_1[] = "\e[1;31m1\e[0m";
-	char	colored_e[] = "\e[1;33mE\e[0m";
-	char	colored_s[] = "\e[1;32mS\e[0m";
-	char	colored_w[] = "\e[1;35mW\e[0m";
-	char	colored_n[] = "\e[1;34mN\e[0m";
-	char	colored_x[] = "\e[1;34mX\e[0m";
-	char	colored_plus[] = "\e[1;34m+\e[0m";
-	char	colored_v[] = "\e[1;33mV\e[0m";
+// char	put_chars(char c)
+// {
+// 	char	colored_0[] = "\e[1;37m0\e[0m";
+// 	char	colored_1[] = "\e[1;31m1\e[0m";
+// 	char	colored_e[] = "\e[1;33mE\e[0m";
+// 	char	colored_s[] = "\e[1;32mS\e[0m";
+// 	char	colored_w[] = "\e[1;35mW\e[0m";
+// 	char	colored_n[] = "\e[1;34mN\e[0m";
+// 	char	colored_x[] = "\e[1;34mX\e[0m";
+// 	char	colored_plus[] = "\e[1;34m+\e[0m";
+// 	char	colored_v[] = "\e[1;33mV\e[0m";
 
-	if (c == '0')
-		write(1, &colored_0, 13);
-	else if (c == '1')
-		write(1, &colored_1, 13);
-	else if (c == 'N')
-		write(1, &colored_n, 13);
-	else if (c == 'S')
-		write(1, &colored_s, 13);
-	else if (c == 'W')
-		write(1, &colored_w, 13);
-	else if (c == 'E')
-		write(1, &colored_e, 13);
-	else if (c == '+')
-		write(1, &colored_plus, 13);
-	else if (c == 'V')
-		write(1, &colored_v, 13);
-	else if (c == 'X')
-		write(1, &colored_x, 13);
-	else if (c == ' ')
-		write(1, " ", 1);
-	return (0);
-}
+// 	if (c == '0')
+// 		write(1, &colored_0, 13);
+// 	else if (c == '1')
+// 		write(1, &colored_1, 13);
+// 	else if (c == 'N')
+// 		write(1, &colored_n, 13);
+// 	else if (c == 'S')
+// 		write(1, &colored_s, 13);
+// 	else if (c == 'W')
+// 		write(1, &colored_w, 13);
+// 	else if (c == 'E')
+// 		write(1, &colored_e, 13);
+// 	else if (c == '+')
+// 		write(1, &colored_plus, 13);
+// 	else if (c == 'V')
+// 		write(1, &colored_v, 13);
+// 	else if (c == 'X')
+// 		write(1, &colored_x, 13);
+// 	else if (c == ' ')
+// 		write(1, " ", 1);
+// 	return (0);
+// }

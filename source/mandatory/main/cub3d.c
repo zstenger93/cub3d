@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:50:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:31:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	free_mlx_data(t_data *data, t_mlx_data *mlx_data)
 	mlx_delete_texture(mlx_data->texture);
 	free_char_array(mlx_data->raw_map);
 	free_char_array(mlx_data->map_copy);
-
 	free(mlx_data);
 }
 

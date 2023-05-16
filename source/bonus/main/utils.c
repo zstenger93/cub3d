@@ -6,31 +6,11 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:39:26 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-void	write2(int n)
-{
-	char	*str;
-
-	str = ft_itoa(n);
-	write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
-}
-
-char	*double_to_string(double num)
-{
-	char	*str;
-	int		len;
-
-	len = snprintf(NULL, 0, "%f", num);
-	str = malloc(len + 1);
-	snprintf(str, len + 1, "%f", num);
-	return (str);
-}
 
 uint32_t	rgb(int r, int g, int b, int a)
 {

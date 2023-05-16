@@ -12,6 +12,8 @@
 
 #include "../../../include/cub3d.h"
 
+// TO PRINT MAP
+	// ft_print_2d_char_array(minimap->matrix);
 t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 {
 	t_map	*minimap;
@@ -20,7 +22,6 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	if (minimap == NULL)
 		return (p_err(MALLOC_FAIL), NULL);
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
-	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap);
 	minimap->img_map = mlx_new_image(mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	minimap->img_tmp = mlx_new_image(mlx, WIDTH, HEIGHT);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:56:04 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:02:01 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:37:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ void	move_keys(void	*param)
 	p = &data->minimap->player.pos;
 	i = ((MINIMAP_SIZE / R) / 2) * (-1);
 	draw(data->minimap, data->mlx_data, p, i);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-	{
-		free_data(data);
-		exit(1);
-	}
+	is_escape(data);
 }
 
 void	move_up(double y, double x, t_map *map)

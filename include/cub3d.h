@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:47:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:39:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ void			set_map_error(t_mlx_data *data);
 int				line_has_invalid_chars(char *line);
 int				map_checks(t_mlx_data *data, int i);
 int				line_cotains_only_spaces(char *line);
+void			get_player_pos(char **map, int *py, int *px);
 void			dfs(char **map, int y, int x, t_mlx_data *data);
 int				map_has_multiple_players_or_none(char c, char option);
 int				map_validathor(char *map_file, t_mlx_data *data, int fd);
@@ -319,6 +320,7 @@ uint32_t		get_pixels(t_sprite *sprite, int texture_x, int texture_y);
 
 // MOVEMENT
 void			move_keys(void *param);
+void			is_escape(t_data *data);
 void			set_speed(t_player *player);
 bool			is_wall(int y, int x, char **matrix);
 void			move_up(double y, double x, t_map *map);
@@ -338,16 +340,11 @@ uint32_t		rgb(int r, int g, int b, int a);
 char			**copy_2d_char_array(char **array);
 char			*ft_strdup2(char *str, int start, int end);
 
-// FOR TESTING
-void			write2(int n);
-char			put_chars(char c);
-char			*double_to_string(double num);
-void			print_map_objects(t_mlx_data *data);
-void			ft_print_2d_char_array(char **array_2d);
-
-
+// FOR PRINTING THE MAP
+// char			put_chars(char c);
+// void			print_map_objects(t_mlx_data *data);
+// void			ft_print_2d_char_array(char **array_2d);
 
 void	free_data(t_data *data);
-
 
 #endif

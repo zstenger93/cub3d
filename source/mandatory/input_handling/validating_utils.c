@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:02:29 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:02 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:29:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,26 @@ char	**copy_2d_char_array(char **array)
 	return (result);
 }
 
-void	ft_print_2d_char_array(char **array_2d)
-{
-	int	i;
-	int	k;
+// void	ft_print_2d_char_array(char **array_2d)
+// {
+// 	int	i;
+// 	int	k;
 
-	if (array_2d == NULL)
-		return ;
-	i = 0;
-	while (array_2d[i] != NULL)
-	{
-		k = 0;
-		while (array_2d[i][k] != '\0')
-		{
-			put_chars(array_2d[i][k]);
-			k++;
-		}
-		write(1, "\n", 2);
-		i++;
-	}
-}
-		// printf("%s", array_2d[i++]);
+// 	if (array_2d == NULL)
+// 		return ;
+// 	i = 0;
+// 	while (array_2d[i] != NULL)
+// 	{
+// 		k = 0;
+// 		while (array_2d[i][k] != '\0')
+// 		{
+// 			put_chars(array_2d[i][k]);
+// 			k++;
+// 		}
+// 		write(1, "\n", 2);
+// 		i++;
+// 	}
+// }
 
 void	free_char_array(char **array)
 {
