@@ -17,6 +17,7 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	t_map	*minimap;
 
 	minimap = malloc(sizeof(t_map));
+	minimap->tex = malloc(sizeof(t_tex));
 	minimap->matrix = init_matrix(mlx_data->raw_map, mlx_data->map_length);
 	ft_print_2d_char_array(minimap->matrix);
 	set_player_position(minimap);

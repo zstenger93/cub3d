@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 07:56:50 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	map_checks(t_mlx_data *data, int i)
 	ft_print_2d_char_array(data->map_copy);
 	printf("\n");
 	free_char_array(data->map_copy);
+	data->map_copy = NULL;
 	return (true);
 }
 

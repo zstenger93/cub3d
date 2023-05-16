@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/12 13:09:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 07:59:13 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int	init(int argc, char **argv, t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
-	data->mlx_data = init_data();
 	if (argc == 1)
 		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
+	data->mlx_data = init_data();
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 		exit(0);
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_textures(data->mlx_data);
-	data->minimap->tex = malloc(sizeof(t_tex));
 	return (0);
 }
 

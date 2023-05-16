@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/15 20:34:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:01:46 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ typedef struct s_mlx_data
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*door;
 	int				error; // flag for input check from dfs in case the map is wrong
-	t_player		*player;
+	t_player		*player; // possible LEAK
 	mlx_texture_t	*texture;
-	char			**raw_map; // map copied from the file
+	char			**raw_map; // map copied from the file // free
 	int				f_color[3];
 	int				c_color[3];
 	int				map_length; // heigth of the map
@@ -327,5 +327,10 @@ char			put_chars(char c);
 char			*double_to_string(double num);
 void			print_map_objects(t_mlx_data *data);
 void			ft_print_2d_char_array(char **array_2d);
+
+
+
+void	free_data(t_data *data);
+
 
 #endif
