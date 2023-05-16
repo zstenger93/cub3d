@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/16 08:51:25 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/16 12:12:34 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
 NAME		= cub3D
-B_NAME		= Cub3d
+B_NAME		= Cub3D
 RM			= rm -rf
 OBJ_DIR		= objects/mandatory/
 B_OBJ_DIR	= objects/bonus/
@@ -21,8 +21,8 @@ LIBFT		= libft/libft.a
 B_SRC_DIR	= source/bonus/
 SRC_DIR		= source/mandatory/
 LIBMLX42	= MLX42/build/libmlx42.a
-CFLAGS		= -Wall -Wextra -Werror 
-# CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
+# CFLAGS		= -Wall -Wextra -Werror 
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -33,6 +33,7 @@ SOURCE		= main/cub3d \
 			  movement/move \
 			  movement/turn \
 			  init_data/init \
+			  free_data/free \
 			  input_handling/dfs \
 			  init_data/init_map \
 			  movement/move_utils \
@@ -55,6 +56,7 @@ B_SOURCE	= door/door \
 			  movement/move \
 			  movement/turn \
 			  init_data/init \
+			  free_data/free \
 			  input_handling/dfs \
 			  init_data/init_map \
 			  movement/move_utils \

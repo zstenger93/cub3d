@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:03:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 07:54:02 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:22:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	save_texture_to_data(char *file, t_mlx_data *data, char option)
 	}
 	if (option == 'S')
 	{
-		free(data->no);
+		free(data->so);
 		data->so = ft_strdup(file);
 	}
 	if (option == 'W')
 	{
-		free(data->no);
+		free(data->we);
 		data->we = ft_strdup(file);
 	}
 	if (option == 'E')
 	{
-		free(data->no);
+		free(data->ea);
 		data->ea = ft_strdup(file);
 	}
 }

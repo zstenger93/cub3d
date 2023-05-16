@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:34:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	init(int argc, char **argv, t_data *data)
 	if (argc == 1)
 		return (p_err("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
+	{
+		free_mlx_data_on_error(data->mlx_data);
 		exit(0);
+	}
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_textures(data->mlx_data, &data->minimap->fc);
 	data->minimap->tex = malloc(sizeof(t_tex));
@@ -98,20 +101,11 @@ void	init_textures(t_mlx_data *mlx_data, t_fc_tex *fc)
 	}
 }
 
-void	free_all(t_data *data)
+void	free_mlx_data_on_error(t_mlx_data *mlx_data)
 {
-	mlx_delete_texture(data->mlx_data->t_no);
-	mlx_delete_texture(data->mlx_data->t_so);
-	mlx_delete_texture(data->mlx_data->t_we);
-	mlx_delete_texture(data->mlx_data->t_ea);
-	mlx_delete_texture(data->mlx_data->door);
-	mlx_delete_texture(data->mlx_data->texture);
-	free(data->mlx_data->no);
-	free(data->mlx_data->so);
-	free(data->mlx_data->we);
-	free(data->mlx_data->ea);
-	free(data->minimap->tex);
-	free(data->mlx_data);
-	free(data->minimap->img_map);
-	free(data->minimap->img_tmp);
+	free(mlx_data->no);
+	free(mlx_data->so);
+	free(mlx_data->we);
+	free(mlx_data->ea);
+	free(mlx_data);
 }

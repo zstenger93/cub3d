@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:39:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:33:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@
 
 typedef struct s_vector
 {
-	double	y;// [8][8], y = 6, x =3
+	double	y;
 	double	x;
 }	t_vector;
 
@@ -117,15 +117,14 @@ typedef struct s_mlx_data
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*door;
-	int				error; // flag for input check from dfs in case the map is wrong
+	int				error;
 	t_player		*player; // possible LEAK
-	mlx_texture_t	*texture;
-	char			**raw_map; // map copied from the file // free
+	char			**raw_map; // free
 	int				f_color[3];
 	int				c_color[3];
-	int				map_length; // heigth of the map
-	char			**map_copy; // raw map copy for dfs
-	int				reading_pos; // actual map reading starts from here
+	int				map_length;
+	char			**map_copy;
+	int				reading_pos;
 }	t_mlx_data;
 
 typedef struct s_tex
@@ -255,6 +254,7 @@ void			get_map_length(int fd, char *map_file, t_mlx_data *data);
 // INPUT UTILS
 int				it_can_be_opened(char *file);
 char			*copy_map_line(char *content);
+void			free_mlx_data_on_error(t_mlx_data *mlx_data);
 
 // INIT MAP
 double			get_angle(char c);
@@ -345,6 +345,6 @@ char			*ft_strdup2(char *str, int start, int end);
 // void			print_map_objects(t_mlx_data *data);
 // void			ft_print_2d_char_array(char **array_2d);
 
-void	free_data(t_data *data);
+void			free_data(t_data *data);
 
 #endif

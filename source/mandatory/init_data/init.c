@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:56:05 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:33:17 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	init(int argc, char **argv, t_data *data)
 	if (argc == 1)
 		return (p_err("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
+	{
+		free_mlx_data_on_error(data->mlx_data);
 		exit(0);
+	}
 	data->minimap = init_map(data->mlx_data, data->mlx);
 	init_m_textures(data->mlx_data);
 	if (data->minimap->tex == NULL)
@@ -60,4 +63,13 @@ void	init_m_textures(t_mlx_data *mlx_data)
 	mlx_data->t_so = mlx_load_png(mlx_data->so);
 	mlx_data->t_we = mlx_load_png(mlx_data->we);
 	mlx_data->t_ea = mlx_load_png(mlx_data->ea);
+}
+
+void	free_mlx_data_on_error(t_mlx_data *mlx_data)
+{
+	free(mlx_data->no);
+	free(mlx_data->so);
+	free(mlx_data->we);
+	free(mlx_data->ea);
+	free(mlx_data);
 }

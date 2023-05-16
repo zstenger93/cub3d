@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:37:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:20:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	is_escape(t_data *data)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 	{
 		system("pkill afplay &");
+		free_data(data);
+		system("leaks cub3D");
 		exit(0);
 	}
 }
