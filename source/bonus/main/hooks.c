@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 18:12:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 09:51:55 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	hodor(mlx_key_data_t keydata, void *param)
 
 void	steps(mlx_key_data_t keydata, t_data *data)
 {
-	static int	i;
+	static int	i = 0;
 
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS
 		|| keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS

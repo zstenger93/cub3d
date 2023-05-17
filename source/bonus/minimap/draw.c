@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:14 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 17:27:42 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:50:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	draw(t_map *map, t_mlx_data *mlx_data, t_vector *p, int i)
 {
 	draw_floor_and_ceiling(map);
-	draw_map(map, mlx_data);
 	if (map->draw_minimap == true)
 		visible_map(map, mlx_data, p, i);
 	else
 		invisible_map(map, mlx_data, p, i);
+	draw_map(map, mlx_data);
 	if (map->has_key == false)
 	{
 		calculate_sprite_attributes(map, &map->sprite);

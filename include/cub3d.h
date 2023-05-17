@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 08:11:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:47:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,5 +346,7 @@ char			*ft_strdup2(char *str, int start, int end);
 // char			put_chars(char c);
 // void			print_map_objects(t_mlx_data *data);
 // void			ft_print_2d_char_array(char **array_2d);
+
+void	draw_rays_on_minimap(t_map *map);
 
 #endif

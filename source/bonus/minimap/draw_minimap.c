@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/16 17:09:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:54:52 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i)
 		map->x = -1;
 		while (++map->x < MINIMAP_SIZE)
 		{
-			put_pixels_on_minimap(map, i, k, p);
+			put_pixels_on_minimap(map, i - 1, k - 1, p);
 			if (map->x % R == 0)
 				k++;
 		}
@@ -94,8 +94,8 @@ void	draw_rays(t_map *minimap)
 	while (i < 80)
 	{
 		mlx_put_pixel(minimap->img_map,
-			MINIMAP_SIZE / 2 + x,
-			MINIMAP_SIZE / 2 + y,
+			(int)(MINIMAP_SIZE / 2 + x),
+			(int)(MINIMAP_SIZE / 2 + y),
 			rgb(0, 0, minimap->op_max, minimap->op_max));
 		y += tmp_y;
 		x += tmp_x;
