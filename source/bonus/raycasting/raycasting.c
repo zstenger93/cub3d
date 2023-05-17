@@ -3,59 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 12:25:09 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:07:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-void	draw_rays_on_minimap(t_map *map)
-{
-	double	wall_x;
-	double	wall_y;
-	double	distance_delta;
-	double	delta_x;
-	double	delta_y;
-	int		pix_x;
-	int		pix_y;
-
-	if (map->matrix[(int)map->map_y][(int)map->map_x] > '0'
-			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd'
-			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'K')
-	{
-		wall_y = map->map_y;
-		wall_x = map->map_x;
-		printf("%f:%f\n", wall_y, wall_x);
-	}
-	else
-		return ;
-	pix_x = MINIMAP_SIZE / 2;
-	pix_y = MINIMAP_SIZE / 2;
-
-	delta_x = fabs(map->player.pos.x - wall_x);
-	delta_y = fabs(map->player.pos.y - wall_y);
-
-	distance_delta = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
-	
-	delta_x /= distance_delta;
-	delta_y /= distance_delta;
-	printf("\t\t%f\t%f:%f\n",distance_delta, delta_y, delta_x);
-	// printf("%f:    %f x %f\n", distance_delta, MINIMAP_SIZE / 2 + wall_y * 20, MINIMAP_SIZE / 2 + wall_x * 20);
-	while (distance_delta > 0.0)
-	{
-		// pix_x += (wall_x)
-		// if (MINIMAP_SIZE < MINIMAP_SIZE / 2 + wall_x * 20
-		// 	&& MINIMAP_SIZE < MINIMAP_SIZE / 2 + wall_y * 20)
-			mlx_put_pixel(map->img_map, 
-					MINIMAP_SIZE / 2 + (delta_x + distance_delta) * 10,
-					MINIMAP_SIZE / 2 + (delta_y + distance_delta) * 10, 
-					rgb(0, 200, 0, map->op_max));
-		distance_delta -= 0.05;
-	}
-}
 
 // void	draw_rays_on_minimap(t_map *map)
 // {
@@ -69,15 +24,15 @@ void	draw_rays_on_minimap(t_map *map)
 
 // 	pix_x = MINIMAP_SIZE/2;
 // 	pix_y = MINIMAP_SIZE/2;
-// 	pix1_x = (MINIMAP_SIZE/2 + ((int)map->player.pos.x - (int)map->ray.side_dist.x)) * 20 - 30;
-// 	pix1_y = (MINIMAP_SIZE/2 + ((int)map->player.pos.y - (int)map->ray.side_dist.y)) * 20 - 30;
-// 	delta_x = pix1_x - pix_x;
-// 	delta_y = pix1_y - pix_y;
-// 	len = sqrt(pow(delta_x, 2) - pow(delta_y, 2));
+// 	pix1_x = (MINIMAP_SIZE/2 + (map->player.pos.x - map->ray.side_dist.x)) * 20 - 30;
+// 	pix1_y = (MINIMAP_SIZE/2 + (map->player.pos.y - map->ray.side_dist.y)) * 20 - 30;
+// 	delta_x = pix1_x + pix_x;
+// 	delta_y = pix1_y + pix_y;
+// 	len = map->tex->d_start;
 // 	delta_x /= len;
 // 	delta_y /= len;
 
-// 	while (len > 0)
+// 	while (len > 0.0)
 // 	{
 // 		if (pix_x < MINIMAP_SIZE && pix_y < MINIMAP_SIZE
 // 			&& pix_x > 0 && pix_y > 0)
@@ -87,7 +42,7 @@ void	draw_rays_on_minimap(t_map *map)
 // 		}
 // 		pix_x += delta_x;
 // 		pix_y += delta_y;
-// 		len--;
+// 		len -= 0.05;
 // 	}	
 // }
 
@@ -116,8 +71,8 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 			m->ray.delta_dist.y = fabs(1 / m->ray.dir.y);
 		calculate_the_direction_of_the_ray(m, i);
 		cast_the_ray_until_hits_the_wall(m, m->hit);
-		draw_rays_on_minimap(m);
 		print_textures(m, i, mlx_data);
+		// draw_rays_on_minimap(m);
 	}
 }
 
@@ -182,7 +137,7 @@ void	calculate_the_direction_of_the_ray(t_map *map, int i)
 
 void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 {
-	while (hit == 0)
+	while (map->hit == 0)
 	{
 		if (map->ray.side_dist.x < map->ray.side_dist.y)
 		{
@@ -199,7 +154,7 @@ void	cast_the_ray_until_hits_the_wall(t_map *map, int hit)
 		if (map->matrix[(int)map->map_y][(int)map->map_x] > '0'
 			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd'
 			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'K')
-			hit = 1;
+			map->hit = 1;
 	}
 	if (map->side == 0)
 		map->ray.wall_dist = map->ray.side_dist.x - map->ray.delta_dist.x;
