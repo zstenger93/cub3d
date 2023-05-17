@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 12:04:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:25:09 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,46 @@
 
 void	draw_rays_on_minimap(t_map *map)
 {
-	double	distance_x;
-	double	distance_y;
+	double	wall_x;
+	double	wall_y;
 	double	distance_delta;
 	double	delta_x;
 	double	delta_y;
+	int		pix_x;
+	int		pix_y;
 
 	if (map->matrix[(int)map->map_y][(int)map->map_x] > '0'
 			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'd'
 			&& map->matrix[(int)map->map_y][(int)map->map_x] != 'K')
 	{
-		distance_y = map->map_y;
-		distance_x = map->map_x;
-	printf("%f:%f\n", distance_y, distance_x);
-
+		wall_y = map->map_y;
+		wall_x = map->map_x;
+		printf("%f:%f\n", wall_y, wall_x);
 	}
 	else
 		return ;
-	
+	pix_x = MINIMAP_SIZE / 2;
+	pix_y = MINIMAP_SIZE / 2;
 
-
-	delta_x = fabs(map->player.pos.x + distance_x);
-	delta_y = fabs(map->player.pos.y + distance_y);
+	delta_x = fabs(map->player.pos.x - wall_x);
+	delta_y = fabs(map->player.pos.y - wall_y);
 
 	distance_delta = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
 	
-	distance_x /= distance_delta;
-	distance_y /= distance_delta;
-
-	// printf("%f:    %f x %f\n", distance_delta, MINIMAP_SIZE / 2 + distance_y * 20, MINIMAP_SIZE / 2 + distance_x * 20);
-	// while (distance_x > 0.0 &&  distance_y > 0.0 && distance_delta > 0.0)
+	delta_x /= distance_delta;
+	delta_y /= distance_delta;
+	printf("\t\t%f\t%f:%f\n",distance_delta, delta_y, delta_x);
+	// printf("%f:    %f x %f\n", distance_delta, MINIMAP_SIZE / 2 + wall_y * 20, MINIMAP_SIZE / 2 + wall_x * 20);
 	while (distance_delta > 0.0)
 	{
-		// if (MINIMAP_SIZE < MINIMAP_SIZE / 2 + distance_x * 20
-		// 	&& MINIMAP_SIZE < MINIMAP_SIZE / 2 + distance_y * 20)
+		// pix_x += (wall_x)
+		// if (MINIMAP_SIZE < MINIMAP_SIZE / 2 + wall_x * 20
+		// 	&& MINIMAP_SIZE < MINIMAP_SIZE / 2 + wall_y * 20)
 			mlx_put_pixel(map->img_map, 
-					MINIMAP_SIZE / 2 - (distance_x + distance_delta) * 2,
-					MINIMAP_SIZE / 2 - (distance_y + distance_delta) * 2, 
+					MINIMAP_SIZE / 2 + (delta_x + distance_delta) * 10,
+					MINIMAP_SIZE / 2 + (delta_y + distance_delta) * 10, 
 					rgb(0, 200, 0, map->op_max));
 		distance_delta -= 0.05;
-
-
-		
-		// distance_x -= 0.05;
-		// distance_y -= 0.05;
 	}
 }
 
