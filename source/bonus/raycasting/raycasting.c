@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 12:01:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:04:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void	draw_rays_on_minimap(t_map *map)
 					MINIMAP_SIZE / 2 - (distance_y + distance_delta) * 2, 
 					rgb(0, 200, 0, map->op_max));
 		distance_delta -= 0.05;
+
+
+		
 		// distance_x -= 0.05;
 		// distance_y -= 0.05;
 	}
