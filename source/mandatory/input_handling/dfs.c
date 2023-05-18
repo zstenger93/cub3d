@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:54 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:08:25 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:27:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	dfs(char **map, int y, int x, t_mlx_data *data)
 {
+	if (data->error == true)
+		return ;
 	if (data->map_copy[y][x] == ' ' || data->map_copy[y][x] == '\n')
 		return (set_map_error(data));
 	if (y < 0 || x < 0)

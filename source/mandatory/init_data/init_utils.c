@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:06:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:37:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:05:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ double	get_angle(char c)
 	if (c == 'S')
 		return (M_PI_2);
 	if (c == 'W')
-		return (0);
+		return (M_PI);
 	if (c == 'N')
 		return (M_PI + M_PI_2);
 	return (M_PI * 2);
@@ -71,7 +71,7 @@ void	set_plan(t_vector *plane, char c)
 	}
 	if (c == 'W')
 	{
-		plane->y = -1;
+		plane->y = 1;
 		plane->x = 0;
 	}
 	if (c == 'E')

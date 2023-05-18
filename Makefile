@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/18 11:19:11 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/18 14:06:05 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ SRC_DIR		= source/mandatory/
 OBJ_DIR		= objects/mandatory/
 CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
-# CFLAGS		= -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+# CFLAGS		= -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++
 
 SOURCE		= main/cub3d \
 			  main/utils \
@@ -103,31 +103,31 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
-	$(CC) $(CFLAGS) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
-# @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
-# @echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
-# @echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
-# @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
-# @echo "           ░   ░            ░     ░"
+	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	@echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	@echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	@echo "           ░   ░            ░     ░"
 
 $(B_NAME): $(LIBFT) $(LIBMLX42) $(B_OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
-# @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
-# @echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
-# @echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
-# @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
-# @echo "           ░   ░            ░     ░"
+	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	@echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	@echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	@echo "           ░   ░            ░     ░"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(@D)
@@ -142,7 +142,7 @@ clean:
 	@$(RM) objects
 	@make clean -C libft
 ifneq (,$(wildcard ./MLX42/build))
-	# @make clean -C ./MLX42/build/_deps/glfw-build
+	@make clean -C ./MLX42/build/_deps/glfw-build
 	@make clean -C ./MLX42/build
 else
 	
@@ -213,5 +213,3 @@ YELLOW		= \033[1;33m
 PURPLE		= \033[1;35m
 BWhite		= \033[1;37m
 CYAN2		= \x1B[1;36m
-
-# MLX42/TOOLS/CMAKELISTS.TXT line 129 CHANGE AND TO OR

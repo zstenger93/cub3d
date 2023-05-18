@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 09:15:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:29:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	map_checks(t_mlx_data *data, int i)
 	dfs(data->map_copy, y, x, data);
 	free_char_array(data->map_copy);
 	data->map_copy = NULL;
+	if (data->error == true)
+		return (false);
 	return (true);
 }
 
