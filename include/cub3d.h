@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 08:21:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:17:48 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ void			get_map_length(int fd, char *map_file, t_mlx_data *data);
 // INPUT UTILS
 int				it_can_be_opened(char *file);
 char			*copy_map_line(char *content);
-void			free_mlx_data_on_error(t_mlx_data *mlx_data);
+void			free_mlx_data_on_error(t_mlx_data *mlx_data, t_data *data);
 
 // INIT MAP
 double			get_angle(char c);

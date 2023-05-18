@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/18 14:06:05 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/18 15:29:32 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,10 +80,8 @@ B_SRC		= $(addprefix $(B_SRC_DIR), $(addsuffix .c, $(B_SOURCE)))
 B_OBJ		= $(addprefix $(B_OBJ_DIR), $(addsuffix .o, $(B_SOURCE)))
 
 all: $(NAME)
-	make run
 
 bonus: $(B_NAME)
-	make brun
 
 $(LIBMLX42):
 	@if [ -d ./MLX42/glfw_lib ]; \

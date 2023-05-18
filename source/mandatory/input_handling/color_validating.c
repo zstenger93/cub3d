@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_validating.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 09:15:28 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:20:44 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	validate_color(char *line, t_mlx_data *data)
 		if (valid_rgb(rgb) == true)
 			save_color_to_data(rgb, data, 'F');
 		else
-			return (false);
+			return (free_char_array(rgb), false);
 	}
 	if (line[0] == 'C')
 	{
@@ -34,7 +34,7 @@ int	validate_color(char *line, t_mlx_data *data)
 		if (valid_rgb(rgb) == true)
 			save_color_to_data(rgb, data, 'C');
 		else
-			return (false);
+			return (free_char_array(rgb), false);
 	}
 	return (true);
 }
