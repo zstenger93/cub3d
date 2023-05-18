@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 12:26:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:31:41 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	is_escape(t_data *data)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 	{
 		free_data(data);
-		system("pkill afplay &");
 		exit(0);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:04:44 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 11:16:47 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:48:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_map(t_data *data, t_map *map)
 
 void	free_data(t_data *data)
 {
+	system("pkill afplay &");
 	free_map(data, data->minimap);
 	free_mlx_data(data, data->mlx_data);
 	mlx_terminate(data->mlx);

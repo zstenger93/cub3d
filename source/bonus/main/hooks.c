@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 08:51:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 20:54:30 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void	mouse_rotate(void *param)
 		turn_right(data, player);
 	else if (data->mouse_x < last_m_x)
 		turn_left(data, player);
-	if (data->mouse_x > 2555)
-		data->mouse_x = 5;
-	else if (data->mouse_x < 5)
-		data->mouse_x = 2555;
 }
 
 void	hodor(mlx_key_data_t keydata, void *param)

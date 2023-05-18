@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 14:17:48 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:49:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,11 @@
 
 // SPEED TO MOVE
 # define FAST 0.20
-# define NORMAL 0.09
+# define NORMAL 0.11
 
 // SPEED TO TURN WITH
 # define FAST_SPEED 0.14
-# define NORMAL_SPEED 0.07
-
-// CHANGE BRIGHTNESS
-# define BRIGHT 1
-# define FOG 0.05
+# define NORMAL_SPEED 0.08
 
 typedef struct s_vector
 {

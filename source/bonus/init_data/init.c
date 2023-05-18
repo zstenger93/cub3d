@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 15:08:56 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:50:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init(int argc, char **argv, t_data *data)
 	if (data->minimap->tex == NULL)
 		return (p_err(MALLOC_FAIL), 1);
 	init_spirite_position(data->minimap);
+	system("afplay ./resource/background.mp3 &");
 	return (0);
 }
 
@@ -103,6 +104,7 @@ void	init_textures(t_mlx_data *mlx_data, t_fc_tex *fc)
 
 void	free_mlx_data_on_error(t_mlx_data *mlx_data, t_data *data)
 {
+	system("pkill afplay &");
 	free(mlx_data->no);
 	free(mlx_data->so);
 	free(mlx_data->we);

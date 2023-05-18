@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:06:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 14:05:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:51:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	set_plan(t_vector *plane, char c)
 	}
 	if (c == 'W')
 	{
-		plane->y = 1;
+		plane->y = -1;
 		plane->x = 0;
 	}
 	if (c == 'E')
