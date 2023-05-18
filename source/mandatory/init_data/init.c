@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:24:20 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:17:32 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init(int argc, char **argv, t_data *data)
 		return (p_err("%s%s", TMA, HOW_TO_LAUNCH), false);
 	if (input_check(argc, argv[1], data->mlx_data) == false)
 	{
-		free_mlx_data_on_error(data->mlx_data);
+		free_mlx_data_on_error(data->mlx_data, data);
 		exit(0);
 	}
 	data->minimap = init_map(data->mlx_data, data->mlx);
@@ -65,11 +65,12 @@ void	init_m_textures(t_mlx_data *mlx_data)
 	mlx_data->t_ea = mlx_load_png(mlx_data->ea);
 }
 
-void	free_mlx_data_on_error(t_mlx_data *mlx_data)
+void	free_mlx_data_on_error(t_mlx_data *mlx_data, t_data *data)
 {
 	free(mlx_data->no);
 	free(mlx_data->so);
 	free(mlx_data->we);
 	free(mlx_data->ea);
 	free(mlx_data);
+	mlx_terminate(data->mlx);
 }

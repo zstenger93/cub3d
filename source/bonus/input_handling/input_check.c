@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 09:18:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:43:52 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int	map_checks(t_mlx_data *data, int i)
 	get_player_pos(data->map_copy, &y, &x);
 	dfs(data->map_copy, y, x, data);
 	free_char_array(data->map_copy);
+	if (data->error == true)
+	{
+		free_char_array(data->raw_map);
+		return (false);
+	}
 	data->map_copy = NULL;
 	return (true);
 }
