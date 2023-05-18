@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 15:14:37 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:26:03 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	contains_valid_objects(char *line, t_mlx_data *data)
 {
 	if (invalid_attribute(line) == true)
-		return(false);
+		return (false);
 	if (is_duplicate(line, data) == true)
-		return(false);
+		return (false);
 	if (ft_strncmp(line, "NO .", 4) == 0
 		|| ft_strncmp(line, "SO .", 4) == 0
 		|| ft_strncmp(line, "WE .", 4) == 0

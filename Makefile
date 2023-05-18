@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/18 14:14:46 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/18 15:28:19 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ B_SRC_DIR	= source/bonus/
 B_OBJ_DIR	= objects/bonus/
 SRC_DIR		= source/mandatory/
 OBJ_DIR		= objects/mandatory/
-# CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
-CFLAGS		= -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++
+# CFLAGS		= -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -80,22 +80,20 @@ B_SRC		= $(addprefix $(B_SRC_DIR), $(addsuffix .c, $(B_SOURCE)))
 B_OBJ		= $(addprefix $(B_OBJ_DIR), $(addsuffix .o, $(B_SOURCE)))
 
 all: $(NAME)
-	make run
 
 bonus: $(B_NAME)
-	make brun
 
-# $(LIBMLX42):
-# 	@if [ -d ./MLX42/glfw_lib ]; \
-#     then echo "glfw3 already Exists"; \
-#     else \
-# 	echo "Creating Makefiles." && \
-# 	sleep 1 && \
-# 	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
-# 	echo "Building glfw3 and MLX42." && \
-# 	sleep 1; \
-# 	make -C MLX42/build; \
-# 	fi
+$(LIBMLX42):
+	@if [ -d ./MLX42/glfw_lib ]; \
+    then echo "glfw3 already Exists"; \
+    else \
+	echo "Creating Makefiles." && \
+	sleep 1 && \
+	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
+	echo "Building glfw3 and MLX42." && \
+	sleep 1; \
+	make -C MLX42/build; \
+	fi
 
 $(LIBFT):
 	@git submodule update --init --recursive --remote
@@ -105,29 +103,29 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
-# @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
-# @echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
-# @echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
-# @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
-# @echo "           ░   ░            ░     ░"
+	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	@echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	@echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	@echo "           ░   ░            ░     ░"
 
 $(B_NAME): $(LIBFT) $(LIBMLX42) $(B_OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
-# @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
-# @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
-# @echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
-# @echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
-# @echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
-# @echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
-# @echo "           ░   ░            ░     ░"
+	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo " █▓░░░░░░░░██▒░░▒██░░█████▒░░░▒███░░██▒░░▒██"
+	@echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
+	@echo "   ▓███▓░ ░░██████░░░█████▒░▒█████░░██████"
+	@echo "   ▒▓▒░ ░  ░░▒▓▓▒░░ ░▒▓▒ ░░░▒▓▓▓▓▒░░▒▓▓▒▒"
+	@echo "   ░░     ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "    ░      ░░  ░░      ░   ░░     ░░   ░"
+	@echo "           ░   ░            ░     ░"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(@D)
@@ -140,20 +138,20 @@ $(B_OBJ_DIR)%.o : $(B_SRC_DIR)%.c
 clean:
 	@echo "Cleaning object files."
 	@$(RM) objects
-# 	@make clean -C libft
-# ifneq (,$(wildcard ./MLX42/build))
-# 	# @make clean -C ./MLX42/build/_deps/glfw-build
-# 	@make clean -C ./MLX42/build
-# else
+	@make clean -C libft
+ifneq (,$(wildcard ./MLX42/build))
+	@make clean -C ./MLX42/build/_deps/glfw-build
+	@make clean -C ./MLX42/build
+else
 	
-# endif
+endif
 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
-# @make fclean -C libft
-# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	@make fclean -C libft
+	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
 
 re:
@@ -213,5 +211,3 @@ YELLOW		= \033[1;33m
 PURPLE		= \033[1;35m
 BWhite		= \033[1;37m
 CYAN2		= \x1B[1;36m
-
-# MLX42/TOOLS/CMAKELISTS.TXT line 129 CHANGE AND TO OR
