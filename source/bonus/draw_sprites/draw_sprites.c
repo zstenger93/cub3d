@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:16:16 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/15 17:07:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:41:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	calculate_sprite_attributes(t_map *map, t_sprite *sprite)
 		sprite->draw_end.x = WIDTH;
 }
 
+// setting sprite attributes first part
 void	love_norm(t_map *map, t_sprite *sprite)
 {
 	sprite->distance = ((map->player.pos.x - sprite->pos.x)
@@ -52,6 +53,7 @@ void	love_norm(t_map *map, t_sprite *sprite)
 	sprite->size.x = fabs((HEIGHT / sprite->transform_y)) / UDIV;
 }
 
+// speed of the key sprite it's spinning with
 void	set_fps_counter(t_sprite *sprite)
 {
 	sprite->fps++;

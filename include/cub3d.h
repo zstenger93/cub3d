@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 10:47:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:21:11 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@
 # define MISSING_ATTRIBUTES "Error! Attributes are missing form the map.\n"
 # define DUPLICATE "Error! Duplicates found on the map for the attributes.\n"
 # define WRONG_EXTENSION "Map file has wrong format. It needs .cub format.\n"
-
-// MISC
-# define TOGGLE_MINIMAP "M"
-# define SPACES " \t\n\v\r\f"
 
 // MOVING THE SPRITE ON THE MAP AND SCALE IT
 # define UDIV 2
@@ -346,7 +342,5 @@ char			*ft_strdup2(char *str, int start, int end);
 // char			put_chars(char c);
 // void			print_map_objects(t_mlx_data *data);
 // void			ft_print_2d_char_array(char **array_2d);
-
-void	draw_rays_on_minimap(t_map *map);
 
 #endif

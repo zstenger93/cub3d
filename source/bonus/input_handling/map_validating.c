@@ -6,14 +6,12 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:00:50 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 09:31:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:47:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-// do check player duplicates / no player
-// check invalid char on the lines
 int	map_validathor(char *map_file, t_mlx_data *data, int fd)
 {
 	int			i;

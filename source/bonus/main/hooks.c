@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 09:51:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:51:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	add_hooks(t_data *data)
 	mlx_key_hook(data->mlx, &hodor, data);
 }
 
-	// float distance = m_x - last_m_x;
-	// float time = 0.016f;
-	// float speed = distance / time;
-	// m_x = (float)data->mouse_x;
-	// float		m_x;
 void	mouse_rotate(void *param)
 {
 	t_data		*data;

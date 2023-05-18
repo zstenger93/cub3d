@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:40:08 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:14:13 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	is_escape(t_data *data)
 	{
 		system("pkill afplay &");
 		free_data(data);
-		system("leaks cub3D");
 		exit(0);
 	}
 }

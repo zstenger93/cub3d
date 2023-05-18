@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:17:08 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 10:39:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:16:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*ft_strdup2(char *str, int start, int end)
 	return (result);
 }
 
-// checking the amount of commas in the rgb list
 int	commacounter(char *line)
 {
 	int	i;

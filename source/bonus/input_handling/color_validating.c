@@ -6,17 +6,12 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:24 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 08:26:40 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:45:09 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-// trim off the start
-// get array of numbers
-// check the rgb range
-// save it to struct
-// check between numbers. DONE
 int	validate_color(char *line, t_mlx_data *data)
 {
 	char	*trimmed_line;

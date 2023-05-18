@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:30:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/14 17:02:16 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:16:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ void	add_hooks(t_data *data)
 	mlx_loop_hook(data->mlx, &mouse_rotate, data);
 }
 
-	// float distance = m_x - last_m_x;
-	// float time = 0.016f;
-	// float speed = distance / time;
-	// m_x = (float)data->mouse_x;
-	// float		m_x;
 void	mouse_rotate(void *param)
 {
 	t_data		*data;

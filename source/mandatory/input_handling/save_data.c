@@ -6,13 +6,12 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:03:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:52:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:16:06 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-// save the path to the textures
 void	save_texture_to_data(char *file, t_mlx_data *data, char option)
 {
 	if (option == 'N')
@@ -38,7 +37,6 @@ void	save_texture_to_data(char *file, t_mlx_data *data, char option)
 	free(file);
 }
 
-// save the rgb colors as int
 void	save_color_to_data(char **rgb, t_mlx_data *data, char option)
 {
 	if (option == 'F')

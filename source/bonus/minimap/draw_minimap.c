@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 14:58:04 by jergashe          #+#    #+#             */
-/*   Updated: 2023/05/17 17:57:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:57:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 {
 	if (m->matrix[(int)p->y + i][(int)p->x + k] == '1'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(230, 0, 0, m->op_mid));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(150, 75, 0, m->op_mid));
 	else if (m->matrix[(int)p->y + i][(int)p->x + k] == '0'
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
 		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, m->op_mid));
@@ -55,7 +55,7 @@ void	put_pixels_on_minimap(t_map *m, int i, int k, t_vector *p)
 		|| (m->x % R == (int)m->player.pos.x - (int)m->player.pos.x * 10))
 		mlx_put_pixel(m->img_map, m->x, m->y, rgb(145, 145, 145, m->op_mid));
 	else
-		mlx_put_pixel(m->img_map, m->x, m->y, rgb(160, 190, 150, m->op_mid));
+		mlx_put_pixel(m->img_map, m->x, m->y, rgb(85, 85, 85, m->op_mid));
 }
 
 void	draw_minimap(t_map *map, t_mlx_data *mlx_d, t_vector *p, int i)

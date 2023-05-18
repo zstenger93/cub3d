@@ -6,15 +6,12 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:59:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:44:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:18:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-// printf("working\n");
-// checking .cub format
-//check the file content		
 int	input_check(int argc, char *argv, t_mlx_data *data)
 {
 	int	i;
@@ -33,8 +30,6 @@ int	input_check(int argc, char *argv, t_mlx_data *data)
 	return (true);
 }
 
-// check the textures and colors
-// check errors on the map
 int	validate_content(char *map_file, t_mlx_data *data)
 {
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 12:05:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:13:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	add_hooks(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
+	free_data(&data);
 	system("pkill afplay &");
 	exit(0);
 }

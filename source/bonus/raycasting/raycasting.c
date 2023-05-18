@@ -6,45 +6,11 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:15:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/17 18:07:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 08:18:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-// void	draw_rays_on_minimap(t_map *map)
-// {
-// 	double	pix_x;
-// 	double	pix_y;
-// 	double	pix1_x;
-// 	double	pix1_y;
-// 	double	delta_x;
-// 	double	delta_y;
-// 	double	len;
-
-// 	pix_x = MINIMAP_SIZE/2;
-// 	pix_y = MINIMAP_SIZE/2;
-// 	pix1_x = (MINIMAP_SIZE/2 + (map->player.pos.x - map->ray.side_dist.x)) * 20 - 30;
-// 	pix1_y = (MINIMAP_SIZE/2 + (map->player.pos.y - map->ray.side_dist.y)) * 20 - 30;
-// 	delta_x = pix1_x + pix_x;
-// 	delta_y = pix1_y + pix_y;
-// 	len = map->tex->d_start;
-// 	delta_x /= len;
-// 	delta_y /= len;
-
-// 	while (len > 0.0)
-// 	{
-// 		if (pix_x < MINIMAP_SIZE && pix_y < MINIMAP_SIZE
-// 			&& pix_x > 0 && pix_y > 0)
-// 		{
-// 			// printf("%f:%f\n", pix_y, pix_x);
-// 			mlx_put_pixel(map->img_map, pix_x, pix_y, rgb(0, 200, 0, map->op_max));
-// 		}
-// 		pix_x += delta_x;
-// 		pix_y += delta_y;
-// 		len -= 0.05;
-// 	}	
-// }
 
 	// empty_map(m->img_tmp, mlx_data);
 		// print_vertical_lines(m, i);
@@ -72,7 +38,6 @@ void	draw_map(t_map *m, t_mlx_data *mlx_data)
 		calculate_the_direction_of_the_ray(m, i);
 		cast_the_ray_until_hits_the_wall(m, m->hit);
 		print_textures(m, i, mlx_data);
-		// draw_rays_on_minimap(m);
 	}
 }
 

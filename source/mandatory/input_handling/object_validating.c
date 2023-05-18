@@ -6,13 +6,12 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:02:55 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:53:06 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 09:15:59 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-//check duplicates. DONE
 int	contains_valid_objects(char *line, t_mlx_data *data)
 {
 	if (invalid_attribute(line) == true)
