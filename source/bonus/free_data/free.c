@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:04:44 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:47:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:16:47 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	free_data(t_data *data)
 {
 	free_map(data, data->minimap);
 	free_mlx_data(data, data->mlx_data);
+	mlx_terminate(data->mlx);
 }

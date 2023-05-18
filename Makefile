@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/17 12:18:44 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/18 11:19:11 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC_DIR		= source/mandatory/
 OBJ_DIR		= objects/mandatory/
 CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
+# CFLAGS		= -Wno-gnu-include-next -I/LeakSanitizer/include -L./LeakSanitizer/ -llsan -lc++
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -85,17 +85,17 @@ all: $(NAME)
 bonus: $(B_NAME)
 	make brun
 
-# $(LIBMLX42):
-# 	@if [ -d ./MLX42/glfw_lib ]; \
-#     then echo "glfw3 already Exists"; \
-#     else \
-# 	echo "Creating Makefiles." && \
-# 	sleep 1 && \
-# 	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
-# 	echo "Building glfw3 and MLX42." && \
-# 	sleep 1; \
-# 	make -C MLX42/build; \
-# 	fi
+$(LIBMLX42):
+	@if [ -d ./MLX42/glfw_lib ]; \
+    then echo "glfw3 already Exists"; \
+    else \
+	echo "Creating Makefiles." && \
+	sleep 1 && \
+	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
+	echo "Building glfw3 and MLX42." && \
+	sleep 1; \
+	make -C MLX42/build; \
+	fi
 
 $(LIBFT):
 	@git submodule update --init --recursive --remote
@@ -103,7 +103,7 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
-	@$(CC) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
 # @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
 # @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
@@ -117,7 +117,7 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 
 $(B_NAME): $(LIBFT) $(LIBMLX42) $(B_OBJ)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
-	@$(CC) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
 # @echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
 # @echo " ▓██▓░▒██░░██▒░░▒██░░██▒░▒█░░░░▒██░░██▒░▒██"
@@ -140,20 +140,20 @@ $(B_OBJ_DIR)%.o : $(B_SRC_DIR)%.c
 clean:
 	@echo "Cleaning object files."
 	@$(RM) objects
-# 	@make clean -C libft
-# ifneq (,$(wildcard ./MLX42/build))
-# 	# @make clean -C ./MLX42/build/_deps/glfw-build
-# 	@make clean -C ./MLX42/build
-# else
+	@make clean -C libft
+ifneq (,$(wildcard ./MLX42/build))
+	# @make clean -C ./MLX42/build/_deps/glfw-build
+	@make clean -C ./MLX42/build
+else
 	
-# endif
+endif
 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
-# @make fclean -C libft
-# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	@make fclean -C libft
+	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
 
 re:

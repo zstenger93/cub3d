@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 09:13:40 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:16:37 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
 	add_hooks(&data);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
 	free_data(&data);
 	system("pkill afplay &");
 	exit(0);
