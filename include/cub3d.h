@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:28 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 19:49:25 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:55:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 // ERROR MESSAGES
-# define TMA "Wrong number of arguments.\n"
 # define MALLOC_FAIL "Error! Malloc failed.\n"
-# define RGB_IS "The RGB color is out of range, "
 # define BAD_DOOR "Error! Png for door is bad.\n"
+# define TMA "Error! Wrong number of arguments.\n"
 # define INVALID_MAP "Error! The map is invalid.\n"
 # define BAD_FLOOR "Error! Png for floor is bad.\n"
 # define BAD_CEILING "Error! Png for ceiling is bad.\n"
+# define RGB_IS "Error! The RGB color is out of range, "
 # define CANNOT_OPEN "Error! This map cannot be opened.\n"
 # define BAD_KEY_PIC "Error! Png for key animation is bad.\n"
 # define MISSING_PLAYER "Error! No players found on the map.\n"
 # define OUT_OF_RANGE "all numbers must be between 0 and 255.\n"
 # define RGB_DUPLICATE "Error! To many rgb values on the map.\n"
 # define TOO_MANY_PLAYERS "Error! Too many players on the map.\n"
+# define NOA "Error! No arguments arguments, please add a map.\n"
 # define INVALID_CHAR "Error! Map has at least one invalid char: "
 # define PLAYER_DUPLICATE "Error! Player duplicates on the map.\n"
 # define HOW_TO_LAUNCH "Please launch it as ./cub3d path/to/map.\n"
@@ -44,8 +45,8 @@
 # define TEX_FILE_WRONG "Error! The %s texture file cannot be opened.\n"
 # define DFS_ERROR "Error! The DFS algorithm found a problem on the map.\n"
 # define MISSING_ATTRIBUTES "Error! Attributes are missing form the map.\n"
+# define WRONG_EXTENSION "Error! Map file is wrong. It needs .cub format.\n"
 # define DUPLICATE "Error! Duplicates found on the map for the attributes.\n"
-# define WRONG_EXTENSION "Map file has wrong format. It needs .cub format.\n"
 
 // MOVING THE SPRITE ON THE MAP AND SCALE IT
 # define UDIV 2
