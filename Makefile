@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
+#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/19 07:30:52 by jergashe         ###   ########.fr        #
+#    Updated: 2023/05/19 11:04:33 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ B_SRC_DIR	= source/bonus/
 B_OBJ_DIR	= objects/bonus/
 SRC_DIR		= source/mandatory/
 OBJ_DIR		= objects/mandatory/
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror
 LIBMLX42	= MLX42/build/libmlx42.a
 GLFW3		= MLX42/build/_deps/glfw-build/src/libglfw3.a
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit

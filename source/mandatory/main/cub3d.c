@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/19 06:56:17 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:00:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_data		data;
 
-	data.
 	init(argc, argv, &data);
 	mlx_image_to_window(data.mlx, data.minimap->img_tmp, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap->img_map, 0, 0);
