@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:01:40 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 11:14:45 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:28:14 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	is_escape(t_data *data)
 	{
 		system("pkill afplay &");
 		free_data(data);
+		system("leaks cub3D");
 		exit(0);
 	}
 }

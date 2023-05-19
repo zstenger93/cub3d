@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
+#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
 #    Updated: 2023/05/19 13:43:00 by zstenger         ###   ########.fr        #
@@ -145,11 +145,15 @@ clean:
 # else
 	
 # endif
+# 	@echo "Objects have been removed."
 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
+	# @make fclean -C libft
+	# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	# @echo "Executables and objects have been romved."
 # @make fclean -C libft
 # @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."

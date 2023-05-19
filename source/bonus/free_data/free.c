@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:04:44 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/19 07:18:48 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:42:54 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	free_mlx_data(t_data *data, t_mlx_data *mlx_data)
 void	free_map(t_data *data, t_map *map)
 {
 	free_char_array(map->matrix);
+	mlx_delete_image(data->mlx, data->minimap->img_map);
+	mlx_delete_image(data->mlx, data->minimap->img_tmp);
 	free(map->tex);
+	free(map);
 }
 
 void	free_data(t_data *data)
@@ -49,4 +52,5 @@ void	free_data(t_data *data)
 	system("pkill afplay &");
 	free_mlx_data(data, data->mlx_data);
 	free_map(data, data->minimap);
+	mlx_terminate(data->mlx);
 }
