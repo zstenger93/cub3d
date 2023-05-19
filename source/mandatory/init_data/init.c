@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:03:46 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 14:17:32 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:30:32 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	init(int argc, char **argv, t_data *data)
 {
-	if (argc == 1)
-		return (ft_printf("%s%s", TMA, HOW_TO_LAUNCH), false);
+	if (argc != 2)
+	{
+		ft_printf("%s%s", TMA, HOW_TO_LAUNCH);
+		exit(0);
+	}
 	data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", 1);
 	data->mlx_data = init_data();
 	if (argc == 1)

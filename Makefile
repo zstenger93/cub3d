@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
+#    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/19 11:04:33 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/19 14:47:02 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,17 +83,17 @@ all: $(NAME)
 
 bonus: $(B_NAME)
 
-$(LIBMLX42):
-	@if [ -d ./MLX42/glfw_lib ]; \
-    then echo "glfw3 already Exists"; \
-    else \
-	echo "Creating Makefiles." && \
-	sleep 1 && \
-	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
-	echo "Building glfw3 and MLX42." && \
-	sleep 1; \
-	make -C MLX42/build; \
-	fi
+# $(LIBMLX42):
+# 	@if [ -d ./MLX42/glfw_lib ]; \
+#     then echo "glfw3 already Exists"; \
+#     else \
+# 	echo "Creating Makefiles." && \
+# 	sleep 1 && \
+# 	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
+# 	echo "Building glfw3 and MLX42." && \
+# 	sleep 1; \
+# 	make -C MLX42/build; \
+# 	fi
 
 $(LIBFT):
 	@git submodule update --init --recursive --remote
@@ -138,21 +138,21 @@ $(B_OBJ_DIR)%.o : $(B_SRC_DIR)%.c
 clean:
 	@echo "Cleaning object files."
 	@$(RM) objects
-	@make clean -C libft
-ifneq (,$(wildcard ./MLX42/build))
-	@make clean -C ./MLX42/build/_deps/glfw-build
-	@make clean -C ./MLX42/build
-else
+# 	@make clean -C libft
+# ifneq (,$(wildcard ./MLX42/build))
+# 	@make clean -C ./MLX42/build/_deps/glfw-build
+# 	@make clean -C ./MLX42/build
+# else
 	
-endif
-	@echo "Objects have been removed."
+# endif
+# 	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
-	@make fclean -C libft
-	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
-	@echo "Executables and objects have been romved."
+	# @make fclean -C libft
+	# @$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
+	# @echo "Executables and objects have been romved."
 
 re:
 	@echo "Rebuilding the project."

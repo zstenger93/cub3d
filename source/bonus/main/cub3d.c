@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/19 07:19:11 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:32:43 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	mlx_delete_image(data.mlx, data.minimap->img_map);
 	mlx_terminate(data.mlx);
 	free(data.minimap);
+	system("leaks cub3D");
 	exit(0);
 }
 
