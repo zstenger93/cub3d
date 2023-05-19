@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:00:49 by zstenger          #+#    #+#             */
-/*   Updated: 2023/05/18 19:31:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/05/19 07:19:11 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	main(int argc, char **argv)
 	add_hooks(&data);
 	mlx_loop(data.mlx);
 	free_data(&data);
+	mlx_delete_image(data.mlx, data.minimap->img_tmp);
+	mlx_delete_image(data.mlx, data.minimap->img_map);
+	mlx_terminate(data.mlx);
+	free(data.minimap);
 	exit(0);
 }
 

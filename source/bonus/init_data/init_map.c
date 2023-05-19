@@ -28,6 +28,7 @@ t_map	*init_map(t_mlx_data *mlx_data, mlx_t *mlx)
 	minimap->has_key = false;
 	minimap->player.speed_is_life = false;
 	minimap->sprite.index = 0;
+	minimap->sprite.fps = 0;
 	minimap->draw_minimap = false;
 	if (init_key_images(minimap) == 1)
 		exit(0);
