@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/19 15:04:33 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/20 09:19:49 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,12 @@ bonus: $(B_NAME)
 
 $(LIBMLX42):
 	@if [ -d ./MLX42/glfw_lib ]; \
-    then echo "glfw3 already Exists"; \
+    echo "Creating Makefiles." && \
+	sleep 1 && \
+	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 && \
+	echo "Building glfw3 and MLX42." && \
+	sleep 1; \
+	make -C MLX42/build; \
     else \
 	echo "Creating Makefiles." && \
 	sleep 1 && \
