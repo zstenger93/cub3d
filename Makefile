@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/20 10:01:04 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/20 10:16:42 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,36 +85,37 @@ all: $(NAME)
 bonus: $(B_NAME)
 
 $(LIBMLX42):
-	if [ -d /Users/$(USER)/.brew/opt/glfw/lib ]; \
+	@if [ -d /Users/$(USER)/.brew/opt/glfw/lib ] $(DN); \
     then make have_glfw; \
     else \
 	make no_glfw; \
 	fi
 
 have_glfw:
-	brew uninstall glfw
-	echo "Creating Makefiles."
-	sleep 1
-	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1
-	echo "Building glfw3 and MLX42."
-	sleep 1
-	make -C MLX42/build
-	brew install glfw
+	@brew uninstall glfw $(DN)
+	@echo "$(YELLOW)Creating Makefiles.$(DEF_COLOR)" 
+	@sleep 1 $(DN)
+	@cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 $(DN)
+	@echo "$(YELLOW)Building glfw3 and MLX42.$(DEF_COLOR)"
+	@sleep 1 $(DN)
+	@make -C MLX42/build $(DN)
+	@brew install glfw $(DN)
 
 no_glfw:
-	echo "Creating Makefiles."
-	sleep 1
-	cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1
-	echo "Building glfw3 and MLX42."
-	sleep 1
-	make -C MLX42/build
+	@echo "$(YELLOW)Creating Makefiles.$(DEF_COLOR)"
+	@sleep 1 $(DN)
+	@cmake -S MLX42/ -B MLX42/build -DGLFW_FETCH=1 $(DN)
+	@echo "$(YELLOW)Building glfw3 and MLX42.$(DEF_COLOR)"
+	@sleep 1 $(DN)
+	@make -C MLX42/build $(DN)
 
 $(LIBFT):
-	@git submodule update --init --recursive --remote
-	@make -C libft
+	@echo "$(YELLOW)Downloading and Compiling LIBFT.$(DEF_COLOR)"
+	@git submodule update --init --recursive --remote $(DN)
+	@make -C libft $(DN)
 
 $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
-	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)jergashe & zstenger$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LIBFT) $(OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
 	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
@@ -128,7 +129,7 @@ $(NAME): $(LIBFT) $(LIBMLX42) $(OBJ)
 	@echo "           ░   ░            ░     ░"
 
 $(B_NAME): $(LIBFT) $(LIBMLX42) $(B_OBJ)
-	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)jergashe & zstenger$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LIBFT) $(B_OBJ) $(LIBMLX42) $(GLFW3) $(FRAMEWORK) -o $(NAME)
 	@echo "$(NAME) has been compiled."
 	@echo "$(RED)   ▓███▓░░░██▒░░▒██░▒█████░░░█████░░██████"
