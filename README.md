@@ -6,3 +6,7 @@
 </h2>
 
 # Requirements the project should fulfill
+
+## Mandatory
+
+## Bonus
