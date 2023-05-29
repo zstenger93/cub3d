@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 16:42:11 by zstenger          #+#    #+#              #
-#    Updated: 2023/05/20 10:16:42 by zstenger         ###   ########.fr        #
+#    Updated: 2023/05/29 12:37:17 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,14 +161,10 @@ else
 	
 endif
 	@echo "Objects have been removed."
-	@echo "Objects have been removed."
 
 fclean: clean
 	@echo "Removing executables."
 	@$(RM) $(NAME) $(B_NAME) cub3D.dSYM/
-	@make fclean -C libft
-	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
-	@echo "Executables and objects have been romved."
 	@make fclean -C libft
 	@$(RM) ./MLX42/build $(GLFW3) $(LIBMLX42)
 	@echo "Executables and objects have been romved."
